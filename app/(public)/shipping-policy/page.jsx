@@ -5,7 +5,7 @@ export default function ShippingPolicyPage() {
     <div className="bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 py-10 min-h-[60vh]">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Shipping & Delivery Policy</h1>
-        <p className="text-gray-600 mb-8">How we process, ship, and deliver your orders placed on Qui.ae.</p>
+        <p className="text-gray-600 mb-8">How we process, ship, and deliver your orders placed on Quickfynd.com.</p>
 
         <div className="space-y-6 bg-white border border-gray-200 rounded-xl p-6">
           <section>
@@ -30,7 +30,7 @@ export default function ShippingPolicyPage() {
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">6. Damaged or Missing Items</h2>
-            <p className="text-gray-700">If your order arrives damaged or incomplete, contact support@qui.ae within 48 hours with photos and your order ID.</p>
+            <p className="text-gray-700">If your order arrives damaged or incomplete, contact support@Quickfynd.com within 48 hours with photos and your order ID.</p>
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">7. Address Accuracy</h2>

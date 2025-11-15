@@ -53,7 +53,7 @@ const Footer = () => {
 
     const socialIcons = [
         { icon: FacebookIcon, link: "https://www.facebook.com/profile.php?id=61582829276428" },
-        { icon: InstagramIcon, link: "https://www.instagram.com/qui.ae_?igsh=dWV4eTc5cHZxMzFh&utm_source=qr" },
+        { icon: InstagramIcon, link: "https://www.instagram.com/Quickfynd.com_?igsh=dWV4eTc5cHZxMzFh&utm_source=qr" },
     ];
 
     return (
@@ -80,8 +80,8 @@ const Footer = () => {
                         <div className="space-y-3 mb-6">
                             <div className="flex items-center gap-2 text-sm">
                                 <MailIcon />
-                                <a href="mailto:support@qui.ae" className="text-slate-400 hover:text-white transition">
-                                    support@qui.ae
+                                <a href="mailto:support@Quickfynd.com" className="text-slate-400 hover:text-white transition">
+                                    support@Quickfynd.com
                                 </a>
                             </div>
                             <div className="flex items-center gap-2 text-sm">
@@ -128,7 +128,7 @@ const Footer = () => {
                             ))}
                         </div>
                         <p className="text-sm text-slate-500 text-center w-full">
-                            © {new Date().getFullYear()} Qui.ae. All rights reserved.
+                            © {new Date().getFullYear()} Quickfynd.com. All rights reserved.
                         </p>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ const OrderSummary = ({ totalPrice, items }) => {
     const {user} = useUser()
     const { getToken, isSignedIn } = useAuth()
     const dispatch = useDispatch()
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'AED';
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs';
 
     const router = useRouter();
 

@@ -83,7 +83,7 @@ export async function POST(request){
         // Check minimum price
         if (cartTotal && coupon.minPrice > 0 && cartTotal < coupon.minPrice) {
             return NextResponse.json({ 
-                error: `Minimum cart value of AED${coupon.minPrice} required` 
+                error: `Minimum cart value of Rs${coupon.minPrice} required` 
             }, { status: 400 })
         }
 

@@ -13,7 +13,7 @@ import SubBanner1 from '../assets/herobanner/Sub 1.webp'
 import SubBanner2 from '../assets/herobanner/Sub 2.webp'
 
 const Hero = () => {
-  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'AED'
+  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
 
   // === Default Slides (fallback if admin does not configure) ===
   const slides = [

@@ -10,7 +10,7 @@ import { SaveIcon, TruckIcon, PackageIcon, WeightIcon, DollarSignIcon } from 'lu
 
 export default function StoreShippingSettings() {
   const { getToken } = useAuth()
-  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'AED'
+  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({

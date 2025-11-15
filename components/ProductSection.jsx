@@ -48,9 +48,9 @@ export default function ProductSection({ title, products, viewAllLink }) {
                                 {product.name}
                             </h3>
                             <div className="flex items-center gap-2">
-                                <span className="text-sm font-bold text-gray-900">AED {product.price}</span>
+                                <span className="text-sm font-bold text-gray-900">Rs {product.price}</span>
                                 {product.mrp > product.price && (
-                                    <span className="text-xs text-gray-500 line-through">AED {product.mrp}</span>
+                                    <span className="text-xs text-gray-500 line-through">Rs {product.mrp}</span>
                                 )}
                             </div>
                             {product.mrp > product.price && (

@@ -5,7 +5,7 @@ export default function PrivacyPolicyPage() {
     <div className="bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 py-10 min-h-[60vh]">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
-        <p className="text-gray-600 mb-8">This Privacy Policy describes how Qui.ae collects, uses, and protects your personal information.</p>
+        <p className="text-gray-600 mb-8">This Privacy Policy describes how Quickfynd.com collects, uses, and protects your personal information.</p>
 
         <div className="space-y-6 bg-white border border-gray-200 rounded-xl p-6">
           <section>
@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">6. Your Rights</h2>
-            <p className="text-gray-700">Subject to local laws, you may request access, correction, or deletion of your data. Contact us at support@qui.ae.</p>
+            <p className="text-gray-700">Subject to local laws, you may request access, correction, or deletion of your data. Contact us at support@Quickfynd.com.</p>
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">7. Updates</h2>

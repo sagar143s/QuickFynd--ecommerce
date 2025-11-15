@@ -17,7 +17,7 @@ import { downloadInvoice, printInvoice } from "@/lib/generateInvoice"
 
 
 export default function StoreOrders() {
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'AED';
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs';
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedOrder, setSelectedOrder] = useState(null);

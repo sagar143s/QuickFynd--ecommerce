@@ -314,7 +314,7 @@ export async function POST(request){
                 payment_method_types: ['card'],
                 line_items: [{
                     price_data:{
-                        currency: 'aed',
+                        currency: 'Rs',
                         product_data:{
                             name: 'Order'
                         },

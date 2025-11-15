@@ -226,9 +226,9 @@ function WishlistAuthed() {
 
                                             {/* Price */}
                                             <div className="flex items-baseline gap-2 mb-4">
-                                                <span className="text-xl font-bold text-gray-900">AED{product.price}</span>
+                                                <span className="text-xl font-bold text-gray-900">Rs{product.price}</span>
                                                 {product.mrp > product.price && (
-                                                    <span className="text-sm text-gray-400 line-through">AED{product.mrp}</span>
+                                                    <span className="text-sm text-gray-400 line-through">Rs{product.mrp}</span>
                                                 )}
                                             </div>
 
@@ -270,7 +270,7 @@ function WishlistAuthed() {
                                     <hr />
                                     <div className="flex justify-between">
                                         <span className="font-semibold text-gray-900">Total Amount:</span>
-                                        <span className="font-bold text-xl text-gray-900">AED{calculateTotal().toFixed(2)}</span>
+                                        <span className="font-bold text-xl text-gray-900">Rs{calculateTotal().toFixed(2)}</span>
                                     </div>
                                 </div>
 
@@ -307,7 +307,7 @@ function WishlistAuthed() {
                                     <ul className="space-y-2 text-xs text-gray-600">
                                         <li className="flex items-start gap-2">
                                             <span className="text-green-500 mt-0.5">✓</span>
-                                            <span>Free shipping on orders above AED499</span>
+                                            <span>Free shipping on orders above Rs499</span>
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <span className="text-green-500 mt-0.5">✓</span>
@@ -331,7 +331,7 @@ function WishlistAuthed() {
                     <div className="flex items-center justify-between mb-2">
                         <div>
                             <p className="text-xs text-gray-600">{selectedItems.length} items selected</p>
-                            <p className="text-lg font-bold text-gray-900">AED{calculateTotal().toFixed(2)}</p>
+                            <p className="text-lg font-bold text-gray-900">Rs{calculateTotal().toFixed(2)}</p>
                         </div>
                         <button
                             onClick={addSelectedToCart}

@@ -8,8 +8,8 @@ import React from 'react'
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
 export const metadata = {
-  title: "Qui - Shop smarter",
-  description: "qui - Shop smarter",
+  title: "Quickfynd - Shop smarter",
+  description: "Quickfynd - Shop smarter",
 };
 
 export default function RootLayout({ children }) {

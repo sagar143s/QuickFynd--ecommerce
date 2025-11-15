@@ -74,7 +74,7 @@ function OrderSuccessContent() {
   const discount = order?.coupon?.discount ? (order.coupon.discountType === 'percentage' ? (order.coupon.discount / 100 * subtotal) : Math.min(order.coupon.discount, subtotal)) : 0;
   const total = subtotal + shipping - discount;
   const orderDate = order?.createdAt ? new Date(order.createdAt).toLocaleDateString() : new Date().toLocaleDateString();
-  const currency = order?.currency || 'AED';
+  const currency = order?.currency || 'Rs';
 
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col items-center justify-center py-8'>
