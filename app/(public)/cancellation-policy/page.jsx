@@ -19,9 +19,10 @@ export default function CancellationPolicyPage() {
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">3. Refunds on Cancellations</h2>
             <p className="text-gray-700">If payment was captured and your cancellation is approved, a refund is issued to your original payment method. See Refund Policy timelines.</p>
-          </section>
+          </section>   
         </div>
       </div>
     </div>
   );
 }
+    
