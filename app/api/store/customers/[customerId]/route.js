@@ -25,8 +25,8 @@ export async function GET(request, { params }) {
             return NextResponse.json({ error: 'Customer not found' }, { status: 404 });
         }
 
-        // Get all ordeRs from this customer for this store
-        const ordeRs = await prisma.order.findMany({
+        // Get all orders from this customer for this store
+        const orders = await prisma.order.findMany({
             where: {
                 userId: customerId,
                 storeId: storeId
@@ -44,7 +44,7 @@ export async function GET(request, { params }) {
         });
 
         // Convert orderItems to items format
-        const ordeRsWithItems = ordeRs.map(order => ({
+        const ordersWithItems = orders.map(order => ({
             ...order,
             items: JSON.stringify(order.orderItems.map(item => ({
                 name: item.product?.name || 'Product',
@@ -64,18 +64,18 @@ export async function GET(request, { params }) {
         });
 
         // Calculate statistics
-        const totalSpent = ordeRsWithItems.reduce((sum, order) => sum + order.total, 0);
-        const totalOrdeRs = ordeRsWithItems.length;
-        const averageOrderValue = totalOrdeRs > 0 ? totalSpent / totalOrdeRs : 0;
+        const totalSpent = ordersWithItems.reduce((sum, order) => sum + order.total, 0);
+        const totalOrders = ordersWithItems.length;
+        const averageOrderValue = totalOrders > 0 ? totalSpent / totalOrders : 0;
 
         const customerDetails = {
             ...customer,
-            totalOrdeRs,
+            totalOrders,
             totalSpent,
             averageOrderValue: Math.round(averageOrderValue),
-            fiRstOrderDate: ordeRsWithItems.length > 0 ? ordeRsWithItems[ordeRsWithItems.length - 1].createdAt : null,
-            lastOrderDate: ordeRsWithItems.length > 0 ? ordeRsWithItems[0].createdAt : null,
-            ordeRs: ordeRsWithItems,
+            firstOrderDate: ordersWithItems.length > 0 ? ordersWithItems[ordersWithItems.length - 1].createdAt : null,
+            lastOrderDate: ordersWithItems.length > 0 ? ordersWithItems[0].createdAt : null,
+            orders: ordersWithItems,
             abandonedCart
         };
 

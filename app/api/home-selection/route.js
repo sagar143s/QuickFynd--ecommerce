@@ -16,7 +16,7 @@ export async function GET(request) {
 
     const selections = await prisma.homeSelection.findMany({ where, orderBy: { updatedAt: "desc" } });
 
-    // If a section is specified, return products resolved for the fiRst matching selection
+    // If a section is specified, return products resolved for the first matching selection
     if (section && selections[0]) {
       const ids = selections[0].productIds || [];
       if (ids.length === 0) return NextResponse.json({ products: [], selection: selections[0] });

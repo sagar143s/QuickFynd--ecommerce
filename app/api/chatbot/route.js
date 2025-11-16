@@ -6,7 +6,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export async function POST(request) {
     try {
-        const { message, conveRsationHistory } = await request.json();
+        const { message, conversationHistory } = await request.json();
 
         if (!message) {
             return NextResponse.json({ error: "Message is required" }, { status: 400 });
@@ -54,46 +54,46 @@ export async function POST(request) {
         });
 
         // Build context for AI
-        const systemContext = `You are Qui's friendly shopping assistant. Help customeRs find products, answer questions about offeRs, shipping, returns, and provide excellent customer service.
+        const systemContext = `You are Qui's friendly shopping assistant. Help customers find products, answer questions about offers, shipping, returns, and provide excellent customer service.
 
 **Available Products (${products.length}):**
-${products.map(p => `- ${p.name} (Rs${p.price}${p.mrp > p.price ? `, was Rs${p.mrp}` : ''}) - ${p.category}${p.fastDelivery ? ' - Fast Delivery Available' : ''} - Store: ${p.store.name}`).join('\n')}
+${products.map(p => `- ${p.name} (rs${p.price}${p.mrp > p.price ? `, was rs${p.mrp}` : ''}) - ${p.category}${p.fastDelivery ? ' - Fast Delivery Available' : ''} - Store: ${p.store.name}`).join('\n')}
 
-**Active OffeRs & Coupons:**
+**Active Offers & Coupons:**
 ${coupons.length > 0 ? coupons.map(c => 
-    `- Code: ${c.code} - ${c.discountType === 'percentage' ? c.discount + '% off' : 'Rs' + c.discount + ' off'}${c.minPurchase ? ' (Min purchase: Rs' + c.minPurchase + ')' : ''}${c.forNewUser ? ' - New UseRs Only' : ''}${c.forMember ? ' - MembeRs Only' : ''}`
+    `- Code: ${c.code} - ${c.discountType === 'percentage' ? c.discount + '% off' : 'rs' + c.discount + ' off'}${c.minPurchase ? ' (Min purchase: rs' + c.minPurchase + ')' : ''}${c.forNewUser ? ' - New Users Only' : ''}${c.forMember ? ' - Members Only' : ''}`
 ).join('\n') : 'No active coupons at the moment.'}
 
 **Store Policies:**
-- Free shipping on ordeRs above Rs499 (may vary by shipping settings)
+- Free shipping on orders above rs499 (may vary by shipping settings)
 - 7-day return and replacement policy on eligible products
 - Cash on Delivery (COD) and Online payment available
 - Fast delivery available on select products
 - Guest checkout available for quick purchases
 
 **Important Guidelines:**
-1. Be friendly, helpful, and conveRsational
+1. Be friendly, helpful, and conversational
 2. Recommend products based on customer needs
 3. Provide accurate pricing and availability information
-4. Explain offeRs and how to use coupon codes
+4. Explain offers and how to use coupon codes
 5. Help with order tracking, returns, and general queries
 6. If you don't know something, admit it and suggest contacting support
 7. Keep responses concise but informative
 8. Use emojis occasionally to be friendly 😊
-9. Always mention product prices in Rs (United Arab Emirates Dirham)
+9. Always mention product prices in rs (United Arab Emirates Dirham)
 10. Provide product links when relevant: /product/[productId]
 
 Customer Question: ${message}
 
 Respond naturally and helpfully!`;
 
-        // Build conveRsation history for context
-        const conveRsationContext = conveRsationHistory && conveRsationHistory.length > 0
-            ? conveRsationHistory.map(msg => `${msg.role === 'user' ? 'Customer' : 'Assistant'}: ${msg.content}`).join('\n')
+        // Build conversation history for context
+        const conversationContext = conversationHistory && conversationHistory.length > 0
+            ? conversationHistory.map(msg => `${msg.role === 'user' ? 'Customer' : 'Assistant'}: ${msg.content}`).join('\n')
             : '';
 
-        const fullPrompt = conveRsationContext 
-            ? `${systemContext}\n\nPrevious ConveRsation:\n${conveRsationContext}\n\nCurrent Question: ${message}`
+        const fullPrompt = conversationContext 
+            ? `${systemContext}\n\nPrevious Conversation:\n${conversationContext}\n\nCurrent Question: ${message}`
             : systemContext;
 
         // Generate AI response
@@ -110,7 +110,7 @@ Respond naturally and helpfully!`;
     } catch (error) {
         console.error('Chatbot error:', error);
         
-        // Handle specific Gemini erroRs
+        // Handle specific Gemini errors
         if (error.message?.includes('API key')) {
             return NextResponse.json({ 
                 error: "AI service configuration error. Please contact support." 

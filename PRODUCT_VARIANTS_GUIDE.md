@@ -2,8 +2,8 @@
 
 ## Overview
 Your product pages now support:
-1. **Short Description** - A one-liner that appeaRs below the product name
-2. **Color Variants with Images** - Display different coloRs with product images and prices
+1. **Short Description** - A one-liner that appears below the product name
+2. **Color Variants with Images** - Display different colors with product images and prices
 3. **Bulk Pricing Bundles** - Offer discounts for buying multiple quantities (Buy 1, Bundle of 2, Bundle of 3, etc.)
 
 ---
@@ -15,7 +15,7 @@ Go to: **Store Dashboard → Add Product**
 
 ### 1. Short Description
 - Fill in the "Short Description" field below the product name
-- This is a brief one-liner that helps customeRs undeRstand the product quickly
+- This is a brief one-liner that helps customers understand the product quickly
 - Example: "Premium quality, fast delivery, 100% authentic"
 
 ### 2. Color Variants (with Images)
@@ -29,7 +29,7 @@ For each color variant, fill in:
 - **Color**: Name of the color (e.g., "Black", "White", "Blue")
 - **Image URL**: Direct link to the product image for this color
   - Upload image to ImageKit or use any image URL
-  - Example: `https://ik.imagekit.io/youRstore/product-black.jpg`
+  - Example: `https://ik.imagekit.io/yourstore/product-black.jpg`
 - **Size**: Optional size (e.g., "M", "L", "XL")
 - **Price**: Price for this specific variant
 - **MRP**: Original price (for showing discount)
@@ -64,17 +64,17 @@ The form provides 3 default rows, but you can customize:
 #### How Savings Are Calculated
 - Savings = (MRP × Qty) - Price
 - Example: Bundle of 2
-  - MRP per item: Rs 250
-  - Total MRP: Rs 500
-  - Bundle Price: Rs 169
-  - **You Save: Rs 331**
+  - MRP per item: rs 250
+  - Total MRP: rs 500
+  - Bundle Price: rs 169
+  - **You Save: rs 331**
 
 ---
 
 ## Product Page Display
 
 ### Short Description
-AppeaRs directly below the product name in gray text
+Appears directly below the product name in gray text
 
 ### Color Variants Display
 - Shows square thumbnails with product images
@@ -94,7 +94,7 @@ Shows at the top of variants section with:
   - Savings amount in red
   - Price and crossed-out MRP
   - Selection radio button
-- MOST_POPULAR badge appeaRs at top-right of the option
+- MOST_POPULAR badge appears at top-right of the option
 
 ---
 
@@ -163,7 +163,7 @@ model Product {
 1. **Use high-quality images** - Each color should have its own clear product image
 2. **Consistent naming** - Use standard color names (Black, White, Blue, not "Dark Night")
 3. **Set realistic stock** - Update stock levels regularly
-4. **Price differences** - If all coloRs are same price, use the base product price
+4. **Price differences** - If all colors are same price, use the base product price
 
 ### For Bulk Pricing:
 1. **Calculate savings carefully** - Make sure the bundle price shows real savings
@@ -183,7 +183,7 @@ model Product {
 
 1. **Add a test product** with variants in the dashboard
 2. **View the product page** to see how variants display
-3. **Test selection** - Click different coloRs/bundles
+3. **Test selection** - Click different colors/bundles
 4. **Check pricing** - Verify price updates correctly
 5. **Add to cart** - Ensure selected variant is added correctly
 
@@ -194,4 +194,4 @@ model Product {
 - Check that variant JSON is properly formatted in database
 - Ensure image URLs are publicly accessible
 - Verify stock levels are > 0 for available variants
-- Check browser console for any JavaScript erroRs
+- Check browser console for any JavaScript errors

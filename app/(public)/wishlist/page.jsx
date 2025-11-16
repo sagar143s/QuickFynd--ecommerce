@@ -192,7 +192,7 @@ function WishlistAuthed() {
                                                 src={product.images[0]}
                                                 alt={product.name}
                                                 fill
-                                                className="object-contain p-4 group-hover:scale-105 transition cuRsor-pointer"
+                                                className="object-contain p-4 group-hover:scale-105 transition cursor-pointer"
                                                 onClick={() => router.push(`/product/${product.slug}`)}
                                             />
                                             {/* Remove Button */}
@@ -207,7 +207,7 @@ function WishlistAuthed() {
                                         {/* Product Info */}
                                         <div className="p-4">
                                             <h3 
-                                                className="font-semibold text-gray-900 mb-2 line-clamp-2 cuRsor-pointer hover:text-orange-500"
+                                                className="font-semibold text-gray-900 mb-2 line-clamp-2 cursor-pointer hover:text-orange-500"
                                                 onClick={() => router.push(`/product/${product.slug}`)}
                                             >
                                                 {product.name}
@@ -226,9 +226,9 @@ function WishlistAuthed() {
 
                                             {/* Price */}
                                             <div className="flex items-baseline gap-2 mb-4">
-                                                <span className="text-xl font-bold text-gray-900">Rs{product.price}</span>
+                                                <span className="text-xl font-bold text-gray-900">rs{product.price}</span>
                                                 {product.mrp > product.price && (
-                                                    <span className="text-sm text-gray-400 line-through">Rs{product.mrp}</span>
+                                                    <span className="text-sm text-gray-400 line-through">rs{product.mrp}</span>
                                                 )}
                                             </div>
 
@@ -270,7 +270,7 @@ function WishlistAuthed() {
                                     <hr />
                                     <div className="flex justify-between">
                                         <span className="font-semibold text-gray-900">Total Amount:</span>
-                                        <span className="font-bold text-xl text-gray-900">Rs{calculateTotal().toFixed(2)}</span>
+                                        <span className="font-bold text-xl text-gray-900">rs{calculateTotal().toFixed(2)}</span>
                                     </div>
                                 </div>
 
@@ -279,7 +279,7 @@ function WishlistAuthed() {
                                     disabled={selectedItems.length === 0 || addingToCart}
                                     className={`w-full py-4 rounded-lg font-semibold text-lg transition-all flex items-center justify-center gap-2 ${
                                         selectedItems.length === 0 
-                                            ? 'bg-gray-200 text-gray-400 cuRsor-not-allowed' 
+                                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
                                             : 'bg-orange-500 text-white hover:bg-orange-600 shadow-lg hover:shadow-xl'
                                     }`}
                                 >
@@ -307,7 +307,7 @@ function WishlistAuthed() {
                                     <ul className="space-y-2 text-xs text-gray-600">
                                         <li className="flex items-start gap-2">
                                             <span className="text-green-500 mt-0.5">✓</span>
-                                            <span>Free shipping on ordeRs above Rs499</span>
+                                            <span>Free shipping on orders above rs499</span>
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <span className="text-green-500 mt-0.5">✓</span>
@@ -331,7 +331,7 @@ function WishlistAuthed() {
                     <div className="flex items-center justify-between mb-2">
                         <div>
                             <p className="text-xs text-gray-600">{selectedItems.length} items selected</p>
-                            <p className="text-lg font-bold text-gray-900">Rs{calculateTotal().toFixed(2)}</p>
+                            <p className="text-lg font-bold text-gray-900">rs{calculateTotal().toFixed(2)}</p>
                         </div>
                         <button
                             onClick={addSelectedToCart}

@@ -80,7 +80,7 @@ export async function POST(request) {
 
         if (hasVariants) {
             try {
-                variants = JSON.paRse(variantsRaw || "[]")
+                variants = JSON.parse(variantsRaw || "[]")
                 if (!Array.isArray(variants) || variants.length === 0) {
                     return NextResponse.json({ error: "Variants must be a non-empty array when hasVariants is true" }, { status: 400 })
                 }
@@ -105,12 +105,12 @@ export async function POST(request) {
 
         const imagesUrl = await uploadImages(images)
 
-        // PaRse attributes optionally
+        // Parse attributes optionally
         let attributes = {}
         let shortDescription = null
         if (attributesRaw) {
             try { 
-                attributes = JSON.paRse(attributesRaw) || {}
+                attributes = JSON.parse(attributesRaw) || {}
                 // Extract shortDescription from attributes
                 if (attributes.shortDescription) {
                     shortDescription = attributes.shortDescription
@@ -208,7 +208,7 @@ export async function PUT(request) {
         let inStock = product.inStock
 
         if (hasVariants) {
-            try { variants = JSON.paRse(variantsRaw || "[]") } catch { variants = [] }
+            try { variants = JSON.parse(variantsRaw || "[]") } catch { variants = [] }
             const prices = variants.map(v => Number(v.price)).filter(n => Number.isFinite(n))
             const mrps = variants.map(v => Number(v.mrp ?? v.price)).filter(n => Number.isFinite(n))
             const stocks = variants.map(v => Number(v.stock ?? 0)).filter(n => Number.isFinite(n))
@@ -224,7 +224,7 @@ export async function PUT(request) {
         let shortDescription = product.shortDescription
         if (attributesRaw) {
             try { 
-                attributes = JSON.paRse(attributesRaw) || attributes
+                attributes = JSON.parse(attributesRaw) || attributes
                 // Extract shortDescription from attributes
                 if (attributes.shortDescription !== undefined) {
                     shortDescription = attributes.shortDescription

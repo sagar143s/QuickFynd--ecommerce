@@ -24,7 +24,7 @@ export default function MobileBottomNav() {
     { href: '/', icon: Home, label: 'Home' },
     { href: '/categories', icon: LayoutGrid, label: 'Categories' },
     { href: '/cart', icon: ShoppingCart, label: 'Cart', badge: cartCount },
-    { href: isSignedIn ? '/ordeRs' : '/sign-in', icon: User, label: isSignedIn ? 'My Account' : 'Account' },
+    { href: isSignedIn ? '/orders' : '/sign-in', icon: User, label: isSignedIn ? 'My Account' : 'Account' },
   ]
 
   return (
@@ -37,7 +37,7 @@ export default function MobileBottomNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex-1 flex flex-col items-center justify-center py-2.5 transition-coloRs relative ${
+              className={`flex-1 flex flex-col items-center justify-center py-2.5 transition-colors relative ${
                 isActive 
                   ? 'text-gray-900' 
                   : 'text-gray-500'

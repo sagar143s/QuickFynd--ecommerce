@@ -4,14 +4,14 @@ import { getAuth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 
-// Get Dashboard Data for Seller ( total ordeRs, total earnings, total products )
+// Get Dashboard Data for Seller ( total orders, total earnings, total products )
 export async function GET(request){
     try {
         const { userId } = getAuth(request)
         const storeId = await authSeller(userId)
 
-        // Get all ordeRs for seller
-        const ordeRs = await prisma.order.findMany({where: {storeId}})
+        // Get all orders for seller
+        const orders = await prisma.order.findMany({where: {storeId}})
 
          // Get all products with ratings for seller
          const products = await prisma.product.findMany({where: {storeId}})
@@ -21,9 +21,9 @@ export async function GET(request){
             include: {user: true, product: true}
          })
 
-         // Get unique customeRs who have ordered from this store
-         const uniqueCustomerIds = [...new Set(ordeRs.map(order => order.userId))]
-         const totalCustomeRs = uniqueCustomerIds.length
+         // Get unique customers who have ordered from this store
+         const uniqueCustomerIds = [...new Set(orders.map(order => order.userId))]
+         const totalCustomers = uniqueCustomerIds.length
 
          // Get abandoned carts for this store
          const abandonedCarts = await prisma.abandonedCart.count({
@@ -32,10 +32,10 @@ export async function GET(request){
 
          const dashboardData = {
             ratings,
-            totalOrdeRs: ordeRs.length,
-            totalEarnings: Math.round(ordeRs.reduce((acc, order)=>  acc + order.total, 0)),
+            totalOrders: orders.length,
+            totalEarnings: Math.round(orders.reduce((acc, order)=>  acc + order.total, 0)),
             totalProducts: products.length,
-            totalCustomeRs,
+            totalCustomers,
             abandonedCarts
          }
 

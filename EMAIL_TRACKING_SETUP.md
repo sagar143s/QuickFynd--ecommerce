@@ -3,8 +3,8 @@
 Email notifications have been removed from this project. The endpoints remain as no-ops to keep flows working without an email provider.
 
 What still works:
-- Order tracking fields on ordeRs: `trackingId`, `trackingUrl`, `courier`.
-- Update tracking via `PUT /api/store/ordeRs/[orderId]`.
+- Order tracking fields on orders: `trackingId`, `trackingUrl`, `courier`.
+- Update tracking via `PUT /api/store/orders/[orderId]`.
 - The notification endpoints respond with success but do not send emails:
    - `POST /api/notifications/order-status`
    - `POST /api/notifications/guest-order`
@@ -12,13 +12,13 @@ What still works:
 If you want to enable email in the future, add your preferred provider (Nodemailer/SES/SendGrid/etc.) inside those routes.
 
 1. **Add tracking details to an order:**
-   - Go to Store Dashboard → OrdeRs
+   - Go to Store Dashboard → Orders
    - Click on any order
    - Fill in the tracking form (Tracking ID, Courier, optional URL)
    - Click "Update Tracking & Notify Customer"
 
 2. **Change order status:**
-   - In the ordeRs table, change the status dropdown
+   - In the orders table, change the status dropdown
    - Customer will receive an email notification automatically
 
 ---
@@ -54,7 +54,7 @@ Order Items:
 
 1. **Update Tracking Details:**
    \`\`\`javascript
-   PUT /api/store/ordeRs/{orderId}
+   PUT /api/store/orders/{orderId}
    Body: {
      trackingId: "1234567890",
      courier: "FedEx", 
@@ -64,7 +64,7 @@ Order Items:
 
 2. **Update Status:**
    \`\`\`javascript
-   PUT /api/store/ordeRs/{orderId}
+   PUT /api/store/orders/{orderId}
    Body: { status: "SHIPPED" }
    \`\`\`
 
@@ -83,14 +83,14 @@ Order Update → API → Email Service (Resend) → Customer's Inbox
 
 ## 🎨 Features
 
-### For Store OwneRs:
+### For Store Owners:
 ✅ Update order status with dropdown (sends email automatically)
 ✅ Add tracking details anytime
 ✅ Update tracking if courier changes
 ✅ Beautiful redesigned order modal
-✅ See tracking info for all ordeRs
+✅ See tracking info for all orders
 
-### For CustomeRs:
+### For Customers:
 ✅ Receive email for every status change
 ✅ Get tracking details when order ships
 ✅ Click tracking URL to see live updates
@@ -134,7 +134,7 @@ If you don't configure an email service, the system will:
 - ✅ Still update tracking details
 - ✅ Still update order status
 - ✅ Log email content to console
-- ⚠️ Not actually send emails to customeRs
+- ⚠️ Not actually send emails to customers
 
 To see the email content, check your terminal/console logs.
 
@@ -144,7 +144,7 @@ To see the email content, check your terminal/console logs.
 
 You can use these templates for the tracking URL:
 
-- **FedEx**: `https://www.fedex.com/fedextrack/?tracknumbeRs={TRACKING_ID}`
+- **FedEx**: `https://www.fedex.com/fedextrack/?tracknumbers={TRACKING_ID}`
 - **UPS**: `https://www.ups.com/track?tracknum={TRACKING_ID}`
 - **DHL**: `https://www.dhl.com/en/express/tracking.html?AWB={TRACKING_ID}`
 - **USPS**: `https://tools.usps.com/go/TrackConfirmAction?tLabels={TRACKING_ID}`
@@ -160,7 +160,7 @@ Add these to your `.env` file:
 \`\`\`env
 # Email Configuration (Required for sending emails)
 RESEND_API_KEY=re_xxxxxxxxxxxxx
-EMAIL_FROM=ordeRs@yourdomain.com
+EMAIL_FROM=orders@yourdomain.com
 
 # App URL (Required for email API calls)
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -176,7 +176,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 4. **Customer Dashboard** - Show tracking on customer's order page
 5. **Auto-update Tracking** - Fetch real-time updates from courier APIs
 6. **Email Templates** - Create custom branded email templates
-7. **Notification Preferences** - Let customeRs choose notification methods
+7. **Notification Preferences** - Let customers choose notification methods
 
 ---
 
@@ -190,10 +190,10 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ### Tracking not updating?
 1. Make sure you ran `npx prisma db push`
-2. Check browser console for erroRs
+2. Check browser console for errors
 3. Verify API endpoint is being called
 
-### Database erroRs?
+### Database errors?
 1. Run `npx prisma generate` after schema changes
 2. Restart your dev server
 
@@ -201,4 +201,4 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ## 🎉 You're All Set!
 
-Your order tracking and email notification system is ready to use! CustomeRs will now receive beautiful emails whenever you update their order status or add tracking information.
+Your order tracking and email notification system is ready to use! Customers will now receive beautiful emails whenever you update their order status or add tracking information.

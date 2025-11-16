@@ -2,9 +2,9 @@
 import BestSelling from "@/components/BestSelling";
 import Hero from "@/components/Hero";
 import Newsletter from "@/components/Newsletter";
-import OuRspecs from "@/components/OuRspec";
+import Ourspecs from "@/components/Ourspec";
 import LatestProducts from "@/components/LatestProducts";
-import BanneRslider from "@/components/BanneRslider";
+import Bannerslider from "@/components/Bannerslider";
 
 import HomeDealsSection from "@/components/HomeDealsSection";
 import BrandDirectory from "@/components/BrandDirectory";
@@ -84,10 +84,10 @@ export default function Home() {
             <Hero />
             <LatestProducts />
             {/* <BestSelling /> */}
-            <BanneRslider/>
+            <Bannerslider/>
             {showGrid && <HomeDealsSection sections={gridSectionsWithProducts} />}
             <div className="max-w-7xl mx-auto px-4 py-8">
-                {/* FiRst row: fiRst two sections side by side */}
+                {/* First row: first two sections side by side */}
                 {sections.length >= 2 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         {/* <ProductSection
@@ -114,7 +114,7 @@ export default function Home() {
                     />
                 ))}
             </div>
-            {/* <OuRspecs /> */}
+            {/* <Ourspecs /> */}
             {/* <Newsletter /> */}
             {/* <BrandDirectory/> */}
         </div>

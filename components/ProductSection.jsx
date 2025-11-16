@@ -30,7 +30,7 @@ export default function ProductSection({ title, products, viewAllLink }) {
                     <div
                         key={product.id}
                         onClick={() => product.slug && router.push(`/product/${product.slug}`)}
-                        className={`cuRsor-pointer group hover:shadow-md transition-all duration-200 rounded-lg p-2 hover:bg-gray-50 ${!product.slug ? 'opacity-50 pointer-events-none' : ''}`}
+                        className={`cursor-pointer group hover:shadow-md transition-all duration-200 rounded-lg p-2 hover:bg-gray-50 ${!product.slug ? 'opacity-50 pointer-events-none' : ''}`}
                         title={product.slug ? '' : 'No slug set for this product'}
                     >
                         {/* Product Image */}
@@ -48,9 +48,9 @@ export default function ProductSection({ title, products, viewAllLink }) {
                                 {product.name}
                             </h3>
                             <div className="flex items-center gap-2">
-                                <span className="text-sm font-bold text-gray-900">Rs {product.price}</span>
+                                <span className="text-sm font-bold text-gray-900">rs {product.price}</span>
                                 {product.mrp > product.price && (
-                                    <span className="text-xs text-gray-500 line-through">Rs {product.mrp}</span>
+                                    <span className="text-xs text-gray-500 line-through">rs {product.mrp}</span>
                                 )}
                             </div>
                             {product.mrp > product.price && (

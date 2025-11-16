@@ -21,7 +21,7 @@ export async function PUT(req, { params }) {
         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
         // Check if slug already exists (excluding current category)
-        const existingCategory = await prisma.category.findFiRst({
+        const existingCategory = await prisma.category.findFirst({
             where: {
                 slug,
                 NOT: { id }
@@ -79,7 +79,7 @@ export async function DELETE(req, { params }) {
 
         if (category.children.length > 0) {
             return NextResponse.json({ 
-                error: "Cannot delete category with subcategories. Please delete subcategories fiRst." 
+                error: "Cannot delete category with subcategories. Please delete subcategories first." 
             }, { status: 400 });
         }
 

@@ -37,17 +37,17 @@ async function main(base64Image, mimeType) {
     const raw = response.choices[0].message.content;
     console.log(raw);
 
-    // remove ```json or ``` wrappeRs if present
+    // remove ```json or ``` wrappers if present
     const cleaned = raw.replace(/```json|```/g, "").trim();
 
-    let paRsed;
+    let parsed;
     try {
-        paRsed = JSON.paRse(cleaned);
+        parsed = JSON.parse(cleaned);
     } catch {
         throw new Error("AI did not return valid JSON");
     }
 
-    return paRsed;
+    return parsed;
 
 }
 

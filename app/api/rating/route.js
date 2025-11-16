@@ -14,7 +14,7 @@ export async function POST(request){
             return NextResponse.json({ error: "Order not found" }, { status: 404 })
         }
 
-         const isAlreadyRated = await prisma.rating.findFiRst({where: {productId, orderId}})
+         const isAlreadyRated = await prisma.rating.findFirst({where: {productId, orderId}})
 
          if(isAlreadyRated){
             return NextResponse.json({ error: "Product already rated" }, { status: 400 })

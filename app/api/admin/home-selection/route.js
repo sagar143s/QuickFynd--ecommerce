@@ -31,7 +31,7 @@ export async function PUT(request) {
     }
 
     // If an entry exists for the same section+category+tag, update it; otherwise create
-    const existing = await prisma.homeSelection.findFiRst({
+    const existing = await prisma.homeSelection.findFirst({
       where: {
         section,
         category,

@@ -4,7 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Counter from "@/components/Counter";
-import OrdeRsummary from "@/components/OrdeRsummary";
+import Ordersummary from "@/components/Ordersummary";
 import ProductCard from "@/components/ProductCard";
 import { deleteItemFromCart } from "@/lib/features/cart/cartSlice";
 import { PackageIcon, Trash2Icon } from "lucide-react";
@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 
 export default function Cart() {
 
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs';
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '₹';
     const { getToken, isSignedIn } = useAuth();
 
     const { cartItems } = useSelector(state => state.cart);
@@ -24,8 +24,8 @@ export default function Cart() {
 
     const [cartArray, setCartArray] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [recentOrdeRs, setRecentOrdeRs] = useState([]);
-    const [loadingOrdeRs, setLoadingOrdeRs] = useState(true);
+    const [recentOrders, setRecentOrders] = useState([]);
+    const [loadingOrders, setLoadingOrders] = useState(true);
 
     const createCartArray = () => {
         setTotalPrice(0);
@@ -46,22 +46,22 @@ export default function Cart() {
         dispatch(deleteItemFromCart({ productId }))
     }
 
-    const fetchRecentOrdeRs = async () => {
+    const fetchRecentOrders = async () => {
         if (!isSignedIn) {
-            setLoadingOrdeRs(false);
+            setLoadingOrders(false);
             return;
         }
         try {
             const token = await getToken();
-            const { data } = await axios.get('/api/ordeRs', {
-                headeRs: { Authorization: `Bearer ${token}` }
+            const { data } = await axios.get('/api/orders', {
+                headers: { Authorization: `Bearer ${token}` }
             });
 
-            // Get unique products from recent ordeRs (limit to last 8 products)                                                                        const recentProducts = [];
+            // Get unique products from recent orders (limit to last 8 products)                                                                        const recentProducts = [];
             const seenProductIds = new Set();
 
-            if (data.ordeRs && data.ordeRs.length > 0) {
-                for (const order of data.ordeRs) {
+            if (data.orders && data.orders.length > 0) {
+                for (const order of data.orders) {
                     for (const item of order.orderItems) {
                         if (!seenProductIds.has(item.product.id) && recentProducts.length < 8) {                                                                        seenProductIds.add(item.product.id);      
                             recentProducts.push(item.product);        
@@ -71,11 +71,11 @@ export default function Cart() {
                 }
             }
 
-            setRecentOrdeRs(recentProducts);
+            setRecentOrders(recentProducts);
         } catch (error) {
-            console.error('Failed to fetch recent ordeRs:', error);   
+            console.error('Failed to fetch recent orders:', error);   
         } finally {
-            setLoadingOrdeRs(false);
+            setLoadingOrders(false);
         }
     }
 
@@ -86,7 +86,7 @@ export default function Cart() {
     }, [cartItems, products]);
 
     useEffect(() => {
-        fetchRecentOrdeRs();
+        fetchRecentOrders();
     }, [isSignedIn]);
 
     return (
@@ -132,7 +132,7 @@ export default function Cart() {
                                             </div>
 
                                             {/* Desktop: Total Price & Remove */}                                                                                                       <div className="hidden md:flex flex-col items-end justify-between">                                                                             <button
-                                                    onClick={() => handleDeleteItemFromCart(item.id)}                                                                                           className="text-gray-400 hover:text-red-500 transition-coloRs"                                                                          >
+                                                    onClick={() => handleDeleteItemFromCart(item.id)}                                                                                           className="text-gray-400 hover:text-red-500 transition-colors"                                                                          >
                                                     <Trash2Icon size={20} />                                                                                                                </button>
                                                 <p className="text-lg font-bold text-gray-900">                                                                                                 {currency}{(item.price * item.quantity).toLocaleString()}                                                                               </p>
                                             </div>
@@ -144,7 +144,7 @@ export default function Cart() {
                             {/* Order Summary - Sticky on Desktop */} 
                             <div className="lg:w-[380px]">
                                 <div className="lg:sticky lg:top-6">  
-                                    <OrdeRsummary totalPrice={totalPrice} items={cartArray} />                                                                              </div>
+                                    <Ordersummary totalPrice={totalPrice} items={cartArray} />                                                                              </div>
                             </div>
                         </div>
                     </>
@@ -152,7 +152,7 @@ export default function Cart() {
                     <div className="min-h-[60vh] flex items-center justify-center">                                                                                 <div className="text-center bg-white rounded-2xl p-12 shadow-sm max-w-md">                                                                      <div className="w-24 h-24 mx-auto mb-6 bg-orange-50 rounded-full flex items-center justify-center">                                             <PackageIcon size={48} className="text-orange-400" />                                                                                   </div>
                             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Your cart is empty</h1>                                                   <p className="text-gray-500 mb-6">Add some products to get started</p>                                                                      <a
                                 href="/products"
-                                className="inline-block bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-coloRs"                                                                                    >
+                                className="inline-block bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"                                                                                    >
                                 Continue Shopping
                             </a>
                         </div>
@@ -160,11 +160,11 @@ export default function Cart() {
                 )}
 
                 {/* Recently Ordered Products Section */}
-                {isSignedIn && !loadingOrdeRs && recentOrdeRs.length > 0 && (                                                                                   <div className="mt-16 mb-12">
+                {isSignedIn && !loadingOrders && recentOrders.length > 0 && (                                                                                   <div className="mt-16 mb-12">
                         <div className="flex items-center gap-3 mb-6">
                             <PackageIcon className="text-slate-700" size={28} />                                                                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800">Recently Ordered</h2>                                                     </div>
-                        <p className="text-slate-500 mb-6">Products from your recent ordeRs</p>                                             
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">                                                           {recentOrdeRs.map((product) => (
+                        <p className="text-slate-500 mb-6">Products from your recent orders</p>                                             
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">                                                           {recentOrders.map((product) => (
                                 <ProductCard key={product.id} product={product} />                                                                                      ))}
                         </div>
                     </div>

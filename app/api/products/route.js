@@ -52,7 +52,7 @@ import { NextResponse } from "next/server";
 export async function GET(request){
     try {
         const { searchParams } = new URL(request.url);
-        const sortBy = searchParams.get('sortBy'); // 'newest', 'ordeRs', 'rating'
+        const sortBy = searchParams.get('sortBy'); // 'newest', 'orders', 'rating'
         
         // Fetch products with only essential data and active stores
         let products = await prisma.product.findMany({
@@ -117,15 +117,15 @@ export async function GET(request){
             
             return {
                 ...productData,
-                totalOrdeRs: _count.orderItems,
+                totalOrders: _count.orderItems,
                 averageRating: avgRating,
                 ratingCount: _count.rating
             };
         });
         
         // Sort based on the sortBy parameter
-        if (sortBy === 'ordeRs') {
-            products = products.sort((a, b) => b.totalOrdeRs - a.totalOrdeRs);
+        if (sortBy === 'orders') {
+            products = products.sort((a, b) => b.totalOrders - a.totalOrders);
         } else if (sortBy === 'rating') {
             products = products.sort((a, b) => b.averageRating - a.averageRating);
         } else if (sortBy === 'newest') {

@@ -8,20 +8,20 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 
-export default function OrdeRsClient() {
+export default function OrdersClient() {
     const {getToken} = useAuth()
     const {user, isLoaded} = useUser()
-    const [ordeRs, setOrdeRs] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true)
 
     const router = useRouter()
 
     useEffect(() => {
-       const fetchOrdeRs = async () => {
+       const fetchOrders = async () => {
         try {
             const token = await getToken()
-            const { data } = await axios.get('/api/ordeRs', { headeRs: { Authorization: `Bearer ${token}` } })
-            setOrdeRs(data.ordeRs)
+            const { data } = await axios.get('/api/orders', { headers: { Authorization: `Bearer ${token}` } })
+            setOrders(data.orders)
             setLoading(false)
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)
@@ -29,7 +29,7 @@ export default function OrdeRsClient() {
        }
        if(isLoaded){
         if(user){
-            fetchOrdeRs()
+            fetchOrders()
         }else{
             router.push('/')
         }
@@ -42,10 +42,10 @@ export default function OrdeRsClient() {
 
     return (
         <div className="min-h-[70vh] mx-6">
-            {ordeRs.length > 0 ? (
+            {orders.length > 0 ? (
                 (
                     <div className="my-20 max-w-7xl mx-auto">
-                        <PageTitle heading="My OrdeRs" text={`Showing total ${ordeRs.length} ordeRs`} linkText={'Go to home'} />
+                        <PageTitle heading="My Orders" text={`Showing total ${orders.length} orders`} linkText={'Go to home'} />
 
                         <table className="w-full max-w-5xl text-slate-500 table-auto border-separate border-spacing-y-12 border-spacing-x-4">
                             <thead>
@@ -57,7 +57,7 @@ export default function OrdeRsClient() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {ordeRs.map((order) => (
+                                {orders.map((order) => (
                                     <OrderItem order={order} key={order.id} />
                                 ))}
                             </tbody>
@@ -66,7 +66,7 @@ export default function OrdeRsClient() {
                 )
             ) : (
                 <div className="min-h-[80vh] mx-6 flex items-center justify-center text-slate-400">
-                    <h1 className="text-2xl sm:text-4xl font-semibold">You have no ordeRs</h1>
+                    <h1 className="text-2xl sm:text-4xl font-semibold">You have no orders</h1>
                 </div>
             )}
         </div>

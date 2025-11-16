@@ -10,8 +10,8 @@ import { clearCart, fetchCart } from '@/lib/features/cart/cartSlice';
 import countryList from 'react-select-country-list';
 import { countryCodes } from '@/assets/countryCodes';
 
-// OrderSummary component - India localization
-const OrderSummary = ({ totalPrice = 0, items = [] }) => {
+// Ordersummary component - India localization
+const Ordersummary = ({ totalPrice = 0, items = [] }) => {
   const { user } = useUser();
   const { getToken, isSignedIn } = useAuth();
   const dispatch = useDispatch();
@@ -513,4 +513,4 @@ const OrderSummary = ({ totalPrice = 0, items = [] }) => {
   );
 };
 
-export default OrderSummary;
+export default Ordersummary;

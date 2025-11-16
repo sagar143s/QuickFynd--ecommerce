@@ -22,7 +22,7 @@ export default function NewHomeSection(){
 
   const uploadSlide = async (file) => {
     const fd = new FormData(); fd.append('image', file)
-    try{ const { data } = await axios.post('/api/store/upload-image', fd, { headeRs: { 'Content-Type': 'multipart/form-data' } });
+    try{ const { data } = await axios.post('/api/store/upload-image', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
       const url = data?.url || data?.imageUrl; if(url) setForm(f=>({ ...f, slides:[...f.slides, url] }))
     }catch(e){ toast.error('Upload failed') }
   }
@@ -67,7 +67,7 @@ export default function NewHomeSection(){
           </div>
           <div>
             <label className='block text-sm text-gray-600'>Section Key</label>
-            <input className='w-full border rounded-lg px-3 py-2' value={form.section} onChange={e=>setForm({...form,section:e.target.value})} placeholder="e.g., limited_offeRs" required/>
+            <input className='w-full border rounded-lg px-3 py-2' value={form.section} onChange={e=>setForm({...form,section:e.target.value})} placeholder="e.g., limited_offers" required/>
           </div>
         </div>
         <div>
@@ -109,7 +109,7 @@ export default function NewHomeSection(){
                 <button type='button' key={p.id} onClick={()=>pick(p.id)} className={`text-left border-2 rounded-lg p-3 ${form.productIds.includes(p.id)?'border-blue-600 bg-blue-50':'border-gray-200'}`}>
                   <img src={p.images[0]} alt={p.name} className='w-full aspect-square object-contain mb-2'/>
                   <div className='text-xs font-medium'>{p.name}</div>
-                  <div className='text-xs text-gray-600'>Rs {p.price}</div>
+                  <div className='text-xs text-gray-600'>rs {p.price}</div>
                 </button>
               ))}
             </div>

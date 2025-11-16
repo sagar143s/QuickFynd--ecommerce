@@ -5,13 +5,13 @@ const brandData = {
   "MOST SEARCHED FOR": [
     "Big Bang Diwali Sale", "iPhone 17", "Samsung Galaxy S24 5G", "Oppo Reno 14 Pro", "CMF by Nothing Phone 1", "Google Pixel 9",
     "Realme 13 Pro", "iQOO Z9", "Apple Watch Series 10", "Nothing Phone 2a", "iPhone 16 Pro", "Airpods", "Smart Watches",
-    "Bluetooth Earphones", "Power Banks", "Portable SpeakeRs", "Noise Smart Watch", "Samsung Galaxy Watch 7", "Mi Power Bank",
+    "Bluetooth Earphones", "Power Banks", "Portable Speakers", "Noise Smart Watch", "Samsung Galaxy Watch 7", "Mi Power Bank",
     "Apple Pencil 2", "MacBook Air M3", "iPad Pro 13", "Samsung Galaxy Tab S9", "iPhone 15 Pro Max", "OnePlus Nord CE 3",
     "Vivo X100", "Realme 12 Pro+", "Infinix Zero 30", "Honor 200 Pro", "Redmi Note 13 Pro+", "Pixel Buds Pro", "JBL Headphones",
     "Sony WH-1000XM5", "Boat Rockerz", "Fire Boltt Smartwatch", "Noise ColorFit Pro", "boAt Airdopes 181", "Anker Soundcore Mini",
     "OnePlus Buds 3", "Apple AirPods Pro 2", "Samsung Galaxy Z Fold 6", "Nothing Ear 3", "Mi Band 9", "Oppo Enco Buds 3",
     "Fire Boltt Visionary", "JBL Go 4", "Boat Stone 350", "Apple Watch SE 2", "CMF Watch Pro 2", "Beats Studio Pro",
-    "MaRshall Emberton 2", "Dyson SupeRsonic Hair Dryer", "Philips Air Fryer XL", "LG OLED C4", "Samsung Frame TV 65 inch"
+    "Marshall Emberton 2", "Dyson Supersonic Hair Dryer", "Philips Air Fryer XL", "LG OLED C4", "Samsung Frame TV 65 inch"
   ],
 
   "MOBILES": [
@@ -31,27 +31,27 @@ const brandData = {
 
   // "CLOTHING": [
   //   "Men's T-Shirts", "Women's Dresses", "Kurtas", "Lehengas", "Sarees", "Jeans", "Shirts", "Designer Bags", "Shoes",
-  //   "Ethnic Wear", "Hoodies", "TrouseRs", "Tops", "BlazeRs", "SweateRs", "Shorts", "Casual Pants", "Suits", "Denim Jackets",
-  //   "Tracksuits", "Crop Tops", "Party Wear Gowns", "JoggeRs", "Formal Shirts", "Wedding Sarees", "Kids Wear", "Cotton Kurtas",
-  //   "Jackets", "Cargo Pants", "Maxi Dresses", "OveRsized T-Shirts", "Polo Shirts"
+  //   "Ethnic Wear", "Hoodies", "Trousers", "Tops", "Blazers", "Sweaters", "Shorts", "Casual Pants", "Suits", "Denim Jackets",
+  //   "Tracksuits", "Crop Tops", "Party Wear Gowns", "Joggers", "Formal Shirts", "Wedding Sarees", "Kids Wear", "Cotton Kurtas",
+  //   "Jackets", "Cargo Pants", "Maxi Dresses", "Oversized T-Shirts", "Polo Shirts"
   // ],
 
   // "ELECTRONICS": [
-  //   "TVs", "Headphones", "SpeakeRs", "Smartwatches", "Bluetooth Earphones", "ProjectoRs", "SoundbaRs", "Home TheateRs",
-  //   "MonitoRs", "Gaming Consoles", "VR Headsets", "Smart Lights", "Security Cameras", "Tablets", "PrinteRs", "ScanneRs",
+  //   "TVs", "Headphones", "Speakers", "Smartwatches", "Bluetooth Earphones", "Projectors", "Soundbars", "Home Theaters",
+  //   "Monitors", "Gaming Consoles", "VR Headsets", "Smart Lights", "Security Cameras", "Tablets", "Printers", "Scanners",
   //   "Laptops", "Desktops", "PC Accessories", "Smart Bulbs", "Wireless Keyboards", "Gaming Mouse", "SSD Drives", "External Hard Disks",
-  //   "Power Strips", "Bluetooth SpeakeRs", "Robot Vacuum CleaneRs", "Smart Doorbells", "Smart Remotes"
+  //   "Power Strips", "Bluetooth Speakers", "Robot Vacuum Cleaners", "Smart Doorbells", "Smart Remotes"
   // ],
 
   // "APPLIANCES": [
-  //   "RefrigeratoRs", "Washing Machines", "Microwaves", "Air ConditioneRs", "Water PurifieRs", "Vacuum CleaneRs", "Air FryeRs",
-  //   "Induction Cooktops", "DishwasheRs", "GeyseRs", "Ceiling Fans", "HeateRs", "Chimneys", "MixeRs", "GrindeRs", "OTG Ovens",
-  //   "Electric Kettles", "Coffee MakeRs", "JuiceRs", "ToasteRs", "Electric CookeRs", "Water DispenseRs", "Steam Irons", "Rice CookeRs"
+  //   "Refrigerators", "Washing Machines", "Microwaves", "Air Conditioners", "Water Purifiers", "Vacuum Cleaners", "Air Fryers",
+  //   "Induction Cooktops", "Dishwashers", "Geysers", "Ceiling Fans", "Heaters", "Chimneys", "Mixers", "Grinders", "OTG Ovens",
+  //   "Electric Kettles", "Coffee Makers", "Juicers", "Toasters", "Electric Cookers", "Water Dispensers", "Steam Irons", "Rice Cookers"
   // ],
 
   // "FOOTWEAR": [
-  //   "Nike Shoes", "Adidas Shoes", "Puma SneakeRs", "Reebok Shoes", "Woodland Shoes", "Crocs", "SkecheRs", "Formal Shoes",
-  //   "LoafeRs", "Sandals", "Flip Flops", "Heels", "Boots", "Running Shoes", "Training Shoes", "SlippeRs", "Casual SneakeRs",
+  //   "Nike Shoes", "Adidas Shoes", "Puma Sneakers", "Reebok Shoes", "Woodland Shoes", "Crocs", "Skechers", "Formal Shoes",
+  //   "Loafers", "Sandals", "Flip Flops", "Heels", "Boots", "Running Shoes", "Training Shoes", "Slippers", "Casual Sneakers",
   //   "Ethnic Footwear", "Slip Ons", "Walking Shoes"
   // ],
 
@@ -62,31 +62,31 @@ const brandData = {
   // ],
 
   // "FURNITURE": [
-  //   "Sofas", "Beds", "Dining Sets", "TV Units", "ChaiRs", "Tables", "Bean Bags", "Mattresses", "Wardrobes", "Office ChaiRs",
-  //   "Bookshelves", "ReclineRs", "Study Tables", "Shoe Racks", "Cabinets", "Side Tables", "Coffee Tables", "Storage Boxes",
+  //   "Sofas", "Beds", "Dining Sets", "TV Units", "Chairs", "Tables", "Bean Bags", "Mattresses", "Wardrobes", "Office Chairs",
+  //   "Bookshelves", "Recliners", "Study Tables", "Shoe Racks", "Cabinets", "Side Tables", "Coffee Tables", "Storage Boxes",
   //   "Dressing Tables", "TV Cabinets"
   // ],
 
-  // "BEAUTY & PERsONAL CARE": [
+  // "BEAUTY & PErsONAL CARE": [
   //   "Face Wash", "Perfume", "Hair Dryer", "Straightener", "Trimmer", "Lipstick", "Moisturizer", "Body Lotion", "Face Cream",
   //   "Makeup Kits", "Nail Polish", "Shampoo", "Sunscreen", "Conditioner", "Razor", "Beard Oil", "Face Serum", "Compact Powder",
   //   "Foundation", "Eye Liner", "Body Mist", "Facial Kit", "Hair Oil", "Deodorant", "After Shave Lotion"
   // ],
 
   // "HOME DECOR": [
-  //   "Wall Clocks", "Photo Frames", "Curtains", "Cushion CoveRs", "Lamps", "Vases", "Artificial Plants", "Wall Art",
-  //   "Candles", "MirroRs", "Table Lamps", "Rugs", "Bed Sheets", "Door Mats", "Showpieces", "PlanteRs", "Fairy Lights",
-  //   "Wall Shelves", "Carpets", "Table RunneRs"
+  //   "Wall Clocks", "Photo Frames", "Curtains", "Cushion Covers", "Lamps", "Vases", "Artificial Plants", "Wall Art",
+  //   "Candles", "Mirrors", "Table Lamps", "Rugs", "Bed Sheets", "Door Mats", "Showpieces", "Planters", "Fairy Lights",
+  //   "Wall Shelves", "Carpets", "Table Runners"
   // ],
 
   // "SPORTS & FITNESS": [
   //   "Dumbbells", "Yoga Mats", "Treadmills", "Exercise Bikes", "Resistance Bands", "Gym Gloves", "Running Shoes",
-  //   "Fitness TrackeRs", "Cricket Kits", "Football Shoes", "Badminton Rackets", "Skipping Ropes", "Protein Supplements",
+  //   "Fitness Trackers", "Cricket Kits", "Football Shoes", "Badminton Rackets", "Skipping Ropes", "Protein Supplements",
   //   "Cycling Helmets", "Tennis Balls", "Gym Bags", "Water Bottles", "Sports Watches", "Smart Scales", "Sweatbands"
   // ],
 
   // "TOYS & GAMES": [
-  //   "Remote CaRs", "Board Games", "Action Figures", "Barbie Dolls", "Building Blocks", "Lego Sets", "Puzzle Toys",
+  //   "Remote Cars", "Board Games", "Action Figures", "Barbie Dolls", "Building Blocks", "Lego Sets", "Puzzle Toys",
   //   "Stuffed Animals", "RC Drones", "Toy Guns", "Musical Toys", "Train Sets", "Video Games", "Kids Bikes", "Educational Toys"
   // ]
 };
@@ -106,7 +106,7 @@ export default function BrandDirectory() {
             </h3>
             <div className="flex flex-wrap">
               {items.map((item, i) => (
-                <span key={i} className="flex items-center text-gray-500 hover:text-gray-800 transition-coloRs">
+                <span key={i} className="flex items-center text-gray-500 hover:text-gray-800 transition-colors">
                   <Link
                     href={`/shop?search=${encodeURIComponent(item)}`}
                     className="whitespace-nowrap"

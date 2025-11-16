@@ -19,7 +19,7 @@ export default function StoreReturnRequests() {
         try {
             const token = await getToken();
             const { data } = await axios.get('/api/store/return-requests', {
-                headeRs: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             });
             setRequests(data.requests);
         } catch (error) {
@@ -33,7 +33,7 @@ export default function StoreReturnRequests() {
         try {
             const token = await getToken();
             await axios.put(`/api/store/return-requests/${id}`, { status }, {
-                headeRs: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             });
             
             setRequests(prev =>

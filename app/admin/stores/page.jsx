@@ -19,7 +19,7 @@ export default function AdminStores() {
     const fetchStores = async () => {
         try {
             const token = await getToken()
-            const { data } = await axios.get('/api/admin/stores', {headeRs: { Authorization: `Bearer ${token}` }})
+            const { data } = await axios.get('/api/admin/stores', {headers: { Authorization: `Bearer ${token}` }})
             setStores(data.stores)
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)
@@ -30,7 +30,7 @@ export default function AdminStores() {
     const toggleIsActive = async (storeId) => {
         try {
             const token = await getToken()
-            const { data } = await axios.post('/api/admin/toggle-store', {storeId}, {headeRs: { Authorization: `Bearer ${token}` }})
+            const { data } = await axios.post('/api/admin/toggle-store', {storeId}, {headers: { Authorization: `Bearer ${token}` }})
             await fetchStores()
             toast.success(data.message)
         } catch (error) {
@@ -58,9 +58,9 @@ export default function AdminStores() {
                             {/* Actions */}
                             <div className="flex items-center gap-3 pt-2 flex-wrap">
                                 <p>Active</p>
-                                <label className="relative inline-flex items-center cuRsor-pointer text-gray-900">
+                                <label className="relative inline-flex items-center cursor-pointer text-gray-900">
                                     <input type="checkbox" className="sr-only peer" onChange={() => toast.promise(toggleIsActive(store.id), { loading: "Updating data..." })} checked={store.isActive} />
-                                    <div className="w-9 h-5 bg-slate-300 rounded-full peer peer-checked:bg-green-600 transition-coloRs duration-200"></div>
+                                    <div className="w-9 h-5 bg-slate-300 rounded-full peer peer-checked:bg-green-600 transition-colors duration-200"></div>
                                     <span className="dot absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-4"></span>
                                 </label>
                             </div>

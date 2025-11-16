@@ -36,16 +36,16 @@ export async function POST(request) {
         const client = await clerkClient();
         
         try {
-            const user = await client.useRs.createUser({
+            const user = await client.users.createUser({
                 emailAddress: [guestUser.email],
-                fiRstName: guestUser.name.split(' ')[0],
+                firstName: guestUser.name.split(' ')[0],
                 lastName: guestUser.name.split(' ').slice(1).join(' ') || '',
                 skipPasswordRequirement: false,
                 skipPasswordChecks: false,
             });
 
             // Send password setup email
-            await client.useRs.createEmailAddress({
+            await client.users.createEmailAddress({
                 userId: user.id,
                 emailAddress: guestUser.email,
                 verified: false
@@ -84,7 +84,7 @@ export async function POST(request) {
             console.error('Clerk error:', clerkError);
             
             // Check if user already exists in Clerk
-            if (clerkError.erroRs?.[0]?.code === 'form_identifier_exists') {
+            if (clerkError.errors?.[0]?.code === 'form_identifier_exists') {
                 // Mark as converted anyway since account exists
                 await prisma.guestUser.update({
                     where: { id: guestUser.id },

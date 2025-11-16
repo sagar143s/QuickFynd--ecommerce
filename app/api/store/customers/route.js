@@ -3,14 +3,14 @@ import authSeller from "@/middlewares/authSeller";
 import { getAuth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-// Get all customeRs for a store with their order statistics
+// Get all customers for a store with their order statistics
 export async function GET(request) {
     try {
         const { userId } = getAuth(request);
         const storeId = await authSeller(userId);
 
-        // Get all ordeRs for this store with user information
-        const ordeRs = await prisma.order.findMany({
+        // Get all orders for this store with user information
+        const orders = await prisma.order.findMany({
             where: { storeId },
             include: {
                 user: {
@@ -32,10 +32,10 @@ export async function GET(request) {
             }
         });
 
-        // Group ordeRs by customer and calculate statistics
+        // Group orders by customer and calculate statistics
         const customerMap = new Map();
 
-        ordeRs.forEach(order => {
+        orders.forEach(order => {
             const customerId = order.userId;
             
             if (!customerMap.has(customerId)) {
@@ -44,16 +44,16 @@ export async function GET(request) {
                     name: order.user?.name || 'Unknown Customer',
                     email: order.user?.email || 'No email',
                     image: order.user?.image || null,
-                    totalOrdeRs: 0,
+                    totalOrders: 0,
                     totalSpent: 0,
-                    fiRstOrderDate: order.createdAt,
+                    firstOrderDate: order.createdAt,
                     lastOrderDate: order.createdAt,
-                    ordeRs: []
+                    orders: []
                 });
             }
 
             const customer = customerMap.get(customerId);
-            customer.totalOrdeRs += 1;
+            customer.totalOrders += 1;
             customer.totalSpent += order.total;
             
             // Convert orderItems to items array
@@ -63,7 +63,7 @@ export async function GET(request) {
                 quantity: item.quantity
             }));
             
-            customer.ordeRs.push({
+            customer.orders.push({
                 id: order.id,
                 total: order.total,
                 status: order.status,
@@ -71,9 +71,9 @@ export async function GET(request) {
                 items: JSON.stringify(items)
             });
 
-            // Update fiRst and last order dates
-            if (new Date(order.createdAt) < new Date(customer.fiRstOrderDate)) {
-                customer.fiRstOrderDate = order.createdAt;
+            // Update first and last order dates
+            if (new Date(order.createdAt) < new Date(customer.firstOrderDate)) {
+                customer.firstOrderDate = order.createdAt;
             }
             if (new Date(order.createdAt) > new Date(customer.lastOrderDate)) {
                 customer.lastOrderDate = order.createdAt;
@@ -81,9 +81,9 @@ export async function GET(request) {
         });
 
         // Convert map to array and sort by total spent (descending)
-        const customeRs = Array.from(customerMap.values()).sort((a, b) => b.totalSpent - a.totalSpent);
+        const customers = Array.from(customerMap.values()).sort((a, b) => b.totalSpent - a.totalSpent);
 
-        return NextResponse.json({ customeRs });
+        return NextResponse.json({ customers });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ error: error.code || error.message }, { status: 400 });

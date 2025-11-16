@@ -1,10 +1,10 @@
 'use client'
 import { dummyAdminDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
-import OrdeRsAreaChart from "@/components/OrdeRsAreaChart"
+import OrdersAreaChart from "@/components/OrdersAreaChart"
 import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
-import { CircleDollaRsignIcon, ShoppingBasketIcon, StoreIcon, TagsIcon, UseRsIcon } from "lucide-react"
+import { CircleDollarsignIcon, ShoppingBasketIcon, StoreIcon, TagsIcon, UsersIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -13,31 +13,31 @@ export default function AdminDashboard() {
 
     const { getToken } = useAuth()
 
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'rs'
 
     const [loading, setLoading] = useState(true)
     const [dashboardData, setDashboardData] = useState({
         products: 0,
         revenue: 0,
-        ordeRs: 0,
+        orders: 0,
         stores: 0,
-        customeRs: 0,
-        allOrdeRs: [],
+        customers: 0,
+        allOrders: [],
     })
 
     const dashboardCardsData = [
         { title: 'Total Products', value: dashboardData.products, icon: ShoppingBasketIcon },
-        { title: 'Total Revenue', value: currency + dashboardData.revenue, icon: CircleDollaRsignIcon },
-        { title: 'Total OrdeRs', value: dashboardData.ordeRs, icon: TagsIcon },
+        { title: 'Total Revenue', value: currency + dashboardData.revenue, icon: CircleDollarsignIcon },
+        { title: 'Total Orders', value: dashboardData.orders, icon: TagsIcon },
         { title: 'Total Stores', value: dashboardData.stores, icon: StoreIcon },
-        { title: 'Total CustomeRs', value: dashboardData.customeRs, icon: UseRsIcon },
+        { title: 'Total Customers', value: dashboardData.customers, icon: UsersIcon },
     ]
 
     const fetchDashboardData = async () => {
         try {
             const token = await getToken()
             const { data } = await axios.get('/api/admin/dashboard', {
-                headeRs: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             })
             setDashboardData(data.dashboardData)
         } catch (error) {
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* Area Chart */}
-            <OrdeRsAreaChart allOrdeRs={dashboardData.allOrdeRs} />
+            <OrdersAreaChart allOrders={dashboardData.allOrders} />
         </div>
     )
 }

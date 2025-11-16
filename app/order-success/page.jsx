@@ -4,19 +4,19 @@ import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import Loading from '@/components/Loading';
 
-export default function OrdeRsuccess() {
+export default function Ordersuccess() {
   return (
     <Suspense>
-      <OrdeRsuccessContent />
+      <OrdersuccessContent />
     </Suspense>
   );
 
 }
 
-function OrdeRsuccessContent() {
+function OrdersuccessContent() {
   const params = useSearchParams();
   const router = useRouter();
-  const [ordeRs, setOrdeRs] = useState(null);
+  const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,34 +31,34 @@ function OrdeRsuccessContent() {
 
   const fetchOrder = async (orderId) => {
     try {
-      // Try to fetch by ID for both guests and useRs
-      const res = await fetch(`/api/ordeRs?orderId=${orderId}`);
+      // Try to fetch by ID for both guests and users
+      const res = await fetch(`/api/orders?orderId=${orderId}`);
       const data = await res.json();
-      // Support both {order} and {ordeRs} response
-      if (data.ordeRs && Array.isArray(data.ordeRs)) {
-        setOrdeRs(data.ordeRs);
+      // Support both {order} and {orders} response
+      if (data.orders && Array.isArray(data.orders)) {
+        setOrders(data.orders);
       } else if (data.order) {
-        setOrdeRs([data.order]);
+        setOrders([data.order]);
       } else {
-        setOrdeRs(null);
+        setOrders(null);
       }
     } catch (err) {
-      setOrdeRs(null);
+      setOrders(null);
     } finally {
       setLoading(false);
     }
   };
 
   if (loading) return <Loading />;
-  if (!ordeRs || ordeRs.length === 0) return <div className='p-8 text-center text-red-600'>Order not found or failed.</div>;
+  if (!orders || orders.length === 0) return <div className='p-8 text-center text-red-600'>Order not found or failed.</div>;
 
-  // Use fiRst order for summary
-  const order = ordeRs && ordeRs.length > 0 ? ordeRs[0] : null;
+  // Use first order for summary
+  const order = orders && orders.length > 0 ? orders[0] : null;
   // Generate readable order number (e.g., S523645)
   function getOrderNumber(id) {
     if (!id) return '';
     // Deterministically convert the full order id into a 6-digit numeric order number
-    // This keeps the URL using the real id while showing a short numeric order number to useRs.
+    // This keeps the URL using the real id while showing a short numeric order number to users.
     let hash = 0;
     for (let i = 0; i < id.length; i++) {
       hash = (hash * 31 + id.charCodeAt(i)) >>> 0;
@@ -74,7 +74,7 @@ function OrdeRsuccessContent() {
   const discount = order?.coupon?.discount ? (order.coupon.discountType === 'percentage' ? (order.coupon.discount / 100 * subtotal) : Math.min(order.coupon.discount, subtotal)) : 0;
   const total = subtotal + shipping - discount;
   const orderDate = order?.createdAt ? new Date(order.createdAt).toLocaleDateString() : new Date().toLocaleDateString();
-  const currency = order?.currency || 'Rs';
+  const currency = order?.currency || 'rs';
 
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col items-center justify-center py-8'>

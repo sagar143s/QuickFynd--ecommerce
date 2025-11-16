@@ -39,7 +39,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
         price: "",
         category: "",
         sku: "",
-        coloRs: [],
+        colors: [],
         sizes: [],
         fastDelivery: false,
         allowReturn: true,
@@ -128,7 +128,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                 price: product.price || "",
                 category: product.category || "",
                 sku: product.sku || "",
-                coloRs: product.coloRs || [],
+                colors: product.colors || [],
                 sizes: product.sizes || [],
                 fastDelivery: product.fastDelivery || false,
                 allowReturn: product.allowReturn !== undefined ? product.allowReturn : true,
@@ -177,7 +177,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
         const previewUrl = URL.createObjectURL(file)
         setImages(prev => ({ ...prev, [key]: { file, preview: previewUrl } }))
 
-        // AI analysis only for fiRst image
+        // AI analysis only for first image
         if (key === "1" && file && !aiUsed) {
             const reader = new FileReader()
             reader.readAsDataURL(file)
@@ -188,7 +188,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
 
                 try {
                     await toast.promise(
-                        axios.post("/api/store/ai", { base64Image: base64String, mimeType }, { headeRs: { Authorization: `Bearer ${token}` } }),
+                        axios.post("/api/store/ai", { base64Image: base64String, mimeType }, { headers: { Authorization: `Bearer ${token}` } }),
                         {
                             loading: "Analyzing image with AI...",
                             success: (res) => {
@@ -233,7 +233,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
             const formData = new FormData()
 
             Object.entries(productInfo).forEach(([key, value]) => {
-                if (["coloRs", "sizes"].includes(key)) {
+                if (["colors", "sizes"].includes(key)) {
                     formData.append(key, JSON.stringify(value))
                 } else if (key === 'reviews') {
                     const cleanReviews = value.map(({ name, rating, comment }) => ({ name, rating, comment }))
@@ -269,7 +269,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                     }))
                 hasVariantsFlag = variantsToSend.length > 0
                 
-                // Ensure base price/mrp are set from the fiRst bulk option for API validation
+                // Ensure base price/mrp are set from the first bulk option for API validation
                 if (variantsToSend.length > 0 && (!productInfo.price || !productInfo.mrp)) {
                     formData.set('price', String(variantsToSend[0].price))
                     formData.set('mrp', String(variantsToSend[0].mrp))
@@ -305,8 +305,8 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
 
             const token = await getToken()
             const apiCall = product
-                ? axios.put(`/api/store/product`, formData, { headeRs: { Authorization: `Bearer ${token}` } })
-                : axios.post('/api/store/product', formData, { headeRs: { Authorization: `Bearer ${token}` } })
+                ? axios.put(`/api/store/product`, formData, { headers: { Authorization: `Bearer ${token}` } })
+                : axios.post('/api/store/product', formData, { headers: { Authorization: `Bearer ${token}` } })
 
             const { data } = await apiCall
             toast.success(data.message)
@@ -395,16 +395,16 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                 {/* Pricing */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium mb-1">Regular Price (MRP) - Rs</label>
+                        <label className="block text-sm font-medium mb-1">Regular Price (MRP) - rs</label>
                         <div className="relative">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium">Rs</span>
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium">rs</span>
                             <input type="number" step="0.01" name="mrp" value={productInfo.mrp} onChange={onChangeHandler} className="w-full border rounded px-3 py-2 pl-14" placeholder="0.00" />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-1">Sale Price - Rs</label>
+                        <label className="block text-sm font-medium mb-1">Sale Price - rs</label>
                         <div className="relative">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium">Rs</span>
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium">rs</span>
                             <input type="number" step="0.01" name="price" value={productInfo.price} onChange={onChangeHandler} className="w-full border rounded px-3 py-2 pl-14" placeholder="0.00" />
                         </div>
                     </div>
@@ -471,7 +471,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                         <button type="button" onClick={() => editor?.chain().focus().setTextAlign('center').run()} className={`px-3 py-1.5 rounded text-sm font-medium transition-all ${editor?.isActive({ textAlign: 'center' }) ? 'bg-blue-600 text-white shadow' : 'bg-gray-100 hover:bg-gray-200'}`} title="Align Center">↔</button>
                         <button type="button" onClick={() => editor?.chain().focus().setTextAlign('right').run()} className={`px-3 py-1.5 rounded text-sm font-medium transition-all ${editor?.isActive({ textAlign: 'right' }) ? 'bg-blue-600 text-white shadow' : 'bg-gray-100 hover:bg-gray-200'}`} title="Align Right">➡</button>
                         <div className="w-px h-6 bg-gray-300 self-center mx-1"></div>
-                        <label className="px-3 py-1.5 rounded text-sm font-medium bg-green-100 hover:bg-green-200 transition-all cuRsor-pointer flex items-center gap-1" title="Upload Image">
+                        <label className="px-3 py-1.5 rounded text-sm font-medium bg-green-100 hover:bg-green-200 transition-all cursor-pointer flex items-center gap-1" title="Upload Image">
                             🖼️ <span className="hidden sm:inline">Image</span>
                             <input 
                                 type="file" 
@@ -487,7 +487,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                                         
                                         const token = await getToken()
                                         const { data } = await axios.post('/api/store/upload-image', formData, {
-                                            headeRs: { Authorization: `Bearer ${token}` }
+                                            headers: { Authorization: `Bearer ${token}` }
                                         })
                                         
                                         editor?.chain().focus().setImage({ src: data.url }).run()
@@ -503,7 +503,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                             const url = prompt('Enter link URL:')
                             if (url) editor?.chain().focus().setLink({ href: url }).run()
                         }} className="px-3 py-1.5 rounded text-sm font-medium bg-gray-100 hover:bg-gray-200 transition-all" title="Add Link">🔗 <span className="hidden sm:inline">Link</span></button>
-                        <input type="color" onChange={(e) => editor?.chain().focus().setColor(e.target.value).run()} className="w-10 h-8 rounded border-2 cuRsor-pointer hover:border-blue-400 transition-all" title="Text Color" />
+                        <input type="color" onChange={(e) => editor?.chain().focus().setColor(e.target.value).run()} className="w-10 h-8 rounded border-2 cursor-pointer hover:border-blue-400 transition-all" title="Text Color" />
                     </div>
                     
                     {/* Editor */}
@@ -522,7 +522,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                             const hasImage = img && (img.preview || typeof img === 'string')
                             
                             return (
-                                <label key={key} className="relative border rounded flex items-center justify-center h-32 cuRsor-pointer bg-gray-50 hover:bg-gray-100 overflow-hidden group">
+                                <label key={key} className="relative border rounded flex items-center justify-center h-32 cursor-pointer bg-gray-50 hover:bg-gray-100 overflow-hidden group">
                                     <input type="file" accept="image/*" className="hidden" onChange={(e)=> e.target.files && handleImageUpload(key, e.target.files[0])} />
                                     {hasImage ? (
                                         <>
@@ -581,8 +581,8 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                             <div className="grid grid-cols-7 gap-2 font-medium text-sm text-gray-700">
                                 <div>Label</div>
                                 <div>Qty</div>
-                                <div>Price (Rs)</div>
-                                <div>MRP (Rs)</div>
+                                <div>Price (rs)</div>
+                                <div>MRP (rs)</div>
                                 <div>Stock</div>
                                 <div>Tag</div>
                                 <div></div>
@@ -596,9 +596,9 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                                             onChange={(e)=>{
                                                 const v=[...bulkOptions]; v[idx] = { ...b, qty: Number(e.target.value) }; setBulkOptions(v)
                                             }} />
-                                        <input className="border rounded px-2 py-1" type="number" step="0.01" placeholder="Rs" value={b.price}
+                                        <input className="border rounded px-2 py-1" type="number" step="0.01" placeholder="rs" value={b.price}
                                             onChange={(e)=>{ const v=[...bulkOptions]; v[idx] = { ...b, price: e.target.value }; setBulkOptions(v)}} />
-                                        <input className="border rounded px-2 py-1" type="number" step="0.01" placeholder="Rs" value={b.mrp}
+                                        <input className="border rounded px-2 py-1" type="number" step="0.01" placeholder="rs" value={b.mrp}
                                             onChange={(e)=>{ const v=[...bulkOptions]; v[idx] = { ...b, mrp: e.target.value }; setBulkOptions(v)}} />
                                         <input className="border rounded px-2 py-1" type="number" placeholder="Stock" value={b.stock}
                                             onChange={(e)=>{ const v=[...bulkOptions]; v[idx] = { ...b, stock: Number(e.target.value) }; setBulkOptions(v)}} />
@@ -694,7 +694,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                                         {/* Pricing */}
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                             <div>
-                                                <label className="block text-xs font-medium text-gray-600 mb-1">Price (Rs)</label>
+                                                <label className="block text-xs font-medium text-gray-600 mb-1">Price (rs)</label>
                                                 <input className="w-full border rounded px-3 py-2" placeholder="0.00" type="number" step="0.01"
                                                     value={v.price ?? ''}
                                                     onChange={(e)=>{
@@ -702,7 +702,7 @@ export default function ProductForm({ product = null, onClose, onSubmitSuccess }
                                                     }} />
                                             </div>
                                             <div>
-                                                <label className="block text-xs font-medium text-gray-600 mb-1">MRP (Rs)</label>
+                                                <label className="block text-xs font-medium text-gray-600 mb-1">MRP (rs)</label>
                                                 <input className="w-full border rounded px-3 py-2" placeholder="0.00" type="number" step="0.01"
                                                     value={v.mrp ?? ''}
                                                     onChange={(e)=>{

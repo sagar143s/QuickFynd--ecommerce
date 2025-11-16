@@ -12,7 +12,7 @@ export default function FiveStarRated() {
         if (!product.rating || product.rating.length === 0) return false;
         
         const averageRating = product.rating.reduce((acc, item) => acc + item.rating, 0) / product.rating.length;
-        return averageRating >= 4.5; // Products with 4.5+ staRs
+        return averageRating >= 4.5; // Products with 4.5+ stars
     });
 
     return (
@@ -36,7 +36,7 @@ export default function FiveStarRated() {
                         5 Star Rated Products
                     </h1>
                     <p className="text-gray-600">
-                        Discover our highest-rated products loved by customeRs ({fiveStarProducts.length} products)
+                        Discover our highest-rated products loved by customers ({fiveStarProducts.length} products)
                     </p>
                 </div>
 

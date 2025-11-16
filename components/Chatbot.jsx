@@ -9,7 +9,7 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
-            content: "Hi! 👋 I'm your Qui shopping assistant. I can help you find products, learn about offeRs, answer questions about shipping, returns, and more! How can I help you today?",
+            content: "Hi! 👋 I'm your Qui shopping assistant. I can help you find products, learn about offers, answer questions about shipping, returns, and more! How can I help you today?",
             timestamp: new Date().toISOString()
         }
     ]);
@@ -48,15 +48,15 @@ const Chatbot = () => {
         setIsTyping(true);
 
         try {
-            // Build conveRsation history (last 10 messages for context)
-            const conveRsationHistory = messages.slice(-10).map(msg => ({
+            // Build conversation history (last 10 messages for context)
+            const conversationHistory = messages.slice(-10).map(msg => ({
                 role: msg.role,
                 content: msg.content
             }));
 
             const { data } = await axios.post('/api/chatbot', {
                 message: inputMessage,
-                conveRsationHistory
+                conversationHistory
             });
 
             const assistantMessage = {
@@ -84,7 +84,7 @@ const Chatbot = () => {
 
     const quickQuestions = [
         "What products do you have?",
-        "Any offeRs or discounts?",
+        "Any offers or discounts?",
         "How does shipping work?",
         "What's your return policy?"
     ];
@@ -138,7 +138,7 @@ const Chatbot = () => {
                         </div>
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="hover:bg-white/20 p-2 rounded-full transition-coloRs"
+                            className="hover:bg-white/20 p-2 rounded-full transition-colors"
                             aria-label="Close chat"
                         >
                             <X size={20} />
@@ -216,7 +216,7 @@ const Chatbot = () => {
                                     <button
                                         key={index}
                                         onClick={() => handleQuickQuestion(question)}
-                                        className="w-full text-left text-sm px-4 py-2.5 bg-white border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-coloRs text-gray-700"
+                                        className="w-full text-left text-sm px-4 py-2.5 bg-white border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-colors text-gray-700"
                                     >
                                         {question}
                                     </button>
@@ -235,12 +235,12 @@ const Chatbot = () => {
                                 onChange={(e) => setInputMessage(e.target.value)}
                                 placeholder="Type your message..."
                                 disabled={isTyping}
-                                className="flex-1 px-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 disabled:bg-gray-50 disabled:cuRsor-not-allowed text-sm"
+                                className="flex-1 px-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 disabled:bg-gray-50 disabled:cursor-not-allowed text-sm"
                             />
                             <button
                                 type="submit"
                                 disabled={!inputMessage.trim() || isTyping}
-                                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-2.5 rounded-full hover:from-purple-700 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cuRsor-not-allowed transform hover:scale-105 active:scale-95"
+                                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-2.5 rounded-full hover:from-purple-700 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
                                 aria-label="Send message"
                             >
                                 {isTyping ? (

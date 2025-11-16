@@ -51,7 +51,7 @@ const ProductDescription = ({ product }) => {
             return false
         })
         
-        // Shuffle and take fiRst 8 products
+        // Shuffle and take first 8 products
         const shuffled = related.sort(() => 0.5 - Math.random())
         setSuggestedProducts(shuffled.slice(0, 8))
     }
@@ -121,7 +121,7 @@ const ProductDescription = ({ product }) => {
                                 <div className="text-sm text-gray-500">{reviews.length} Ratings</div>
                             </div>
 
-                            {/* Right: Rating Distribution BaRs */}
+                            {/* Right: Rating Distribution Bars */}
                             <div className="flex-1 space-y-2">
                                 {[5, 4, 3, 2, 1].map((star) => {
                                     const count = ratingCounts[star - 1]
@@ -162,7 +162,7 @@ const ProductDescription = ({ product }) => {
                         </div>
                     ) : reviews.length === 0 ? (
                         <div className="text-center py-12 bg-gray-50 rounded-lg">
-                            <p className="text-gray-500">No reviews yet. Be the fiRst to review!</p>
+                            <p className="text-gray-500">No reviews yet. Be the first to review!</p>
                         </div>
                     ) : (
                         <div className="space-y-6">
@@ -215,7 +215,7 @@ const ProductDescription = ({ product }) => {
                                                                 alt={`Review image ${idx + 1}`}
                                                                 width={80}
                                                                 height={80}
-                                                                className="rounded-lg object-cover border border-gray-200 hover:border-orange-400 transition-coloRs cuRsor-pointer"
+                                                                className="rounded-lg object-cover border border-gray-200 hover:border-orange-400 transition-colors cursor-pointer"
                                                             />
                                                         </div>
                                                     ))}

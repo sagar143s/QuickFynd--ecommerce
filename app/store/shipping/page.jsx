@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@clerk/nextjs'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { SaveIcon, TruckIcon, PackageIcon, WeightIcon, DollaRsignIcon } from 'lucide-react'
+import { SaveIcon, TruckIcon, PackageIcon, WeightIcon, DollarsignIcon } from 'lucide-react'
 
 
 export default function StoreShippingSettings() {
   const { getToken } = useAuth()
-  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
+  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'rs'
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
@@ -73,7 +73,7 @@ export default function StoreShippingSettings() {
     try {
       setSaving(true)
       const token = await getToken()
-      await axios.put('/api/shipping', form, { headeRs: { Authorization: `Bearer ${token}` } })
+      await axios.put('/api/shipping', form, { headers: { Authorization: `Bearer ${token}` } })
       toast.success('Shipping settings saved')
     } catch (e) {
       toast.error(e?.response?.data?.error || e.message)
@@ -94,13 +94,13 @@ export default function StoreShippingSettings() {
       <div className='space-y-6'>
         {/* Enable Shipping */}
         <div className='bg-white p-6 rounded-xl border border-slate-200'>
-          <label className='flex items-center gap-3 cuRsor-pointer'>
+          <label className='flex items-center gap-3 cursor-pointer'>
             <input type='checkbox' checked={form.enabled} 
               onChange={(e) => setForm(s => ({ ...s, enabled: e.target.checked }))}
               className='w-5 h-5 accent-slate-700' />
             <div>
               <span className='text-lg font-medium text-slate-700'>Enable Shipping Charges</span>
-              <p className='text-sm text-slate-500'>Turn on to charge shipping fees for ordeRs</p>
+              <p className='text-sm text-slate-500'>Turn on to charge shipping fees for orders</p>
             </div>
           </label>
         </div>
@@ -119,7 +119,7 @@ export default function StoreShippingSettings() {
                   { value: 'WEIGHT_BASED', label: 'Weight Based', desc: 'Based on weight' },
                   { value: 'FREE', label: 'Free Shipping', desc: 'No shipping cost' }
                 ].map(type => (
-                  <label key={type.value} className={`flex flex-col p-4 border-2 rounded-lg cuRsor-pointer transition ${form.shippingType === type.value ? 'border-slate-700 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}>
+                  <label key={type.value} className={`flex flex-col p-4 border-2 rounded-lg cursor-pointer transition ${form.shippingType === type.value ? 'border-slate-700 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}>
                     <input type='radio' name='shippingType' value={type.value} checked={form.shippingType === type.value}
                       onChange={(e) => setForm(s => ({ ...s, shippingType: e.target.value }))}
                       className='sr-only' />
@@ -139,7 +139,7 @@ export default function StoreShippingSettings() {
                       onChange={(e) => setForm(s => ({ ...s, flatRate: Number(e.target.value) }))}
                       className='w-40 border border-slate-300 rounded px-3 py-2' />
                   </div>
-                  <p className='text-xs text-slate-500 mt-2'>A fixed shipping fee applied to all ordeRs</p>
+                  <p className='text-xs text-slate-500 mt-2'>A fixed shipping fee applied to all orders</p>
                 </div>
               )}
 
@@ -224,7 +224,7 @@ export default function StoreShippingSettings() {
             {form.shippingType !== 'FREE' && (
               <div className='bg-white p-6 rounded-xl border border-slate-200'>
                 <h2 className='text-xl font-semibold text-slate-800 mb-4 flex items-center gap-2'>
-                  <DollaRsignIcon size={20} /> Free Shipping Threshold
+                  <DollarsignIcon size={20} /> Free Shipping Threshold
                 </h2>
                 <div>
                   <label className='block text-sm font-medium text-slate-700 mb-2'>Minimum Order Amount for Free Shipping</label>
@@ -234,7 +234,7 @@ export default function StoreShippingSettings() {
                       onChange={(e) => setForm(s => ({ ...s, freeShippingMin: Number(e.target.value) }))}
                       className='w-48 border border-slate-300 rounded px-3 py-2' />
                   </div>
-                  <p className='text-xs text-slate-500 mt-2'>OrdeRs at or above this amount get free shipping</p>
+                  <p className='text-xs text-slate-500 mt-2'>Orders at or above this amount get free shipping</p>
                 </div>
               </div>
             )}
@@ -277,14 +277,14 @@ export default function StoreShippingSettings() {
                   onChange={(e) => setForm(s => ({ ...s, estimatedDays: e.target.value }))}
                   placeholder='e.g., 3-5, 1-2, 5-7'
                   className='w-48 border border-slate-300 rounded px-3 py-2' />
-                <p className='text-xs text-slate-500 mt-2'>Display estimated delivery time to customeRs</p>
+                <p className='text-xs text-slate-500 mt-2'>Display estimated delivery time to customers</p>
               </div>
             </div>
 
             {/* COD Settings */}
             <div className='bg-white p-6 rounded-xl border border-slate-200'>
               <h2 className='text-xl font-semibold text-slate-800 mb-4'>Cash on Delivery (COD)</h2>
-              <label className='flex items-center gap-3 mb-4 cuRsor-pointer'>
+              <label className='flex items-center gap-3 mb-4 cursor-pointer'>
                 <input type='checkbox' checked={form.enableCOD}
                   onChange={(e) => setForm(s => ({ ...s, enableCOD: e.target.checked }))}
                   className='w-5 h-5 accent-slate-700' />
@@ -299,7 +299,7 @@ export default function StoreShippingSettings() {
                       onChange={(e) => setForm(s => ({ ...s, codFee: Number(e.target.value) }))}
                       className='w-40 border border-slate-300 rounded px-3 py-2' />
                   </div>
-                  <p className='text-xs text-slate-500 mt-2'>Additional fee for COD ordeRs (use 0 for no fee)</p>
+                  <p className='text-xs text-slate-500 mt-2'>Additional fee for COD orders (use 0 for no fee)</p>
                 </div>
               )}
             </div>
@@ -307,7 +307,7 @@ export default function StoreShippingSettings() {
             {/* Express Shipping */}
             <div className='bg-white p-6 rounded-xl border border-slate-200'>
               <h2 className='text-xl font-semibold text-slate-800 mb-4'>Express Shipping</h2>
-              <label className='flex items-center gap-3 mb-4 cuRsor-pointer'>
+              <label className='flex items-center gap-3 mb-4 cursor-pointer'>
                 <input type='checkbox' checked={form.enableExpressShipping}
                   onChange={(e) => setForm(s => ({ ...s, enableExpressShipping: e.target.checked }))}
                   className='w-5 h-5 accent-slate-700' />

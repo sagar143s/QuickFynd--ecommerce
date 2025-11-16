@@ -10,24 +10,24 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
 
-export default function CustomeRsPage() {
+export default function CustomersPage() {
     const { getToken } = useAuth()
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'rs'
 
     const [loading, setLoading] = useState(true)
-    const [customeRs, setCustomeRs] = useState([])
+    const [customers, setCustomers] = useState([])
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [customerDetails, setCustomerDetails] = useState(null)
     const [detailsLoading, setDetailsLoading] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
 
-    const fetchCustomeRs = async () => {
+    const fetchCustomers = async () => {
         try {
             const token = await getToken()
-            const { data } = await axios.get('/api/store/customeRs', {
-                headeRs: { Authorization: `Bearer ${token}` }
+            const { data } = await axios.get('/api/store/customers', {
+                headers: { Authorization: `Bearer ${token}` }
             })
-            setCustomeRs(data.customeRs)
+            setCustomers(data.customers)
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)
         }
@@ -38,8 +38,8 @@ export default function CustomeRsPage() {
         setDetailsLoading(true)
         try {
             const token = await getToken()
-            const { data } = await axios.get(`/api/store/customeRs/${customerId}`, {
-                headeRs: { Authorization: `Bearer ${token}` }
+            const { data } = await axios.get(`/api/store/customers/${customerId}`, {
+                headers: { Authorization: `Bearer ${token}` }
             })
             setCustomerDetails(data.customer)
         } catch (error) {
@@ -59,11 +59,11 @@ export default function CustomeRsPage() {
     }
 
     useEffect(() => {
-        fetchCustomeRs()
+        fetchCustomers()
     }, [])
 
-    // Filter customeRs based on search query
-    const filteredCustomeRs = customeRs.filter(customer =>
+    // Filter customers based on search query
+    const filteredCustomers = customers.filter(customer =>
         customer.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         customer.email?.toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -76,12 +76,12 @@ export default function CustomeRsPage() {
             <div className="mb-8">
                 <div className="flex items-center justify-between mb-2">
                     <div>
-                        <h1 className="text-3xl font-bold text-slate-900">CustomeRs</h1>
+                        <h1 className="text-3xl font-bold text-slate-900">Customers</h1>
                         <p className="text-slate-600 mt-1">Manage and track your customer relationships</p>
                     </div>
                     <div className="bg-white rounded-xl shadow-sm border border-slate-200 px-6 py-4">
-                        <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{customeRs.length}</p>
-                        <p className="text-xs text-slate-500 mt-1">Total CustomeRs</p>
+                        <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{customers.length}</p>
+                        <p className="text-xs text-slate-500 mt-1">Total Customers</p>
                     </div>
                 </div>
 
@@ -98,22 +98,22 @@ export default function CustomeRsPage() {
                 </div>
             </div>
 
-            {/* CustomeRs Grid */}
-            {filteredCustomeRs.length === 0 ? (
+            {/* Customers Grid */}
+            {filteredCustomers.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-16 text-center">
                     <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <User size={40} className="text-slate-400" />
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-2">No customeRs yet</h3>
-                    <p className="text-slate-500">Your customeRs will appear here once they place their fiRst order</p>
+                    <h3 className="text-xl font-semibold text-slate-900 mb-2">No customers yet</h3>
+                    <p className="text-slate-500">Your customers will appear here once they place their first order</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                    {filteredCustomeRs.map((customer) => (
+                    {filteredCustomers.map((customer) => (
                         <div
                             key={customer.id}
                             onClick={() => handleCustomerClick(customer)}
-                            className="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cuRsor-pointer"
+                            className="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
                         >
                             {/* Customer Header */}
                             <div className="flex items-center gap-4 mb-4">
@@ -134,7 +134,7 @@ export default function CustomeRsPage() {
                                     <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h3 className="font-semibold text-slate-900 truncate group-hover:text-blue-600 transition-coloRs">{customer.name}</h3>
+                                    <h3 className="font-semibold text-slate-900 truncate group-hover:text-blue-600 transition-colors">{customer.name}</h3>
                                     <p className="text-xs text-slate-500 truncate flex items-center gap-1 mt-0.5">
                                         <Mail size={11} />
                                         {customer.email}
@@ -147,9 +147,9 @@ export default function CustomeRsPage() {
                                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-3">
                                     <div className="flex items-center gap-1 mb-1">
                                         <Package size={14} className="text-blue-600" />
-                                        <p className="text-xs font-medium text-blue-900">OrdeRs</p>
+                                        <p className="text-xs font-medium text-blue-900">Orders</p>
                                     </div>
-                                    <p className="text-xl font-bold text-blue-600">{customer.totalOrdeRs}</p>
+                                    <p className="text-xl font-bold text-blue-600">{customer.totalOrders}</p>
                                 </div>
                                 <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-3">
                                     <div className="flex items-center gap-1 mb-1">
@@ -180,7 +180,7 @@ export default function CustomeRsPage() {
                         <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white">
                             <button
                                 onClick={closeDetails}
-                                className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-coloRs"
+                                className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors"
                             >
                                 <X size={24} />
                             </button>
@@ -226,8 +226,8 @@ export default function CustomeRsPage() {
                                             <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mb-3">
                                                 <ShoppingBag size={20} className="text-white" />
                                             </div>
-                                            <p className="text-sm text-blue-600 font-medium mb-1">Total OrdeRs</p>
-                                            <p className="text-3xl font-bold text-blue-900">{customerDetails.totalOrdeRs}</p>
+                                            <p className="text-sm text-blue-600 font-medium mb-1">Total Orders</p>
+                                            <p className="text-3xl font-bold text-blue-900">{customerDetails.totalOrders}</p>
                                         </div>
 
                                         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-5 border border-green-200">
@@ -252,7 +252,7 @@ export default function CustomeRsPage() {
                                             </div>
                                             <p className="text-sm text-orange-600 font-medium mb-1">Member Since</p>
                                             <p className="text-lg font-bold text-orange-900">
-                                                {customerDetails.fiRstOrderDate ? new Date(customerDetails.fiRstOrderDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'N/A'}
+                                                {customerDetails.firstOrderDate ? new Date(customerDetails.firstOrderDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'N/A'}
                                             </p>
                                         </div>
                                     </div>
@@ -284,14 +284,14 @@ export default function CustomeRsPage() {
                                             Order History
                                         </h3>
                                         
-                                        {customerDetails.ordeRs.length === 0 ? (
+                                        {customerDetails.orders.length === 0 ? (
                                             <div className="text-center py-12 bg-slate-50 rounded-xl">
                                                 <Package size={48} className="mx-auto text-slate-300 mb-3" />
-                                                <p className="text-slate-500">No ordeRs yet</p>
+                                                <p className="text-slate-500">No orders yet</p>
                                             </div>
                                         ) : (
                                             <div className="space-y-4">
-                                                {customerDetails.ordeRs.map((order) => (
+                                                {customerDetails.orders.map((order) => (
                                                     <div
                                                         key={order.id}
                                                         className="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-md transition-all"
@@ -330,7 +330,7 @@ export default function CustomeRsPage() {
                                                         <div className="bg-slate-50 rounded-lg p-4 mt-3">
                                                             <p className="text-xs font-semibold text-slate-600 mb-3 uppercase tracking-wide">Items Ordered</p>
                                                             <div className="space-y-2">
-                                                                {JSON.paRse(order.items || '[]').map((item, idx) => (
+                                                                {JSON.parse(order.items || '[]').map((item, idx) => (
                                                                     <div key={idx} className="flex justify-between items-center py-2 border-b border-slate-200 last:border-0">
                                                                         <div className="flex items-center gap-2">
                                                                             <div className="w-2 h-2 bg-slate-400 rounded-full"></div>

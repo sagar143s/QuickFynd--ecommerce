@@ -5,7 +5,7 @@ import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
 
 export const dynamic = 'force-dynamic'
-import { CircleDollaRsignIcon, ShoppingBasketIcon, StarIcon, TagsIcon, UseRsIcon, ShoppingCartIcon } from "lucide-react"
+import { CircleDollarsignIcon, ShoppingBasketIcon, StarIcon, TagsIcon, UsersIcon, ShoppingCartIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -16,7 +16,7 @@ export default function Dashboard() {
 
     const {getToken} = useAuth()
 
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'rs'
 
     const router = useRouter()
 
@@ -24,17 +24,17 @@ export default function Dashboard() {
     const [dashboardData, setDashboardData] = useState({
         totalProducts: 0,
         totalEarnings: 0,
-        totalOrdeRs: 0,
-        totalCustomeRs: 0,
+        totalOrders: 0,
+        totalCustomers: 0,
         abandonedCarts: 0,
         ratings: [],
     })
 
     const dashboardCardsData = [
         { title: 'Total Products', value: dashboardData.totalProducts, icon: ShoppingBasketIcon },
-        { title: 'Total Earnings', value: currency + dashboardData.totalEarnings, icon: CircleDollaRsignIcon },
-        { title: 'Total OrdeRs', value: dashboardData.totalOrdeRs, icon: TagsIcon },
-        { title: 'Total CustomeRs', value: dashboardData.totalCustomeRs, icon: UseRsIcon },
+        { title: 'Total Earnings', value: currency + dashboardData.totalEarnings, icon: CircleDollarsignIcon },
+        { title: 'Total Orders', value: dashboardData.totalOrders, icon: TagsIcon },
+        { title: 'Total Customers', value: dashboardData.totalCustomers, icon: UsersIcon },
         { title: 'Abandoned Carts', value: dashboardData.abandonedCarts, icon: ShoppingCartIcon },
         { title: 'Total Ratings', value: dashboardData.ratings.length, icon: StarIcon },
     ]
@@ -42,7 +42,7 @@ export default function Dashboard() {
     const fetchDashboardData = async () => {
         try {
             const token = await getToken()
-            const { data } = await axios.get('/api/store/dashboard', {headeRs: { Authorization: `Bearer ${token}` }})
+            const { data } = await axios.get('/api/store/dashboard', {headers: { Authorization: `Bearer ${token}` }})
             setDashboardData(data.dashboardData)
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)

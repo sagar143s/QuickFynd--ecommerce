@@ -124,8 +124,8 @@ const Navbar = () => {
                 <UserButton.MenuItems>
                   <UserButton.Action 
                     labelIcon={<PackageIcon size={16} />} 
-                    label="My OrdeRs" 
-                    onClick={() => router.push("/ordeRs")} 
+                    label="My Orders" 
+                    onClick={() => router.push("/orders")} 
                   />
                 </UserButton.MenuItems>
               </UserButton>
@@ -256,7 +256,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
                   <UserButton>
                     <UserButton.MenuItems>
-                      <UserButton.Action labelIcon={<PackageIcon size={16} />} label="My OrdeRs" onClick={() => router.push("/ordeRs")} />
+                      <UserButton.Action labelIcon={<PackageIcon size={16} />} label="My Orders" onClick={() => router.push("/orders")} />
                     </UserButton.MenuItems>
                   </UserButton>
                   <div className="flex-1">
@@ -323,12 +323,12 @@ const Navbar = () => {
                   )}
                 </Link>
                 <Link 
-                  href="/ordeRs" 
+                  href="/orders" 
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 rounded-lg transition text-gray-700 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <PackageIcon size={18} className="text-gray-600" />
-                  <span>My OrdeRs</span>
+                  <span>My Orders</span>
                 </Link>
               </div>
 

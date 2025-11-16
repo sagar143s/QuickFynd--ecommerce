@@ -11,7 +11,7 @@ import { addToCart, uploadCart } from "@/lib/features/cart/cartSlice";
 import MobileProductActions from "./MobileProductActions";
 
 const ProductDetails = ({ product }) => {
-  const currency = 'Rs';
+  const currency = '₹';
   const [mainImage, setMainImage] = useState(product.images?.[0]);
   const [quantity, setQuantity] = useState(1);
   const [isInWishlist, setIsInWishlist] = useState(false);
@@ -34,9 +34,9 @@ const ProductDetails = ({ product }) => {
   // Variants support
   const variants = Array.isArray(product.variants) ? product.variants : [];
   const bulkVariants = variants.filter(v => v?.options && (v.options.bundleQty || v.options.bundleQty === 0));
-  const variantColoRs = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
+  const variantColors = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
   const variantSizes = [...new Set(variants.map(v => v.options?.size).filter(Boolean))];
-  const [selectedColor, setSelectedColor] = useState(variantColoRs[0] || product.coloRs?.[0] || null);
+  const [selectedColor, setSelectedColor] = useState(variantColors[0] || product.colors?.[0] || null);
   const [selectedSize, setSelectedSize] = useState(variantSizes[0] || product.sizes?.[0] || null);
   const [selectedBundleQty, setSelectedBundleQty] = useState(
     bulkVariants.length ? Number(bulkVariants[0].options.bundleQty) : null
@@ -84,13 +84,13 @@ const ProductDetails = ({ product }) => {
   const checkWishlistStatus = async () => {
     try {
       if (isSignedIn) {
-        // Check server wishlist for signed-in useRs
+        // Check server wishlist for signed-in users
         const { data } = await axios.get('/api/wishlist');
         const isInList = data.wishlist?.some(item => item.productId === product.id);
         setIsInWishlist(isInList);
       } else {
         // Check localStorage for guests
-        const guestWishlist = JSON.paRse(localStorage.getItem('guestWishlist') || '[]');
+        const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
         const isInList = guestWishlist.includes(product.id);
         setIsInWishlist(isInList);
       }
@@ -106,7 +106,7 @@ const ProductDetails = ({ product }) => {
       setWishlistLoading(true);
 
       if (isSignedIn) {
-        // Handle server wishlist for signed-in useRs
+        // Handle server wishlist for signed-in users
         const action = isInWishlist ? 'remove' : 'add';
         await axios.post('/api/wishlist', { 
           productId: product.id, 
@@ -121,7 +121,7 @@ const ProductDetails = ({ product }) => {
         setTimeout(() => setShowWishlistToast(false), 3000);
       } else {
         // Handle localStorage wishlist for guests
-        const guestWishlist = JSON.paRse(localStorage.getItem('guestWishlist') || '[]');
+        const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
         
         if (isInWishlist) {
           // Remove from wishlist
@@ -182,7 +182,7 @@ const ProductDetails = ({ product }) => {
   };
 
   const handleOrderNow = () => {
-    // Add to cart for both guests and signed-in useRs
+    // Add to cart for both guests and signed-in users
     for (let i = 0; i < quantity; i++) {
       dispatch(addToCart({ productId: product.id }));
     }
@@ -191,7 +191,7 @@ const ProductDetails = ({ product }) => {
   };
 
   const handleAddToCart = async () => {
-    // Add to cart for both guests and signed-in useRs
+    // Add to cart for both guests and signed-in users
     for (let i = 0; i < quantity; i++) {
       dispatch(addToCart({ productId: product.id }));
     }
@@ -231,12 +231,12 @@ const ProductDetails = ({ product }) => {
             {/* Desktop: Thumbnails on left + Main Image */}
             <div className="hidden lg:flex gap-2">
               {/* Thumbnail Gallery - Vertical with Scroll */}
-              <div className="flex flex-col gap-2 w-14 flex-shrink-0 overflow-y-auto h-[500px] scrollbar-hide cuRsor-grab active:cuRsor-grabbing">
+              <div className="flex flex-col gap-2 w-14 flex-shrink-0 overflow-y-auto h-[500px] scrollbar-hide cursor-grab active:cursor-grabbing">
                 {product.images?.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setMainImage(image)}
-                    className={`w-14 h-14 border rounded overflow-hidden transition-all bg-white flex-shrink-0 cuRsor-pointer ${
+                    className={`w-14 h-14 border rounded overflow-hidden transition-all bg-white flex-shrink-0 cursor-pointer ${
                       mainImage === image 
                         ? 'border-orange-500' 
                         : 'border-gray-200 hover:border-gray-300'
@@ -337,12 +337,12 @@ const ProductDetails = ({ product }) => {
             </div>
 
             {/* Mobile Thumbnail Gallery */}
-            <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-hide cuRsor-grab active:cuRsor-grabbing">
+            <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-hide cursor-grab active:cursor-grabbing">
               {product.images?.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setMainImage(image)}
-                  className={`flex-shrink-0 w-14 h-14 border-2 rounded overflow-hidden transition-all bg-white cuRsor-pointer ${
+                  className={`flex-shrink-0 w-14 h-14 border-2 rounded overflow-hidden transition-all bg-white cursor-pointer ${
                     mainImage === image 
                       ? 'border-orange-500' 
                       : 'border-gray-200'
@@ -430,7 +430,7 @@ const ProductDetails = ({ product }) => {
                     <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd"/>
                   </svg>
                   <span className="text-orange-600 text-sm font-semibold">
-                    Save {(effMrp - effPrice).toLocaleString()} Rs
+                    Save {(effMrp - effPrice).toLocaleString()} rs
                   </span>
                 </div>
               )}
@@ -517,7 +517,7 @@ const ProductDetails = ({ product }) => {
                 <svg className="w-8 h-8 text-green-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                 </svg>
-                <span className="text-sm font-medium text-gray-800">Fast Shipping</span>
+                <span className="text-sm font-medium text-gray-800">Free Shipping</span>
               </div>
 
               {/* Cash On Delivery */}

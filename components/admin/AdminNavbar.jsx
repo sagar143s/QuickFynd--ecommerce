@@ -22,7 +22,7 @@ const AdminNavbar = () => {
                 </p>
             </Link>
             <div className="flex items-center gap-3">
-                <p>Hi, {user?.fiRstName}</p>
+                <p>Hi, {user?.firstName}</p>
                 <UserButton />
             </div>
         </div>

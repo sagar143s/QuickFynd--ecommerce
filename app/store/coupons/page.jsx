@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic'
 import { useState, useEffect } from 'react'
-import { PlusIcon, EditIcon, TrashIcon, TicketIcon, XIcon, PercentIcon, DollaRsignIcon, PackageIcon, UserIcon, ClockIcon, ToggleLeftIcon, ToggleRightIcon } from 'lucide-react'
+import { PlusIcon, EditIcon, TrashIcon, TicketIcon, XIcon, PercentIcon, DollarsignIcon, PackageIcon, UserIcon, ClockIcon, ToggleLeftIcon, ToggleRightIcon } from 'lucide-react'
 
 
 export default function StoreCouponsPage() {
@@ -13,7 +13,7 @@ export default function StoreCouponsPage() {
     const [editingCoupon, setEditingCoupon] = useState(null)
     const [submitting, setSubmitting] = useState(false)
     
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'rs'
 
     const [formData, setFormData] = useState({
         code: '',
@@ -25,7 +25,7 @@ export default function StoreCouponsPage() {
         specificProducts: [],
         forNewUser: false,
         forMember: false,
-        fiRstOrderOnly: false,
+        firstOrderOnly: false,
         oneTimePerUser: false,
         usageLimit: '',
         isPublic: true,
@@ -78,7 +78,7 @@ export default function StoreCouponsPage() {
 
             const res = await fetch(url, {
                 method,
-                headeRs: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
 
@@ -129,7 +129,7 @@ export default function StoreCouponsPage() {
         try {
             const res = await fetch(`/api/store/coupon/${coupon.code}`, {
                 method: 'PUT',
-                headeRs: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ isActive: !coupon.isActive })
             })
 
@@ -156,7 +156,7 @@ export default function StoreCouponsPage() {
             specificProducts: coupon.specificProducts || [],
             forNewUser: coupon.forNewUser,
             forMember: coupon.forMember,
-            fiRstOrderOnly: coupon.fiRstOrderOnly,
+            firstOrderOnly: coupon.firstOrderOnly,
             oneTimePerUser: coupon.oneTimePerUser,
             usageLimit: coupon.usageLimit?.toString() || '',
             isPublic: coupon.isPublic,
@@ -176,7 +176,7 @@ export default function StoreCouponsPage() {
             specificProducts: [],
             forNewUser: false,
             forMember: false,
-            fiRstOrderOnly: false,
+            firstOrderOnly: false,
             oneTimePerUser: false,
             usageLimit: '',
             isPublic: true,
@@ -206,7 +206,7 @@ export default function StoreCouponsPage() {
                         resetForm()
                         setShowModal(true)
                     }}
-                    className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-coloRs"
+                    className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
                 >
                     <PlusIcon size={20} />
                     Create Coupon
@@ -218,7 +218,7 @@ export default function StoreCouponsPage() {
                 <div className="text-center py-20 bg-gray-50 rounded-lg">
                     <TicketIcon size={64} className="mx-auto text-gray-300 mb-4" />
                     <p className="text-xl text-gray-400 mb-2">No coupons yet</p>
-                    <p className="text-gray-500">Create your fiRst discount coupon to get started</p>
+                    <p className="text-gray-500">Create your first discount coupon to get started</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -267,7 +267,7 @@ export default function StoreCouponsPage() {
                             <div className="space-y-2 text-sm mb-4">
                                 {coupon.minPrice > 0 && (
                                     <div className="flex items-center gap-2 text-gray-600">
-                                        <DollaRsignIcon size={16} />
+                                        <DollarsignIcon size={16} />
                                         <span>Min: {currency}{coupon.minPrice}</span>
                                     </div>
                                 )}
@@ -294,8 +294,8 @@ export default function StoreCouponsPage() {
                                 {coupon.forNewUser && (
                                     <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">New User</span>
                                 )}
-                                {coupon.fiRstOrderOnly && (
-                                    <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded">FiRst Order</span>
+                                {coupon.firstOrderOnly && (
+                                    <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded">First Order</span>
                                 )}
                                 {coupon.oneTimePerUser && (
                                     <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded">One Time</span>
@@ -311,14 +311,14 @@ export default function StoreCouponsPage() {
                             <div className="flex gap-2 pt-3 border-t">
                                 <button
                                     onClick={() => handleEdit(coupon)}
-                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-coloRs"
+                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
                                 >
                                     <EditIcon size={16} />
                                     Edit
                                 </button>
                                 <button
                                     onClick={() => handleDelete(coupon.code)}
-                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-coloRs"
+                                    className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors"
                                 >
                                     <TrashIcon size={16} />
                                     Delete
@@ -506,17 +506,17 @@ export default function StoreCouponsPage() {
                                         onChange={(e) => setFormData(prev => ({ ...prev, forNewUser: e.target.checked }))}
                                         className="w-4 h-4 text-orange-500 rounded"
                                     />
-                                    <span className="text-sm font-medium text-gray-700">For New UseRs Only</span>
+                                    <span className="text-sm font-medium text-gray-700">For New Users Only</span>
                                 </label>
 
                                 <label className="flex items-center gap-2">
                                     <input
                                         type="checkbox"
-                                        checked={formData.fiRstOrderOnly}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, fiRstOrderOnly: e.target.checked }))}
+                                        checked={formData.firstOrderOnly}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, firstOrderOnly: e.target.checked }))}
                                         className="w-4 h-4 text-orange-500 rounded"
                                     />
-                                    <span className="text-sm font-medium text-gray-700">FiRst Order Only</span>
+                                    <span className="text-sm font-medium text-gray-700">First Order Only</span>
                                 </label>
 
                                 <label className="flex items-center gap-2">
@@ -536,7 +536,7 @@ export default function StoreCouponsPage() {
                                         onChange={(e) => setFormData(prev => ({ ...prev, isPublic: e.target.checked }))}
                                         className="w-4 h-4 text-orange-500 rounded"
                                     />
-                                    <span className="text-sm font-medium text-gray-700">Public (Show to all customeRs)</span>
+                                    <span className="text-sm font-medium text-gray-700">Public (Show to all customers)</span>
                                 </label>
                             </div>
 
@@ -548,14 +548,14 @@ export default function StoreCouponsPage() {
                                         setShowModal(false)
                                         setEditingCoupon(null)
                                     }}
-                                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-coloRs"
+                                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-coloRs disabled:opacity-50 disabled:cuRsor-not-allowed"
+                                    className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {submitting ? 'Saving...' : editingCoupon ? 'Update' : 'Create'}
                                 </button>

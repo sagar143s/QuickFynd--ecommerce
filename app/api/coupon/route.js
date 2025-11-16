@@ -35,28 +35,28 @@ export async function POST(request){
             return NextResponse.json({ error: "Coupon usage limit reached" }, { status: 400 })
         }
 
-        // Check if for new useRs only
+        // Check if for new users only
         if(coupon.forNewUser){
-            const userOrdeRs = await prisma.order.findMany({where: {userId}})
-            if(userOrdeRs.length > 0){
-                return NextResponse.json({ error: "Coupon valid for new useRs only" }, { status: 400 })
+            const userOrders = await prisma.order.findMany({where: {userId}})
+            if(userOrders.length > 0){
+                return NextResponse.json({ error: "Coupon valid for new users only" }, { status: 400 })
             }
         }
 
-        // Check if for fiRst order only
-        if(coupon.fiRstOrderOnly){
-            const storeOrdeRs = coupon.storeId 
+        // Check if for first order only
+        if(coupon.firstOrderOnly){
+            const storeOrders = coupon.storeId 
                 ? await prisma.order.findMany({where: {userId, storeId: coupon.storeId}})
                 : await prisma.order.findMany({where: {userId}})
             
-            if(storeOrdeRs.length > 0){
-                return NextResponse.json({ error: "Coupon valid for fiRst order only" }, { status: 400 })
+            if(storeOrders.length > 0){
+                return NextResponse.json({ error: "Coupon valid for first order only" }, { status: 400 })
             }
         }
 
         // Check if one time per user
         if(coupon.oneTimePerUser){
-            const usedOrdeRs = await prisma.order.findMany({
+            const usedOrders = await prisma.order.findMany({
                 where: {
                     userId,
                     isCouponUsed: true,
@@ -67,7 +67,7 @@ export async function POST(request){
                 }
             })
             
-            if(usedOrdeRs.length > 0){
+            if(usedOrders.length > 0){
                 return NextResponse.json({ error: "You have already used this coupon" }, { status: 400 })
             }
         }
@@ -76,14 +76,14 @@ export async function POST(request){
         if (coupon.forMember){
             const hasPlusPlan = has({plan: 'plus'})
             if(!hasPlusPlan){
-                return NextResponse.json({ error: "Coupon valid for membeRs only" }, { status: 400 })
+                return NextResponse.json({ error: "Coupon valid for members only" }, { status: 400 })
             }
         }
 
         // Check minimum price
         if (cartTotal && coupon.minPrice > 0 && cartTotal < coupon.minPrice) {
             return NextResponse.json({ 
-                error: `Minimum cart value of Rs${coupon.minPrice} required` 
+                error: `Minimum cart value of rs${coupon.minPrice} required` 
             }, { status: 400 })
         }
 

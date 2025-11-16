@@ -36,10 +36,10 @@ function CreateStoreAuthed() {
         setStoreInfo({ ...storeInfo, [e.target.name]: e.target.value })
     }
 
-    const fetchSelleRstatus = async () => {
+    const fetchSellerstatus = async () => {
         const token = await getToken()
         try {
-            const { data } = await axios.get('/api/store/create', { headeRs: { Authorization: `Bearer ${token}` } })
+            const { data } = await axios.get('/api/store/create', { headers: { Authorization: `Bearer ${token}` } })
             if ([ 'approved', 'rejected', 'pending' ].includes(data.status)) {
                 setStatus(data.status)
                 setAlreadySubmitted(true)
@@ -82,9 +82,9 @@ function CreateStoreAuthed() {
             formData.append("address", storeInfo.address)
             formData.append("image", storeInfo.image)
 
-            const { data } = await axios.post('/api/store/create', formData, { headeRs: { Authorization: `Bearer ${token}` } })
+            const { data } = await axios.post('/api/store/create', formData, { headers: { Authorization: `Bearer ${token}` } })
             toast.success(data.message)
-            await fetchSelleRstatus()
+            await fetchSellerstatus()
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)
         }
@@ -92,7 +92,7 @@ function CreateStoreAuthed() {
 
     useEffect(() => {
         if (user) {
-            fetchSelleRstatus()
+            fetchSellerstatus()
         }
     }, [ user ])
 
@@ -115,7 +115,7 @@ function CreateStoreAuthed() {
                             <p className="max-w-lg">To become a seller on Qui, submit your store details for review. Your store will be activated after admin verification.</p>
                         </div>
 
-                        <label className="mt-10 cuRsor-pointer">
+                        <label className="mt-10 cursor-pointer">
                             Store Logo
                             <Image src={storeInfo.image ? URL.createObjectURL(storeInfo.image) : assets.upload_area} className="rounded-lg mt-2 h-16 w-auto" alt="" width={150} height={100} />
                             <input type="file" accept="image/*" onChange={(e) => setStoreInfo({ ...storeInfo, image: e.target.files[0] })} hidden />

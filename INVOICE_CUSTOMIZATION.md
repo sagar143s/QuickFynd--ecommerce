@@ -26,7 +26,7 @@ Your invoice now includes:
 
 ### 5. **Totals Section (Gray Box)**
 - Subtotal
-- Shipping (Rs5)
+- Shipping (rs5)
 - Discount (if coupon applied - shown in green)
 - Grand Total (Blue box with white text)
 
@@ -71,15 +71,15 @@ doc.text('Email: Qui.com@gmail.com | Phone: +91 1234567890', 14, 38);
 
 Replace with your actual company information.
 
-### Customize ColoRs
+### Customize Colors
 
 Current color scheme:
-- **Blue**: RGB(37, 99, 235) - HeadeRs, buttons
+- **Blue**: RGB(37, 99, 235) - Headers, buttons
 - **Orange**: RGB(249, 115, 22) - Tracking section
 - **Yellow**: RGB(254, 243, 199) - Quote background
 - **Green**: RGB(34, 197, 94) - Discount text
 
-To change coloRs, find and replace RGB values:
+To change colors, find and replace RGB values:
 ```javascript
 doc.setFillColor(37, 99, 235); // Change to your color
 ```
@@ -111,7 +111,7 @@ doc.text('Authorized Signature', 165, 285, { align: 'center' });
 - [ ] Update company address (line 23-24)
 - [ ] Update contact details (line 25)
 - [ ] Add logo image (line 10-15)
-- [ ] Customize coloRs (search for `setFillColor`)
+- [ ] Customize colors (search for `setFillColor`)
 - [ ] Change happy quote (line 169-172)
 - [ ] Update footer contact (line 181-182)
 - [ ] Add company seal/stamp (optional)
@@ -124,7 +124,7 @@ doc.text('Authorized Signature', 165, 285, { align: 'center' });
 // At the top of generateInvoice function, after creating doc:
 export const generateInvoice = (order) => {
     const doc = new jsPDF();
-    const currency = 'Rs';
+    const currency = 'rs';
     
     // Company Header with Logo
     doc.setFillColor(37, 99, 235);
@@ -132,7 +132,7 @@ export const generateInvoice = (order) => {
     
     // ADD YOUR LOGO HERE (Option 1: URL)
     try {
-        doc.addImage('https://ik.imagekit.io/jRstupuke/your-logo.png', 'PNG', 14, 8, 35, 25);
+        doc.addImage('https://ik.imagekit.io/jrstupuke/your-logo.png', 'PNG', 14, 8, 35, 25);
     } catch (error) {
         console.log('Logo not loaded, using text');
     }

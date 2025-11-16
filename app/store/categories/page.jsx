@@ -53,7 +53,7 @@ export default function StoreCategoriesPage() {
 
             const res = await fetch(url, {
                 method,
-                headeRs: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
 
@@ -149,7 +149,7 @@ export default function StoreCategoriesPage() {
                         setFormData({ name: '', description: '', image: '', parentId: '' })
                         setShowModal(true)
                     }}
-                    className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-coloRs"
+                    className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
                 >
                     <PlusIcon size={20} />
                     Add Category
@@ -161,7 +161,7 @@ export default function StoreCategoriesPage() {
                 <div className="text-center py-20 bg-gray-50 rounded-lg">
                     <FolderIcon size={64} className="mx-auto text-gray-300 mb-4" />
                     <p className="text-xl text-gray-400 mb-2">No categories yet</p>
-                    <p className="text-gray-500">Create your fiRst category to get started</p>
+                    <p className="text-gray-500">Create your first category to get started</p>
                 </div>
             ) : (
                 <div className="space-y-6">
@@ -194,13 +194,13 @@ export default function StoreCategoriesPage() {
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => handleEdit(parent)}
-                                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-coloRs"
+                                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                     >
                                         <EditIcon size={18} />
                                     </button>
                                     <button
                                         onClick={() => handleDelete(parent.id)}
-                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-coloRs"
+                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                     >
                                         <TrashIcon size={18} />
                                     </button>
@@ -237,13 +237,13 @@ export default function StoreCategoriesPage() {
                                             <div className="flex items-center gap-1">
                                                 <button
                                                     onClick={() => handleEdit(child)}
-                                                    className="p-1.5 text-blue-600 hover:bg-blue-50 rounded transition-coloRs"
+                                                    className="p-1.5 text-blue-600 hover:bg-blue-50 rounded transition-colors"
                                                 >
                                                     <EditIcon size={16} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(child.id)}
-                                                    className="p-1.5 text-red-600 hover:bg-red-50 rounded transition-coloRs"
+                                                    className="p-1.5 text-red-600 hover:bg-red-50 rounded transition-colors"
                                                 >
                                                     <TrashIcon size={16} />
                                                 </button>
@@ -363,7 +363,7 @@ export default function StoreCategoriesPage() {
                                         />
                                         <label
                                             htmlFor="category-image-upload"
-                                            className="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-lg cuRsor-pointer hover:bg-gray-200 transition-coloRs"
+                                            className="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors"
                                         >
                                             {uploading ? 'Uploading...' : 'Upload Image'}
                                         </label>
@@ -382,14 +382,14 @@ export default function StoreCategoriesPage() {
                                         setShowModal(false)
                                         setEditingCategory(null)
                                     }}
-                                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-coloRs"
+                                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={submitting || uploading}
-                                    className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-coloRs disabled:opacity-50 disabled:cuRsor-not-allowed"
+                                    className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {submitting ? 'Saving...' : editingCategory ? 'Update' : 'Create'}
                                 </button>

@@ -12,8 +12,8 @@ try {
     }
 } catch {}
 
-// Allow Clerk hosted images (avataRs, icons)
-// Include common Clerk hosts to avoid runtime erroRs when rendering user images
+// Allow Clerk hosted images (avatars, icons)
+// Include common Clerk hosts to avoid runtime errors when rendering user images
 ['img.clerk.com', 'img.clerkstage.dev', 'img.lclclerk.com', 'images.clerk.dev'].forEach((host) => {
     if (!domains.includes(host)) domains.push(host);
 });
@@ -32,11 +32,11 @@ const nextConfig = {
         missingSuspenseWithCSRBailout: false,
     },
     // Skip static generation for authenticated routes
-    async headeRs() {
+    async headers() {
         return [
             {
                 source: '/store/:path*',
-                headeRs: [
+                headers: [
                     {
                         key: 'X-Robots-Tag',
                         value: 'noindex',
@@ -45,7 +45,7 @@ const nextConfig = {
             },
             {
                 source: '/admin/:path*',
-                headeRs: [
+                headers: [
                     {
                         key: 'X-Robots-Tag',
                         value: 'noindex',

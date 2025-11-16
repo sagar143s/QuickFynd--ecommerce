@@ -41,40 +41,40 @@ export async function POST(request){
         }
         }
          
-            // Check if coupon is applicable for new useRs
+            // Check if coupon is applicable for new users
         if(couponCode && coupon.forNewUser){
-            const userordeRs = await prisma.order.findMany({where: {userId}})
-            if(userordeRs.length > 0){
-                return NextResponse.json({ error: "Coupon valid for new useRs" }, { status: 400 })
+            const userorders = await prisma.order.findMany({where: {userId}})
+            if(userorders.length > 0){
+                return NextResponse.json({ error: "Coupon valid for new users" }, { status: 400 })
             }
         }
 
         const isPlusMember = has({plan: 'plus'})
 
-        // Check if coupon is applicable for membeRs
+        // Check if coupon is applicable for members
         if (couponCode && coupon.forMember){
             if(!isPlusMember){
-                return NextResponse.json({ error: "Coupon valid for membeRs only" }, { status: 400 })
+                return NextResponse.json({ error: "Coupon valid for members only" }, { status: 400 })
             }
         }
 
-         // Group ordeRs by storeId using a Map
-         const ordeRsByStore = new Map()
+         // Group orders by storeId using a Map
+         const ordersByStore = new Map()
          let grandSubtotal = 0;
 
          for(const item of items){
             const product = await prisma.product.findUnique({where: {id: item.id}})
             const storeId = product.storeId
-            if(!ordeRsByStore.has(storeId)){
-                ordeRsByStore.set(storeId, [])
+            if(!ordersByStore.has(storeId)){
+                ordersByStore.set(storeId, [])
             }
-            ordeRsByStore.get(storeId).push({...item, price: product.price})
+            ordersByStore.get(storeId).push({...item, price: product.price})
             grandSubtotal += (Number(product.price) * Number(item.quantity));
          }
 
          // Load shipping settings
          // Force shipping to be disabled here so shipping fees are not charged anywhere.
-         // This makes shipping free across the site regardless of DB settings or membeRship.
+         // This makes shipping free across the site regardless of DB settings or membership.
          const shippingSetting = await prisma.shippingSetting.findUnique({ where: { id: "default" } }) || {
              enabled: true,
              shippingType: 'FLAT_RATE',
@@ -88,13 +88,13 @@ export async function POST(request){
              additionalWeightFee: 2
          };
 
-        // Override: make shipping free for all ordeRs
+        // Override: make shipping free for all orders
         shippingSetting.enabled = false;
 
          // Calculate shipping fee based on type
          let shippingFee = 0;
          if (!isPlusMember && shippingSetting.enabled) {
-             // Check free shipping threshold fiRst
+             // Check free shipping threshold first
              if (grandSubtotal >= Number(shippingSetting.freeShippingMin)) {
                  shippingFee = 0;
              } else {
@@ -137,8 +137,8 @@ export async function POST(request){
 
          let isShippingFeeAdded = false
 
-         // Create ordeRs for each seller
-         for(const [storeId, sellerItems] of ordeRsByStore.entries()){
+         // Create orders for each seller
+         for(const [storeId, sellerItems] of ordersByStore.entries()){
             let total = sellerItems.reduce((acc, item)=>acc + (item.price * item.quantity), 0)
 
             if(couponCode){
@@ -155,12 +155,12 @@ export async function POST(request){
                 isShippingFeeAdded = true
             }
 
-            fullAmount += paRseFloat(total.toFixed(2))
+            fullAmount += parseFloat(total.toFixed(2))
 
             // Prepare order data
             const orderData = {
                  storeId,
-                 total: paRseFloat(total.toFixed(2)),
+                 total: parseFloat(total.toFixed(2)),
                  paymentMethod,
                  isCouponUsed: coupon ? true : false,
                  coupon: coupon ? coupon : {},
@@ -254,9 +254,9 @@ export async function POST(request){
                         where: { email: guestInfo.email }
                     });
 
-                    const emailResponse = await fetch(`${request.headeRs.get('origin')}/api/notifications/guest-order`, {
+                    const emailResponse = await fetch(`${request.headers.get('origin')}/api/notifications/guest-order`, {
                         method: 'POST',
-                        headeRs: {
+                        headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
@@ -274,9 +274,9 @@ export async function POST(request){
                     }
                 } else {
                     // Send regular order confirmation email
-                    const emailResponse = await fetch(`${request.headeRs.get('origin')}/api/notifications/order-status`, {
+                    const emailResponse = await fetch(`${request.headers.get('origin')}/api/notifications/order-status`, {
                         method: 'POST',
-                        headeRs: {
+                        headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
@@ -308,13 +308,13 @@ export async function POST(request){
 
          if(paymentMethod === 'STRIPE'){
             const stripe = Stripe(process.env.STRIPE_SECRET_KEY)
-            const origin = await request.headeRs.get('origin')
+            const origin = await request.headers.get('origin')
 
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
                 line_items: [{
                     price_data:{
-                        currency: 'Rs',
+                        currency: 'rs',
                         product_data:{
                             name: 'Order'
                         },
@@ -324,7 +324,7 @@ export async function POST(request){
                 }],
                 expires_at: Math.floor(Date.now() / 1000) + 30 * 60, // current time + 30 minutes
                 mode: 'payment',
-                success_url: `${origin}/loading?nextUrl=ordeRs`,
+                success_url: `${origin}/loading?nextUrl=orders`,
                 cancel_url: `${origin}/cart`,
                 metadata: {
                     orderIds: orderIds.join(','),
@@ -335,7 +335,7 @@ export async function POST(request){
             return NextResponse.json({session})
          }
 
-                    // clear the cart only for logged-in useRs
+                    // clear the cart only for logged-in users
                     if (userId) {
                         await prisma.user.update({
                             where: {id: userId},
@@ -343,18 +343,18 @@ export async function POST(request){
                         })
                     }
 
-                    // Return all ordeRs for guests, single order for useRs
+                    // Return all orders for guests, single order for users
                     if (isGuest) {
-                        const ordeRs = await prisma.order.findMany({
+                        const orders = await prisma.order.findMany({
                             where: { id: { in: orderIds } },
                             include: {
                                 user: true,
                                 orderItems: { include: { product: true } }
                             }
                         });
-                        return NextResponse.json({ message: 'OrdeRs Placed Successfully', ordeRs });
+                        return NextResponse.json({ message: 'Orders Placed Successfully', orders });
                     } else {
-                        return NextResponse.json({ message: 'OrdeRs Placed Successfully', order });
+                        return NextResponse.json({ message: 'Orders Placed Successfully', order });
                     }
 
     } catch (error) {
@@ -363,11 +363,11 @@ export async function POST(request){
     }
 }
 
-// Get all ordeRs for a user
+// Get all orders for a user
 export async function GET(request){
     try {
         const { userId } = getAuth(request)
-        const ordeRs = await prisma.order.findMany({
+        const orders = await prisma.order.findMany({
             where: {userId, OR: [
                 {paymentMethod: PaymentMethod.COD},
                 {AND: [{paymentMethod: PaymentMethod.STRIPE}, {isPaid: true}]}
@@ -379,7 +379,7 @@ export async function GET(request){
             orderBy: {createdAt: 'desc'}
         })
 
-        return NextResponse.json({ordeRs})
+        return NextResponse.json({orders})
     } catch (error) {
         console.error(error);
         return NextResponse.json({ error: error.message }, { status: 400 })

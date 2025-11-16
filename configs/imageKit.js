@@ -1,6 +1,6 @@
 import ImageKit from "imagekit";
 
-// Lazy initialize ImageKit to avoid build-time crashes when env vaRs are missing
+// Lazy initialize ImageKit to avoid build-time crashes when env vars are missing
 let _imagekit = null;
 
 export function ensureImageKit() {
@@ -17,7 +17,7 @@ export function ensureImageKit() {
     return _imagekit;
 }
 
-// Default export preserves existing imports; methods resolve to the instance on fiRst use
+// Default export preserves existing imports; methods resolve to the instance on first use
 const imagekit = new Proxy({}, {
     get(_target, prop) {
         const ik = ensureImageKit();

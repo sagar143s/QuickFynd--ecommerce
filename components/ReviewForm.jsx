@@ -55,7 +55,7 @@ export default function ReviewForm({ productId, onReviewAdded }) {
 
             const token = await getToken()
             const { data } = await axios.post('/api/review', formData, {
-                headeRs: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             })
 
             toast.success('Review submitted! Pending approval by store.')
@@ -97,7 +97,7 @@ export default function ReviewForm({ productId, onReviewAdded }) {
                             <StarIcon
                                 size={32}
                                 fill="#D1D5DB"
-                                className="text-transparent cuRsor-pointer hover:fill-yellow-400"
+                                className="text-transparent cursor-pointer hover:fill-yellow-400"
                             />
                         </button>
                     ))}
@@ -123,7 +123,7 @@ export default function ReviewForm({ productId, onReviewAdded }) {
                                 <StarIcon
                                     size={32}
                                     fill={rating >= star ? "#FFA500" : "#D1D5DB"}
-                                    className="text-transparent cuRsor-pointer"
+                                    className="text-transparent cursor-pointer"
                                 />
                             </button>
                         ))}
