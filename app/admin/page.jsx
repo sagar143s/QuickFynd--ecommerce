@@ -1,10 +1,10 @@
 'use client'
 import { dummyAdminDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
-import OrdersAreaChart from "@/components/OrdersAreaChart"
+import OrdeRsAreaChart from "@/components/OrdeRsAreaChart"
 import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
-import { CircleDollarSignIcon, ShoppingBasketIcon, StoreIcon, TagsIcon, UsersIcon } from "lucide-react"
+import { CircleDollaRsignIcon, ShoppingBasketIcon, StoreIcon, TagsIcon, UseRsIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -19,25 +19,25 @@ export default function AdminDashboard() {
     const [dashboardData, setDashboardData] = useState({
         products: 0,
         revenue: 0,
-        orders: 0,
+        ordeRs: 0,
         stores: 0,
-        customers: 0,
-        allOrders: [],
+        customeRs: 0,
+        allOrdeRs: [],
     })
 
     const dashboardCardsData = [
         { title: 'Total Products', value: dashboardData.products, icon: ShoppingBasketIcon },
-        { title: 'Total Revenue', value: currency + dashboardData.revenue, icon: CircleDollarSignIcon },
-        { title: 'Total Orders', value: dashboardData.orders, icon: TagsIcon },
+        { title: 'Total Revenue', value: currency + dashboardData.revenue, icon: CircleDollaRsignIcon },
+        { title: 'Total OrdeRs', value: dashboardData.ordeRs, icon: TagsIcon },
         { title: 'Total Stores', value: dashboardData.stores, icon: StoreIcon },
-        { title: 'Total Customers', value: dashboardData.customers, icon: UsersIcon },
+        { title: 'Total CustomeRs', value: dashboardData.customeRs, icon: UseRsIcon },
     ]
 
     const fetchDashboardData = async () => {
         try {
             const token = await getToken()
             const { data } = await axios.get('/api/admin/dashboard', {
-                headers: { Authorization: `Bearer ${token}` }
+                headeRs: { Authorization: `Bearer ${token}` }
             })
             setDashboardData(data.dashboardData)
         } catch (error) {
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* Area Chart */}
-            <OrdersAreaChart allOrders={dashboardData.allOrders} />
+            <OrdeRsAreaChart allOrdeRs={dashboardData.allOrdeRs} />
         </div>
     )
 }

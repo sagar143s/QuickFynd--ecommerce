@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
         toast.success('Added to cart')
     }
 
-    // Limit product name to 50 characters
+    // Limit product name to 50 characteRs
     const displayName = product.name.length > 50 ? product.name.slice(0, 50) + '…' : product.name;
 
     return (
@@ -98,7 +98,7 @@ const ProductCard = ({ product }) => {
                 {/* Cart Button with Badge - Bottom Right */}
                 <button 
                     onClick={handleAddToCart}
-                    className='absolute bottom-2 right-2 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 bg-slate-700 hover:bg-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 cursor-pointer z-10'
+                    className='absolute bottom-2 right-2 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 bg-slate-700 hover:bg-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 cuRsor-pointer z-10'
                 >
                     <ShoppingCartIcon className='text-white' size={16} />
                     {itemQuantity > 0 && (

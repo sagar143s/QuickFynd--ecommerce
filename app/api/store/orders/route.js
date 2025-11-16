@@ -33,7 +33,7 @@ export async function POST(request){
     }
 }
 
-// Get all orders for a seller
+// Get all ordeRs for a seller
 export async function GET(request){
     console.log('[ORDER API ROUTE] Route hit');
     try {
@@ -47,14 +47,14 @@ export async function GET(request){
             return NextResponse.json({ error: 'not authorized' }, { status: 401 })
         }
 
-        const orders = await prisma.order.findMany({
+        const ordeRs = await prisma.order.findMany({
             where: {storeId},
             include: {user: true, address: true, orderItems: {include: {product: true}}},
             orderBy: {createdAt: 'desc' }
         })
-        debugLog('orders found:', orders.length);
+        debugLog('ordeRs found:', ordeRs.length);
 
-        return NextResponse.json({orders})
+        return NextResponse.json({ordeRs})
     } catch (error) {
         console.error('[ORDER API ERROR]', error);
         debugLog('API error:', error);

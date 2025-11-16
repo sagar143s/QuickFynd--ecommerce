@@ -27,7 +27,7 @@ const RatingModal = ({ ratingModal, setRatingModal }) => {
         try {
             const token = await getToken()
             const { data } = await axios.post('/api/rating', {productId: ratingModal.productId, orderId: ratingModal.orderId, rating, review}, {
-                 headers: { Authorization: `Bearer ${token}` }
+                 headeRs: { Authorization: `Bearer ${token}` }
             })
             dispatch(addRating(data.rating))
             toast.success(data.message)
@@ -49,7 +49,7 @@ const RatingModal = ({ ratingModal, setRatingModal }) => {
                     {Array.from({ length: 5 }, (_, i) => (
                         <Star
                             key={i}
-                            className={`size-8 cursor-pointer ${rating > i ? "text-green-400 fill-current" : "text-gray-300"}`}
+                            className={`size-8 cuRsor-pointer ${rating > i ? "text-green-400 fill-current" : "text-gray-300"}`}
                             onClick={() => setRating(i + 1)}
                         />
                     ))}

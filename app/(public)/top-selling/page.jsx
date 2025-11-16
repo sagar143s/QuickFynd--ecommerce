@@ -7,7 +7,7 @@ import PageTitle from "@/components/PageTitle";
 export default function TopSellingPage() {
     const products = useSelector(state => state.product.list);
 
-    // Calculate total orders for each product and sort
+    // Calculate total ordeRs for each product and sort
     const topSellingProducts = useMemo(() => {
         // For now, we'll sort by creation date as a placeholder
         // In a real scenario, you'd calculate based on actual order data
@@ -25,7 +25,7 @@ export default function TopSellingPage() {
             
             <div className="mb-6">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Top Selling Products</h1>
-                <p className="text-gray-600">Discover our most popular products loved by customers</p>
+                <p className="text-gray-600">Discover our most popular products loved by customeRs</p>
             </div>
 
             {topSellingProducts.length === 0 ? (

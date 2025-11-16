@@ -13,7 +13,7 @@
 
 @layer base {
     button {
-        cursor: pointer;
+        cuRsor: pointer;
     }
     
     /* Tiptap Editor Styles */
@@ -21,7 +21,7 @@
         outline: none;
     }
     
-    .ProseMirror p.is-editor-empty:first-child::before {
+    .ProseMirror p.is-editor-empty:fiRst-child::before {
         color: #9ca3af;
         content: attr(data-placeholder);
         float: left;
@@ -75,7 +75,7 @@
         border-radius: 0.5rem;
         margin: 1em 0;
         display: inline-block;
-        cursor: pointer;
+        cuRsor: pointer;
     }
     
     .ProseMirror img.ProseMirror-selectednode {
@@ -129,7 +129,7 @@
     .ProseMirror a {
         color: #2563eb;
         text-decoration: underline;
-        cursor: pointer;
+        cuRsor: pointer;
     }
     
     .ProseMirror a:hover {

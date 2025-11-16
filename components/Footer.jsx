@@ -43,7 +43,7 @@ const Footer = () => {
         {
             title: "ABOUT QUI",
             links: [
-                { text: "About Us", path: '/support', icon: null },
+                { text: "About Us", path: '/about', icon: null },
                 { text: "Create Your Store", path: '/create-store', icon: null },
                 { text: "Become a Seller", path: '/create-store', icon: null },
                 { text: "Careers", path: '/careers', icon: null },
@@ -86,7 +86,7 @@ const Footer = () => {
                             </div>
                             <div className="flex items-center gap-2 text-sm">
                                 <MapPinIcon />
-                                <span className="text-slate-400">Dubai, UAE</span>
+                                <span className="text-slate-400">Kozhikode, Keala</span>
                             </div>
                         </div>
                         {/* Social Icons removed from brand section to avoid duplication */}
@@ -128,8 +128,9 @@ const Footer = () => {
                             ))}
                         </div>
                         <p className="text-sm text-slate-500 text-center w-full">
-                            © {new Date().getFullYear()} Quickfynd.com. All rights reserved.
-                        </p>
+  © {new Date().getFullYear()} Quickfynd.com — Powered by Nilaas.
+</p>
+
                     </div>
                 </div>
             </div>

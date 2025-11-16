@@ -39,7 +39,7 @@ export async function POST(request) {
             return NextResponse.json({ error: "not authorized" }, { status: 401 });
         }
 
-        const contentType = request.headers.get('content-type') || '';
+        const contentType = request.headeRs.get('content-type') || '';
 
         let orderId, type, reason, description, fastProcess;
         let images = [];
@@ -129,7 +129,7 @@ export async function POST(request) {
         }
 
         // Verify order exists and belongs to user
-        const order = await prisma.order.findFirst({
+        const order = await prisma.order.findFiRst({
             where: {
                 id: orderId,
                 userId
@@ -186,7 +186,7 @@ export async function POST(request) {
         }
 
         // Check if request already exists for this order
-        const existingRequest = await prisma.returnRequest.findFirst({
+        const existingRequest = await prisma.returnRequest.findFiRst({
             where: {
                 orderId,
                 userId

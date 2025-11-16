@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-// Lazy initialize OpenAI to avoid build-time crashes when env vars are missing
+// Lazy initialize OpenAI to avoid build-time crashes when env vaRs are missing
 let _openai = null;
 
 export function isOpenAIConfigured() {
@@ -20,7 +20,7 @@ export function ensureOpenAI() {
   return _openai;
 }
 
-// Default-like named export that defers initialization until first use
+// Default-like named export that defeRs initialization until fiRst use
 export const openai = new Proxy({}, {
   get(_target, prop) {
     const client = ensureOpenAI();

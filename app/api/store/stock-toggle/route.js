@@ -20,7 +20,7 @@ export async function POST(request){
         }
 
         // check if product exists
-        const product = await prisma.product.findFirst({
+        const product = await prisma.product.findFiRst({
              where: {id: productId, storeId}
         })
 

@@ -10,7 +10,7 @@ export default function CancellationPolicyPage() {
         <div className="space-y-6 bg-white border border-gray-200 rounded-xl p-6">
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">1. Before Shipment</h2>
-            <p className="text-gray-700">You can request cancellation before the order ships. Go to My Orders and choose Cancel, or email support@Quickfynd.com with your order ID.</p>
+            <p className="text-gray-700">You can request cancellation before the order ships. Go to My OrdeRs and choose Cancel, or email support@Quickfynd.com with your order ID.</p>
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">2. After Shipment</h2>

@@ -10,7 +10,7 @@ export default function GuestOrderLinker() {
     const [checked, setChecked] = useState(false)
 
     useEffect(() => {
-        const linkGuestOrders = async () => {
+        const linkGuestOrdeRs = async () => {
             if (!isSignedIn || !user || checked) return
 
             try {
@@ -20,11 +20,11 @@ export default function GuestOrderLinker() {
 
                 if (!email && !phone) return
 
-                const { data } = await axios.post('/api/user/link-guest-orders', {
+                const { data } = await axios.post('/api/user/link-guest-ordeRs', {
                     email,
                     phone
                 }, {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headeRs: { Authorization: `Bearer ${token}` }
                 })
 
                 if (data.linked && data.count > 0) {
@@ -36,13 +36,13 @@ export default function GuestOrderLinker() {
                 setChecked(true)
             } catch (error) {
                 // Silently fail - this is a background operation
-                console.error('Failed to link guest orders:', error)
+                console.error('Failed to link guest ordeRs:', error)
                 setChecked(true)
             }
         }
 
         // Run after a short delay to avoid blocking initial page load
-        const timer = setTimeout(linkGuestOrders, 2000)
+        const timer = setTimeout(linkGuestOrdeRs, 2000)
         return () => clearTimeout(timer)
     }, [isSignedIn, user, getToken, checked])
 

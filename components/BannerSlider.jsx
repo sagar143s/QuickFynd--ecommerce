@@ -2,16 +2,16 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Banner1 from '../assets/bannersection3/Wide Banner 1.webp';
-import Banner2 from '../assets/bannersection3/Wide Banner 2.webp';
+import Banner1 from '../assets/banneRsection3/Wide Banner 1.webp';
+import Banner2 from '../assets/banneRsection3/Wide Banner 2.webp';
 
 // Banner data
-const banners = [
+const banneRs = [
   { image: Banner1, link: "/category/sofas" },
   { image: Banner2, link: "/category/beds" },
 ];
 
-const BannerSlider = () => {
+const BanneRslider = () => {
   const [index, setIndex] = useState(0);
   const router = useRouter();
 
@@ -19,7 +19,7 @@ const BannerSlider = () => {
   useEffect(() => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % banners.length);
+      setIndex((prev) => (prev + 1) % banneRs.length);
     }, isMobile ? 3000 : 4000);
     return () => clearInterval(interval);
   }, []);
@@ -34,14 +34,14 @@ const BannerSlider = () => {
         className="flex transition-transform duration-700 ease-out"
         style={{
           transform: `translateX(-${index * 100}%)`,
-          width: `${banners.length * 100}%`,
+          width: `${banneRs.length * 100}%`,
         }}
       >
-        {banners.map((banner, i) => (
+        {banneRs.map((banner, i) => (
           <div
             key={i}
             // onClick={() => handleClick(banner.link)}
-            className="relative cursor-pointer flex-[0_0_100%] overflow-hidden aspect-[4/1] sm:aspect-[16/5] md:aspect-[16/4] lg:aspect-[16/3]"
+            className="relative cuRsor-pointer flex-[0_0_100%] overflow-hidden aspect-[4/1] sm:aspect-[16/5] md:aspect-[16/4] lg:aspect-[16/3]"
           >
             <Image
               src={banner.image}
@@ -57,11 +57,11 @@ const BannerSlider = () => {
 
       {/* Dots */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {banners.map((_, i) => (
+        {banneRs.map((_, i) => (
           <div
             key={i}
             onClick={() => goToSlide(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-colors cursor-pointer ${
+            className={`w-2.5 h-2.5 rounded-full transition-coloRs cuRsor-pointer ${
               i === index ? 'bg-white' : 'bg-white/50'
             }`}
           />
@@ -71,4 +71,4 @@ const BannerSlider = () => {
   );
 };
 
-export default BannerSlider;
+export default BanneRslider;

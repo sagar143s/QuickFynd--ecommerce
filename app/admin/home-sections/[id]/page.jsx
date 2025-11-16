@@ -46,7 +46,7 @@ export default function EditHomeSection(){
 
   const uploadSlide = async (file) => {
     const fd = new FormData(); fd.append('image', file)
-    try{ const { data } = await axios.post('/api/store/upload-image', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+    try{ const { data } = await axios.post('/api/store/upload-image', fd, { headeRs: { 'Content-Type': 'multipart/form-data' } });
       const url = data?.url || data?.imageUrl; if(url) setForm(f=>({ ...f, slides:[...f.slides, url] }))
     }catch(e){ toast.error('Upload failed') }
   }

@@ -30,7 +30,7 @@ export default function ProductSection({ title, products, viewAllLink }) {
                     <div
                         key={product.id}
                         onClick={() => product.slug && router.push(`/product/${product.slug}`)}
-                        className={`cursor-pointer group hover:shadow-md transition-all duration-200 rounded-lg p-2 hover:bg-gray-50 ${!product.slug ? 'opacity-50 pointer-events-none' : ''}`}
+                        className={`cuRsor-pointer group hover:shadow-md transition-all duration-200 rounded-lg p-2 hover:bg-gray-50 ${!product.slug ? 'opacity-50 pointer-events-none' : ''}`}
                         title={product.slug ? '' : 'No slug set for this product'}
                     >
                         {/* Product Image */}

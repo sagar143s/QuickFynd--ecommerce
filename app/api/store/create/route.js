@@ -3,7 +3,7 @@ import { getAuth, clerkClient } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import imagekit from "@/configs/imageKit";
 
-// Ensure Node.js runtime so Buffer and ImageKit work (avoids Edge runtime errors)
+// Ensure Node.js runtime so Buffer and ImageKit work (avoids Edge runtime erroRs)
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
@@ -22,7 +22,7 @@ export async function POST(request) {
     let clerkUser = null;
     try {
       // Use clerkClient directly (it's an object, not a callable)
-      clerkUser = await clerkClient.users.getUser(userId);
+      clerkUser = await clerkClient.useRs.getUser(userId);
     } catch (e) {
       // If Clerk lookup fails, log and continue — we'll still require the userId
       console.warn('Failed to fetch Clerk user:', e?.message || e);
@@ -31,7 +31,7 @@ export async function POST(request) {
     // Ensure user exists in database; if we have clerk data use it, otherwise provide safe defaults
     const upsertData = {
       id: userId,
-      name: clerkUser ? `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim() || 'Unknown' : 'Unknown',
+      name: clerkUser ? `${clerkUser.fiRstName || ''} ${clerkUser.lastName || ''}`.trim() || 'Unknown' : 'Unknown',
       email: clerkUser ? (clerkUser.emailAddresses?.[0]?.emailAddress || '') : '',
       image: clerkUser ? (clerkUser.imageUrl || '') : '',
     };
@@ -70,11 +70,11 @@ export async function POST(request) {
     if (missing.length) return json({ error: "Missing fields", missing }, 400);
 
     // Check if user already has a store
-    const existingStore = await prisma.store.findFirst({ where: { userId } });
+    const existingStore = await prisma.store.findFiRst({ where: { userId } });
     if (existingStore) return json({ status: existingStore.status }, 200);
 
     // Check if username is already taken
-    const usernameTaken = await prisma.store.findFirst({ where: { username } });
+    const usernameTaken = await prisma.store.findFiRst({ where: { username } });
     if (usernameTaken) return json({ error: "Username already taken" }, 400);
 
     // Upload image to ImageKit
@@ -132,7 +132,7 @@ export async function GET(request) {
     try { console.debug('store.create GET getAuth userId:', userId); } catch (e) {}
     if (!userId) return json({ error: "Unauthorized" }, 401);
 
-    const store = await prisma.store.findFirst({ where: { userId } });
+    const store = await prisma.store.findFiRst({ where: { userId } });
     if (store) return json({ status: store.status }, 200);
 
     return json({ status: "not registered" }, 200);

@@ -13,7 +13,7 @@ export async function POST(request){
         // Initialize Stripe lazily only when configured
         const stripe = new Stripe(secret)
         const body = await request.text()
-        const sig = request.headers.get('stripe-signature')
+        const sig = request.headeRs.get('stripe-signature')
 
         const event = stripe.webhooks.constructEvent(body, sig, webhookSecret)
 
@@ -78,5 +78,5 @@ export async function POST(request){
 }
 
 export const config = {
-    api: { bodyparser: false }
+    api: { bodypaRser: false }
 }

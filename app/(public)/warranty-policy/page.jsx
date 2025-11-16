@@ -18,7 +18,7 @@ export default function WarrantyPolicyPage() {
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">3. Exclusions</h2>
-            <p className="text-gray-700">Warranty generally excludes accidental damage, misuse, unauthorized repairs, and normal wear-and-tear. Specific exclusions depend on the brand’s policy.</p>
+            <p className="text-gray-700">Warranty generally excludes accidental damage, misuse, unauthorized repaiRs, and normal wear-and-tear. Specific exclusions depend on the brand’s policy.</p>
           </section>
         </div>
       </div>

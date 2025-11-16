@@ -30,14 +30,14 @@ const ProductDetails = ({ product }) => {
     ? product.rating.reduce((acc, item) => acc + item.rating, 0) / product.rating.length
     : 0;
 
-  // Variants and pricing helpers will compute effective price/MRP and discount
+  // Variants and pricing helpeRs will compute effective price/MRP and discount
 
   // Variants support
   const variants = Array.isArray(product.variants) ? product.variants : [];
   const bulkVariants = variants.filter(v => v?.options && (v.options.bundleQty || v.options.bundleQty === 0));
-  const variantColors = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
+  const variantColoRs = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
   const variantSizes = [...new Set(variants.map(v => v.options?.size).filter(Boolean))];
-  const [selectedColor, setSelectedColor] = useState(variantColors[0] || product.colors?.[0] || null);
+  const [selectedColor, setSelectedColor] = useState(variantColoRs[0] || product.coloRs?.[0] || null);
   const [selectedSize, setSelectedSize] = useState(variantSizes[0] || product.sizes?.[0] || null);
   const [selectedBundleQty, setSelectedBundleQty] = useState(
     bulkVariants.length ? Number(bulkVariants[0].options.bundleQty) : null
@@ -183,7 +183,7 @@ const ProductDetails = ({ product }) => {
               <div
                 key={index}
                 onClick={() => setMainImage(image)}
-                className={`bg-white border-2 flex items-center justify-center w-16 h-16 rounded-lg cursor-pointer transition-all ${
+                className={`bg-white border-2 flex items-center justify-center w-16 h-16 rounded-lg cuRsor-pointer transition-all ${
                   mainImage === image ? 'border-orange-500 ring-2 ring-orange-200' : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
@@ -262,7 +262,7 @@ const ProductDetails = ({ product }) => {
                 <div
                   key={index}
                   onClick={() => setMainImage(image)}
-                  className={`flex-shrink-0 bg-white border-2 flex items-center justify-center w-20 h-20 rounded-lg cursor-pointer transition-all ${
+                  className={`flex-shrink-0 bg-white border-2 flex items-center justify-center w-20 h-20 rounded-lg cuRsor-pointer transition-all ${
                     mainImage === image ? 'border-red-500 ring-2 ring-red-200' : 'border-gray-200'
                   }`}
                 >
@@ -433,11 +433,11 @@ const ProductDetails = ({ product }) => {
             </div>
           )}
           {/* Color Variant */}
-          {(variantColors.length > 0 || product.colors?.length > 0) && (
+          {(variantColoRs.length > 0 || product.coloRs?.length > 0) && (
             <div>
               <p className="font-semibold text-gray-800 mb-2">Choose color</p>
               <div className="flex gap-3 flex-wrap">
-                {(variantColors.length ? variantColors : (product.colors || [])).map((color, index) => {
+                {(variantColoRs.length ? variantColoRs : (product.coloRs || [])).map((color, index) => {
                   const variantWithImage = variants.find(v => v.options?.color === color && v.options?.image);
                   const imageUrl = variantWithImage?.options?.image;
                   const variantPrice = variants.find(v => v.options?.color === color)?.price;
@@ -449,7 +449,7 @@ const ProductDetails = ({ product }) => {
                       key={index}
                       onClick={() => setSelectedColor(color)}
                       disabled={!inStock}
-                      className={`flex flex-col items-center gap-2 transition-all ${!inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex flex-col items-center gap-2 transition-all ${!inStock ? 'opacity-50 cuRsor-not-allowed' : ''}`}
                     >
                       <div className={`w-20 h-20 rounded-lg border-2 transition-all overflow-hidden flex items-center justify-center ${
                         selectedColor === color
@@ -590,7 +590,7 @@ const ProductDetails = ({ product }) => {
               isInWishlist 
                 ? 'text-red-500 scale-110' 
                 : 'text-gray-600 hover:text-red-500 hover:scale-105'
-            } ${wishlistLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            } ${wishlistLoading ? 'opacity-50 cuRsor-not-allowed' : ''}`}
           >
             <HeartIcon 
               size={18} 

@@ -161,7 +161,7 @@ const ProductCard = ({ product }) => {
       {/* Cart Button with Badge - Bottom Right */}
       <button 
         onClick={handleAddToCart}
-        className='absolute bottom-4 right-4 w-10 h-10 bg-slate-700 hover:bg-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 cursor-pointer z-10'
+        className='absolute bottom-4 right-4 w-10 h-10 bg-slate-700 hover:bg-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 cuRsor-pointer z-10'
       >
         <ShoppingCartIcon className='text-white' size={18} />
         {itemQuantity > 0 && (
@@ -183,7 +183,7 @@ const BestSelling = () => {
   // useEffect(() => {
   //   const load = async () => {
   //     try {
-  //       const { data } = await axios.get('/api/home-selection?section=limited_offers')
+  //       const { data } = await axios.get('/api/home-selection?section=limited_offeRs')
   //       if (Array.isArray(data.products)) setCurated(data.products)
   //     } catch (e) {
   //     }

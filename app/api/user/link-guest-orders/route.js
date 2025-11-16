@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { getAuth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-// Link guest orders to newly created user account
+// Link guest ordeRs to newly created user account
 export async function POST(request) {
     try {
         const { userId } = getAuth(request);
@@ -24,7 +24,7 @@ export async function POST(request) {
         if (email) guestUserFilter.push({ email: email });
         if (phone) guestUserFilter.push({ phone: phone });
 
-        const guestUser = await prisma.guestUser.findFirst({
+        const guestUser = await prisma.guestUser.findFiRst({
             where: {
                 OR: guestUserFilter,
                 accountCreated: false
@@ -33,35 +33,35 @@ export async function POST(request) {
 
         if (!guestUser) {
             return NextResponse.json({ 
-                message: "No guest orders found",
+                message: "No guest ordeRs found",
                 linked: false 
             });
         }
 
-        // Find all guest orders with matching email or phone
+        // Find all guest ordeRs with matching email or phone
         const orderFilter = [];
         if (email) orderFilter.push({ guestEmail: email });
         if (phone) orderFilter.push({ guestPhone: phone });
 
-        const guestOrders = await prisma.order.findMany({
+        const guestOrdeRs = await prisma.order.findMany({
             where: {
                 isGuest: true,
                 OR: orderFilter
             }
         });
 
-        if (guestOrders.length === 0) {
+        if (guestOrdeRs.length === 0) {
             return NextResponse.json({ 
-                message: "No guest orders found",
+                message: "No guest ordeRs found",
                 linked: false 
             });
         }
 
-        // Link guest orders to the new user account
+        // Link guest ordeRs to the new user account
         await prisma.order.updateMany({
             where: {
                 id: {
-                    in: guestOrders.map(order => order.id)
+                    in: guestOrdeRs.map(order => order.id)
                 }
             },
             data: {
@@ -79,15 +79,15 @@ export async function POST(request) {
         });
 
         return NextResponse.json({ 
-            message: `Successfully linked ${guestOrders.length} guest order(s) to your account`,
+            message: `Successfully linked ${guestOrdeRs.length} guest order(s) to your account`,
             linked: true,
-            count: guestOrders.length
+            count: guestOrdeRs.length
         });
 
     } catch (error) {
-        console.error("Error linking guest orders:", error);
+        console.error("Error linking guest ordeRs:", error);
         return NextResponse.json({ 
-            error: error.message || "Failed to link guest orders" 
+            error: error.message || "Failed to link guest ordeRs" 
         }, { status: 500 });
     }
 }

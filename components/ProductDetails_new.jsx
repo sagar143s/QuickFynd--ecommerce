@@ -42,9 +42,9 @@ const ProductDetails = ({ product }) => {
   // Variants support
   const variants = Array.isArray(product.variants) ? product.variants : [];
   const bulkVariants = variants.filter(v => v?.options && (v.options.bundleQty || v.options.bundleQty === 0));
-  const variantColors = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
+  const variantColoRs = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
   const variantSizes = [...new Set(variants.map(v => v.options?.size).filter(Boolean))];
-  const [selectedColor, setSelectedColor] = useState(variantColors[0] || product.colors?.[0] || null);
+  const [selectedColor, setSelectedColor] = useState(variantColoRs[0] || product.coloRs?.[0] || null);
   const [selectedSize, setSelectedSize] = useState(variantSizes[0] || product.sizes?.[0] || null);
   const [selectedBundleQty, setSelectedBundleQty] = useState(
     bulkVariants.length ? Number(bulkVariants[0].options.bundleQty) : null

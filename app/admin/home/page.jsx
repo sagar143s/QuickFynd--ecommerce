@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast'
 
 
 const SECTION_OPTIONS = [
-  { value: 'limited_offers', label: 'Limited Time Offers (BestSelling block)' },
+  { value: 'limited_offeRs', label: 'Limited Time OffeRs (BestSelling block)' },
   { value: 'home_deals', label: 'Home Deals Section' },
   { value: 'hero_deals', label: 'Hero Deals Strip' },
 ]
@@ -18,7 +18,7 @@ export default function AdminHomeSelectionPage() {
 
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([])
-  const [section, setSection] = useState('limited_offers')
+  const [section, setSection] = useState('limited_offeRs')
   const [mode, setMode] = useState('category') // 'category' | 'tag'
   const [category, setCategory] = useState('')
   const [tag, setTag] = useState('')
@@ -75,7 +75,7 @@ export default function AdminHomeSelectionPage() {
         category: mode === 'category' ? category : null,
         tag: mode === 'tag' ? tag : null,
         productIds: selected,
-      }, { headers: { Authorization: `Bearer ${token}` } })
+      }, { headeRs: { Authorization: `Bearer ${token}` } })
       toast.success('Selection saved')
     } catch (e) {
       toast.error(e?.response?.data?.error || e.message)

@@ -16,9 +16,9 @@ import { downloadInvoice, printInvoice } from "@/lib/generateInvoice"
 
 
 
-export default function StoreOrders() {
+export default function StoreOrdeRs() {
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs';
-    const [orders, setOrders] = useState([]);
+    const [ordeRs, setOrdeRs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,15 +35,15 @@ export default function StoreOrders() {
         if (!selectedOrder) return;
         try {
             const token = await getToken();
-            await axios.post('/api/store/orders/update-tracking', {
+            await axios.post('/api/store/ordeRs/update-tracking', {
                 orderId: selectedOrder.id,
                 ...trackingData
             }, {
-                headers: { Authorization: `Bearer ${token}` }
+                headeRs: { Authorization: `Bearer ${token}` }
             });
             toast.success('Tracking details updated & customer notified!');
-            // Optionally refresh orders or close modal
-            fetchOrders();
+            // Optionally refresh ordeRs or close modal
+            fetchOrdeRs();
             setIsModalOpen(false);
         } catch (error) {
             toast.error('Failed to update tracking details');
@@ -60,14 +60,14 @@ export default function StoreOrders() {
         setSelectedOrder(null);
     };
 
-    const fetchOrders = async () => {
+    const fetchOrdeRs = async () => {
         try {
             const token = await getToken();
-            const { data } = await axios.get('/api/store/orders', {headers: { Authorization: `Bearer ${token}` }});
-            console.log('[FRONTEND ORDERS API RESPONSE]', data);
-            setOrders(data.orders);
+            const { data } = await axios.get('/api/store/ordeRs', {headeRs: { Authorization: `Bearer ${token}` }});
+            console.log('[FRONTEND ORDERs API RESPONSE]', data);
+            setOrdeRs(data.ordeRs);
         } catch (error) {
-            console.error('[FRONTEND ORDERS API ERROR]', error);
+            console.error('[FRONTEND ORDERs API ERROR]', error);
             toast.error(error?.response?.data?.error || error.message);
         } finally {
             setLoading(false);
@@ -75,16 +75,16 @@ export default function StoreOrders() {
     };
 
     useEffect(() => {
-        fetchOrders();
+        fetchOrdeRs();
     }, []);
 
     if (loading) return <Loading />;
 
     return (
         <>
-            <h1 className="text-2xl text-slate-500 mb-5">Store <span className="text-slate-800 font-medium">Orders</span></h1>
-            {orders.length === 0 ? (
-                <p>No orders found</p>
+            <h1 className="text-2xl text-slate-500 mb-5">Store <span className="text-slate-800 font-medium">OrdeRs</span></h1>
+            {ordeRs.length === 0 ? (
+                <p>No ordeRs found</p>
             ) : (
                 <div className="overflow-x-auto max-w-4xl rounded-md shadow border border-gray-200">
                     <table className="w-full text-sm text-left text-gray-600">
@@ -98,10 +98,10 @@ export default function StoreOrders() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
-                            {orders.map((order, index) => (
+                            {ordeRs.map((order, index) => (
                                 <tr
                                     key={order.id}
-                                    className="hover:bg-gray-50 transition-colors duration-150 cursor-pointer"
+                                    className="hover:bg-gray-50 transition-coloRs duration-150 cuRsor-pointer"
                                     onClick={() => openModal(order)}
                                 >
                                     <td className="pl-6 text-green-600" >
@@ -131,7 +131,7 @@ export default function StoreOrders() {
                                     <td className="px-4 py-3" onClick={(e) => { e.stopPropagation() }}>
                                         <select
                                             value={order.status}
-                                            onChange={e => updateOrderStatus(order.id, e.target.value)}
+                                            onChange={e => updateOrdeRstatus(order.id, e.target.value)}
                                             className="border-gray-300 rounded-md text-sm focus:ring focus:ring-blue-200"
                                         >
                                             <option value="ORDER_PLACED">ORDER_PLACED</option>
@@ -164,7 +164,7 @@ export default function StoreOrders() {
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => downloadInvoice(selectedOrder)}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors backdrop-blur-sm"
+                                        className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-coloRs backdrop-blur-sm"
                                         title="Download Invoice"
                                     >
                                         <Download size={18} />
@@ -172,13 +172,13 @@ export default function StoreOrders() {
                                     </button>
                                     <button
                                         onClick={() => printInvoice(selectedOrder)}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors backdrop-blur-sm"
+                                        className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-coloRs backdrop-blur-sm"
                                         title="Print Invoice"
                                     >
                                         <Printer size={18} />
                                         <span className="text-sm">Print</span>
                                     </button>
-                                    <button onClick={closeModal} className="p-2 hover:bg-white/20 rounded-full transition-colors">
+                                    <button onClick={closeModal} className="p-2 hover:bg-white/20 rounded-full transition-coloRs">
                                         <X size={24} />
                                     </button>
                                 </div>
@@ -254,7 +254,7 @@ export default function StoreOrders() {
                                 </div>
                                 <button
                                     onClick={updateTrackingDetails}
-                                    className="mt-3 w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2.5 rounded-lg transition-colors"
+                                    className="mt-3 w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2.5 rounded-lg transition-coloRs"
                                 >
                                     Update Tracking & Notify Customer
                                 </button>

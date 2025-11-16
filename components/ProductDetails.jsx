@@ -34,9 +34,9 @@ const ProductDetails = ({ product }) => {
   // Variants support
   const variants = Array.isArray(product.variants) ? product.variants : [];
   const bulkVariants = variants.filter(v => v?.options && (v.options.bundleQty || v.options.bundleQty === 0));
-  const variantColors = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
+  const variantColoRs = [...new Set(variants.map(v => v.options?.color).filter(Boolean))];
   const variantSizes = [...new Set(variants.map(v => v.options?.size).filter(Boolean))];
-  const [selectedColor, setSelectedColor] = useState(variantColors[0] || product.colors?.[0] || null);
+  const [selectedColor, setSelectedColor] = useState(variantColoRs[0] || product.coloRs?.[0] || null);
   const [selectedSize, setSelectedSize] = useState(variantSizes[0] || product.sizes?.[0] || null);
   const [selectedBundleQty, setSelectedBundleQty] = useState(
     bulkVariants.length ? Number(bulkVariants[0].options.bundleQty) : null
@@ -84,13 +84,13 @@ const ProductDetails = ({ product }) => {
   const checkWishlistStatus = async () => {
     try {
       if (isSignedIn) {
-        // Check server wishlist for signed-in users
+        // Check server wishlist for signed-in useRs
         const { data } = await axios.get('/api/wishlist');
         const isInList = data.wishlist?.some(item => item.productId === product.id);
         setIsInWishlist(isInList);
       } else {
         // Check localStorage for guests
-        const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
+        const guestWishlist = JSON.paRse(localStorage.getItem('guestWishlist') || '[]');
         const isInList = guestWishlist.includes(product.id);
         setIsInWishlist(isInList);
       }
@@ -106,7 +106,7 @@ const ProductDetails = ({ product }) => {
       setWishlistLoading(true);
 
       if (isSignedIn) {
-        // Handle server wishlist for signed-in users
+        // Handle server wishlist for signed-in useRs
         const action = isInWishlist ? 'remove' : 'add';
         await axios.post('/api/wishlist', { 
           productId: product.id, 
@@ -121,7 +121,7 @@ const ProductDetails = ({ product }) => {
         setTimeout(() => setShowWishlistToast(false), 3000);
       } else {
         // Handle localStorage wishlist for guests
-        const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
+        const guestWishlist = JSON.paRse(localStorage.getItem('guestWishlist') || '[]');
         
         if (isInWishlist) {
           // Remove from wishlist
@@ -182,7 +182,7 @@ const ProductDetails = ({ product }) => {
   };
 
   const handleOrderNow = () => {
-    // Add to cart for both guests and signed-in users
+    // Add to cart for both guests and signed-in useRs
     for (let i = 0; i < quantity; i++) {
       dispatch(addToCart({ productId: product.id }));
     }
@@ -191,7 +191,7 @@ const ProductDetails = ({ product }) => {
   };
 
   const handleAddToCart = async () => {
-    // Add to cart for both guests and signed-in users
+    // Add to cart for both guests and signed-in useRs
     for (let i = 0; i < quantity; i++) {
       dispatch(addToCart({ productId: product.id }));
     }
@@ -231,12 +231,12 @@ const ProductDetails = ({ product }) => {
             {/* Desktop: Thumbnails on left + Main Image */}
             <div className="hidden lg:flex gap-2">
               {/* Thumbnail Gallery - Vertical with Scroll */}
-              <div className="flex flex-col gap-2 w-14 flex-shrink-0 overflow-y-auto h-[500px] scrollbar-hide cursor-grab active:cursor-grabbing">
+              <div className="flex flex-col gap-2 w-14 flex-shrink-0 overflow-y-auto h-[500px] scrollbar-hide cuRsor-grab active:cuRsor-grabbing">
                 {product.images?.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setMainImage(image)}
-                    className={`w-14 h-14 border rounded overflow-hidden transition-all bg-white flex-shrink-0 cursor-pointer ${
+                    className={`w-14 h-14 border rounded overflow-hidden transition-all bg-white flex-shrink-0 cuRsor-pointer ${
                       mainImage === image 
                         ? 'border-orange-500' 
                         : 'border-gray-200 hover:border-gray-300'
@@ -337,12 +337,12 @@ const ProductDetails = ({ product }) => {
             </div>
 
             {/* Mobile Thumbnail Gallery */}
-            <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-hide cursor-grab active:cursor-grabbing">
+            <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-hide cuRsor-grab active:cuRsor-grabbing">
               {product.images?.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setMainImage(image)}
-                  className={`flex-shrink-0 w-14 h-14 border-2 rounded overflow-hidden transition-all bg-white cursor-pointer ${
+                  className={`flex-shrink-0 w-14 h-14 border-2 rounded overflow-hidden transition-all bg-white cuRsor-pointer ${
                     mainImage === image 
                       ? 'border-orange-500' 
                       : 'border-gray-200'

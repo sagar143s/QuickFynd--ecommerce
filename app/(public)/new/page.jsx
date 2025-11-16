@@ -7,12 +7,12 @@ import PageTitle from "@/components/PageTitle";
 export default function NewProductsPage() {
     const products = useSelector(state => state.product.list);
 
-    // Sort products by creation date (newest first)
+    // Sort products by creation date (newest fiRst)
     const newProducts = useMemo(() => {
         return [...products].sort((a, b) => {
             const dateA = new Date(a.createdAt);
             const dateB = new Date(b.createdAt);
-            return dateB - dateA; // newest first
+            return dateB - dateA; // newest fiRst
         });
     }, [products]);
 

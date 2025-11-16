@@ -41,7 +41,7 @@ function ReturnRequestForm() {
         }
         if (!orderId) {
             toast.error('Order ID is required');
-            router.push('/orders');
+            router.push('/ordeRs');
             return;
         }
         fetchOrder();
@@ -50,18 +50,18 @@ function ReturnRequestForm() {
     const fetchOrder = async () => {
         try {
             const token = await getToken();
-            const { data } = await axios.get('/api/orders', {
-                headers: { Authorization: `Bearer ${token}` }
+            const { data } = await axios.get('/api/ordeRs', {
+                headeRs: { Authorization: `Bearer ${token}` }
             });
-            const foundOrder = data.orders.find(o => o.id === orderId);
+            const foundOrder = data.ordeRs.find(o => o.id === orderId);
             if (!foundOrder) {
                 toast.error('Order not found');
-                router.push('/orders');
+                router.push('/ordeRs');
                 return;
             }
             if (foundOrder.status !== 'DELIVERED') {
-                toast.error('Only delivered orders can be returned/replaced');
-                router.push('/orders');
+                toast.error('Only delivered ordeRs can be returned/replaced');
+                router.push('/ordeRs');
                 return;
             }
             
@@ -71,14 +71,14 @@ function ReturnRequestForm() {
             setDaysSinceDelivery(dsd);
             if (dsd > 15) {
                 toast.error('Replacement window has expired (15 days from delivery)');
-                router.push('/orders');
+                router.push('/ordeRs');
                 return;
             }
             
             setOrder(foundOrder);
         } catch (error) {
             toast.error(error?.response?.data?.error || 'Failed to fetch order');
-            router.push('/orders');
+            router.push('/ordeRs');
         } finally {
             setLoading(false);
         }
@@ -171,11 +171,11 @@ function ReturnRequestForm() {
             formData.videoFiles.forEach((file) => fd.append('videos', file));
 
             await axios.post('/api/return-request', fd, {
-                headers: { Authorization: `Bearer ${token}` }
+                headeRs: { Authorization: `Bearer ${token}` }
             });
 
             toast.success('Return/replacement request submitted successfully!');
-            router.push('/orders');
+            router.push('/ordeRs');
         } catch (error) {
             toast.error(error?.response?.data?.error || 'Failed to submit request');
         }
@@ -193,7 +193,7 @@ function ReturnRequestForm() {
                 <PageTitle 
                     heading="Return/Replacement Request" 
                     text="Return within 7 days or request a replacement within 15 days of delivery"
-                    linkText="Back to Orders"
+                    linkText="Back to OrdeRs"
                 />
 
                 {/* Product Eligibility Info */}
@@ -223,7 +223,7 @@ function ReturnRequestForm() {
                                     formData.type === 'RETURN'
                                         ? 'border-red-500 bg-red-50 text-red-700'
                                         : (returnEligible.length === 0 || (daysSinceDelivery !== null && daysSinceDelivery > 7))
-                                        ? 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        ? 'border-gray-200 bg-gray-100 text-gray-400 cuRsor-not-allowed'
                                         : 'border-gray-300 hover:border-gray-400'
                                 }`}
                             >
@@ -239,7 +239,7 @@ function ReturnRequestForm() {
                                     formData.type === 'REPLACEMENT'
                                         ? 'border-blue-500 bg-blue-50 text-blue-700'
                                         : replacementEligible.length === 0
-                                        ? 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        ? 'border-gray-200 bg-gray-100 text-gray-400 cuRsor-not-allowed'
                                         : 'border-gray-300 hover:border-gray-400'
                                 }`}
                             >
@@ -310,7 +310,7 @@ function ReturnRequestForm() {
                             ))}
                         </div>
                         {formData.images.length < 5 && (
-                            <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition">
+                            <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cuRsor-pointer hover:border-orange-500 transition">
                                 <Upload size={20} />
                                 <span>Upload Images</span>
                                 <input
@@ -347,7 +347,7 @@ function ReturnRequestForm() {
                             </div>
                         )}
                         {formData.videos.length === 0 && (
-                            <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition">
+                            <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cuRsor-pointer hover:border-orange-500 transition">
                                 <Upload size={20} />
                                 <span>Upload Video</span>
                                 <input
@@ -417,7 +417,7 @@ function ReturnRequestForm() {
 
                     {/* Fast Process Option */}
                     <div className="mb-6">
-                        <label className="flex items-center gap-2 cursor-pointer">
+                        <label className="flex items-center gap-2 cuRsor-pointer">
                             <input
                                 type="checkbox"
                                 checked={formData.fastProcess}
@@ -434,7 +434,7 @@ function ReturnRequestForm() {
                     <button
                         onClick={handleSubmit}
                         disabled={uploading || !formData.reason}
-                        className="w-full bg-orange-500 text-white py-3 px-6 rounded-lg hover:bg-orange-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed font-medium"
+                        className="w-full bg-orange-500 text-white py-3 px-6 rounded-lg hover:bg-orange-600 transition disabled:bg-gray-300 disabled:cuRsor-not-allowed font-medium"
                     >
                         {uploading ? 'Uploading...' : 'Submit Request'}
                     </button>

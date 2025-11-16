@@ -66,7 +66,7 @@ export async function POST(request) {
         }
 
         // Verify product belongs to this store
-        const product = await prisma.product.findFirst({
+        const product = await prisma.product.findFiRst({
             where: {
                 id: productId,
                 storeId
@@ -101,7 +101,7 @@ export async function POST(request) {
         }
 
         // Find or create user for this email
-        let user = await prisma.user.findFirst({
+        let user = await prisma.user.findFiRst({
             where: { email: customerEmail }
         });
 

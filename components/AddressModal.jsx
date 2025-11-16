@@ -65,7 +65,7 @@ const AddressModal = ({ setShowAddressModal }) => {
             // Remove phoneCode as it has a default value in the database
             delete addressData.phoneCode
             
-            const { data } = await axios.post('/api/address', {address: addressData}, {headers: { Authorization: `Bearer ${token}` } })
+            const { data } = await axios.post('/api/address', {address: addressData}, {headeRs: { Authorization: `Bearer ${token}` } })
             dispatch(addAddress(data.newAddress))
             toast.success(data.message)
             setShowAddressModal(false)
@@ -204,7 +204,7 @@ const AddressModal = ({ setShowAddressModal }) => {
 
                     <button 
                         type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors mt-6 shadow-lg hover:shadow-xl"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-coloRs mt-6 shadow-lg hover:shadow-xl"
                     >
                         SAVE ADDRESS
                     </button>

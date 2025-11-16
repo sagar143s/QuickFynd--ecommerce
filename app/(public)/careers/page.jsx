@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function CareersPage() {
+export default function CareeRsPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
@@ -17,7 +17,7 @@ export default function CareersPage() {
 
   return (
     <div className="max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-3xl font-bold mb-6">Careers at Quickfynd.com</h1>
+      <h1 className="text-3xl font-bold mb-6">CareeRs at Quickfynd.com</h1>
       <p className="mb-8 text-lg text-gray-700">We're always looking for passionate, talented, and driven individuals. Submit your details and we'll get in touch if there's a fit!</p>
       {submitted ? (
         <div className="bg-green-100 border border-green-300 text-green-800 rounded-lg p-6 text-center">

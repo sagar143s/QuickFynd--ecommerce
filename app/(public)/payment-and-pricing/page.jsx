@@ -10,7 +10,7 @@ export default function PaymentAndPricingPolicyPage() {
         <div className="space-y-6 bg-white border border-gray-200 rounded-xl p-6">
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">1. Accepted Methods</h2>
-            <p className="text-gray-700">We accept major cards and other payment methods as shown at checkout. Payments are processed securely by trusted providers.</p>
+            <p className="text-gray-700">We accept major cards and other payment methods as shown at checkout. Payments are processed securely by trusted provideRs.</p>
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">2. Pricing & Promotions</h2>
@@ -22,7 +22,7 @@ export default function PaymentAndPricingPolicyPage() {
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">4. Payment Verification</h2>
-            <p className="text-gray-700">Orders may be subject to verification to prevent fraud. If verification fails, we may cancel and refund the order.</p>
+            <p className="text-gray-700">OrdeRs may be subject to verification to prevent fraud. If verification fails, we may cancel and refund the order.</p>
           </section>
           <section>
             <h2 className="font-semibold text-gray-900 mb-2">5. Billing Issues</h2>

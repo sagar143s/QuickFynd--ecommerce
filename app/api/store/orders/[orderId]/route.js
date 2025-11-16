@@ -13,7 +13,7 @@ export async function PUT(request, { params }) {
         const { status, trackingId, trackingUrl, courier } = await request.json();
 
         // Verify the order belongs to this store
-        const existingOrder = await prisma.order.findFirst({
+        const existingOrder = await prisma.order.findFiRst({
             where: {
                 id: orderId,
                 storeId: storeId
@@ -56,7 +56,7 @@ export async function PUT(request, { params }) {
                 // Call email notification API
                 await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/notifications/order-status`, {
                     method: 'POST',
-                    headers: {
+                    headeRs: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({

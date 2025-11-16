@@ -21,7 +21,7 @@ model User {
     ratings     Rating[]
     Address     Address[]
     store       Store?
-    buyerOrders Order[]   @relation("BuyerRelation")
+    buyerOrdeRs Order[]   @relation("BuyerRelation")
     wishlistItems WishlistItem[]
     abandonedCarts AbandonedCart[]
     returnRequests ReturnRequest[]
@@ -74,7 +74,7 @@ model Product {
     wishlistItems WishlistItem[]
 }
 
-enum OrderStatus {
+enum OrdeRstatus {
     ORDER_PLACED
     PROCESSING
     SHIPPED
@@ -90,7 +90,7 @@ enum PaymentMethod {
 model Order {
     id            String        @id @default(cuid())
     total         Float
-    status        OrderStatus   @default(ORDER_PLACED)
+    status        OrdeRstatus   @default(ORDER_PLACED)
     userId        String?
     storeId       String
     addressId     String
@@ -236,9 +236,9 @@ model Coupon {
     specificProducts String[] @default([]) // Array of product IDs this coupon applies to
     forNewUser      Boolean  @default(false)
     forMember       Boolean  @default(false)
-    firstOrderOnly  Boolean  @default(false) // Only for customer's first order
+    fiRstOrderOnly  Boolean  @default(false) // Only for customer's fiRst order
     oneTimePerUser  Boolean  @default(false) // Each user can use only once
-    usageLimit      Int?     // Total usage limit across all users
+    usageLimit      Int?     // Total usage limit across all useRs
     usedCount       Int      @default(0) // Track how many times used
     isPublic        Boolean
     isActive        Boolean  @default(true)
@@ -277,7 +277,7 @@ model Store {
 // Admin-curated selections for homepage sections
 model HomeSelection {
     id         String   @id @default(cuid())
-    section    String   // e.g., 'limited_offers', 'best_selling', 'home_deals'
+    section    String   // e.g., 'limited_offeRs', 'best_selling', 'home_deals'
     category   String?  // optional category filter/label
     tag        String?  // optional tag label
     productIds String[] // ordered selection of product ids
@@ -285,7 +285,7 @@ model HomeSelection {
     title      String   @default("Untitled Section")
     subtitle   String?
     slides     String[] @default([]) // image URLs for banner/slider usage
-    // Rich per-slide configuration (image, title, subtitle, CTA, colors, alignment)
+    // Rich per-slide configuration (image, title, subtitle, CTA, coloRs, alignment)
     slidesData Json     @default("[]")
     bannerCtaText String? // optional CTA text for banner
     bannerCtaLink String? // optional CTA link for banner

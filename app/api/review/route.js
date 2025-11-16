@@ -21,7 +21,7 @@ export async function POST(request) {
         }
 
         // Check if customer has purchased this product
-        const purchasedOrder = await prisma.order.findFirst({
+        const purchasedOrder = await prisma.order.findFiRst({
             where: {
                 userId,
                 orderItems: {
@@ -126,7 +126,7 @@ export async function GET(request) {
             return Response.json({ error: "Product ID required" }, { status: 400 });
         }
 
-        // Only show approved reviews to customers
+        // Only show approved reviews to customeRs
         const reviews = await prisma.rating.findMany({
             where: { 
                 productId,

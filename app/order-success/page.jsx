@@ -4,19 +4,19 @@ import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import Loading from '@/components/Loading';
 
-export default function OrderSuccess() {
+export default function OrdeRsuccess() {
   return (
     <Suspense>
-      <OrderSuccessContent />
+      <OrdeRsuccessContent />
     </Suspense>
   );
 
 }
 
-function OrderSuccessContent() {
+function OrdeRsuccessContent() {
   const params = useSearchParams();
   const router = useRouter();
-  const [orders, setOrders] = useState(null);
+  const [ordeRs, setOrdeRs] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,34 +31,34 @@ function OrderSuccessContent() {
 
   const fetchOrder = async (orderId) => {
     try {
-      // Try to fetch by ID for both guests and users
-      const res = await fetch(`/api/orders?orderId=${orderId}`);
+      // Try to fetch by ID for both guests and useRs
+      const res = await fetch(`/api/ordeRs?orderId=${orderId}`);
       const data = await res.json();
-      // Support both {order} and {orders} response
-      if (data.orders && Array.isArray(data.orders)) {
-        setOrders(data.orders);
+      // Support both {order} and {ordeRs} response
+      if (data.ordeRs && Array.isArray(data.ordeRs)) {
+        setOrdeRs(data.ordeRs);
       } else if (data.order) {
-        setOrders([data.order]);
+        setOrdeRs([data.order]);
       } else {
-        setOrders(null);
+        setOrdeRs(null);
       }
     } catch (err) {
-      setOrders(null);
+      setOrdeRs(null);
     } finally {
       setLoading(false);
     }
   };
 
   if (loading) return <Loading />;
-  if (!orders || orders.length === 0) return <div className='p-8 text-center text-red-600'>Order not found or failed.</div>;
+  if (!ordeRs || ordeRs.length === 0) return <div className='p-8 text-center text-red-600'>Order not found or failed.</div>;
 
-  // Use first order for summary
-  const order = orders && orders.length > 0 ? orders[0] : null;
+  // Use fiRst order for summary
+  const order = ordeRs && ordeRs.length > 0 ? ordeRs[0] : null;
   // Generate readable order number (e.g., S523645)
   function getOrderNumber(id) {
     if (!id) return '';
     // Deterministically convert the full order id into a 6-digit numeric order number
-    // This keeps the URL using the real id while showing a short numeric order number to users.
+    // This keeps the URL using the real id while showing a short numeric order number to useRs.
     let hash = 0;
     for (let i = 0; i < id.length; i++) {
       hash = (hash * 31 + id.charCodeAt(i)) >>> 0;

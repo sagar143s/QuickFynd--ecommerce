@@ -17,7 +17,7 @@ export default function CookiePolicyPage() {
             <ul className="list-disc pl-5 text-gray-700 space-y-1">
               <li>Essential cookies for core site functions</li>
               <li>Preference cookies to remember choices</li>
-              <li>Analytics cookies to understand usage and improve services</li>
+              <li>Analytics cookies to undeRstand usage and improve services</li>
               <li>Marketing cookies where applicable, to show relevant content</li>
             </ul>
           </section>

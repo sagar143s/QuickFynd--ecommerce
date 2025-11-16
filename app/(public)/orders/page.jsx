@@ -1,7 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic';
 
-const OrdersClient = dynamic(() => import('./OrdersClient'), {
+const OrdeRsClient = dynamic(() => import('./OrdeRsClient'), {
   ssr: false,
   loading: () => (
     <div className="min-h-[70vh] flex items-center justify-center">
@@ -10,6 +10,6 @@ const OrdersClient = dynamic(() => import('./OrdersClient'), {
   )
 });
 
-export default function OrdersPage() {
-  return <OrdersClient />;
+export default function OrdeRsPage() {
+  return <OrdeRsClient />;
 }

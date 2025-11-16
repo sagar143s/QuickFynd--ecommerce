@@ -30,7 +30,7 @@ export default function StoreReviews() {
         try {
             const token = await getToken()
             const { data } = await axios.get('/api/store/reviews', {
-                headers: { Authorization: `Bearer ${token}` }
+                headeRs: { Authorization: `Bearer ${token}` }
             })
             setProducts(data.products)
         } catch (error) {
@@ -44,7 +44,7 @@ export default function StoreReviews() {
             const token = await getToken()
             await axios.post('/api/store/reviews/approve', 
                 { reviewId, approved },
-                { headers: { Authorization: `Bearer ${token}` } }
+                { headeRs: { Authorization: `Bearer ${token}` } }
             )
             toast.success(approved ? 'Review approved' : 'Review rejected')
             fetchReviews()
@@ -70,7 +70,7 @@ export default function StoreReviews() {
             })
 
             await axios.post('/api/store/reviews', form, {
-                headers: { Authorization: `Bearer ${token}` }
+                headeRs: { Authorization: `Bearer ${token}` }
             })
 
             toast.success('Review added successfully')
@@ -251,7 +251,7 @@ export default function StoreReviews() {
                                             <StarIcon
                                                 size={32}
                                                 fill={formData.rating >= star ? "#FFA500" : "#D1D5DB"}
-                                                className="text-transparent cursor-pointer hover:scale-110 transition"
+                                                className="text-transparent cuRsor-pointer hover:scale-110 transition"
                                             />
                                         </button>
                                     ))}

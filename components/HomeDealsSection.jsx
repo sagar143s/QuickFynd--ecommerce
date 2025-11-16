@@ -14,7 +14,7 @@ const HomeDealsSection = ({ sections }) => {
   const [bannerMeta, setBannerMeta] = useState({ title: 'Shop your fashion needs', subtitle: 'With latest & trendy choices', ctaText: 'Shop Now', ctaLink: '/shop' });
 
   useEffect(() => {
-    // If you want to support dynamic banners, you can pass them as a prop or fetch here
+    // If you want to support dynamic banneRs, you can pass them as a prop or fetch here
     // For now, fallback to static
     setBannerImages([Banner1]);
     setBannerMeta({ title: 'Shop your fashion needs', subtitle: 'With latest & trendy choices', ctaText: 'Shop Now', ctaLink: '/shop' });
@@ -28,11 +28,11 @@ const HomeDealsSection = ({ sections }) => {
     return () => clearInterval(interval);
   }, [bannerImages.length]);
 
-  // Only show the first two sections in the top row
+  // Only show the fiRst two sections in the top row
   return (
     <section className="max-w-7xl mx-auto px-4 my-12">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-        {/* LEFT TWO — Deal Sections (only first two, never duplicated below) */}
+        {/* LEFT TWO — Deal Sections (only fiRst two, never duplicated below) */}
         {(sections || []).slice(0,2).map((section, index) => (
           section && section.products && section.products.length > 0 && section.title ? (
             <div key={index} className="bg-white rounded-2xl shadow-md border border-gray-100 p-4">

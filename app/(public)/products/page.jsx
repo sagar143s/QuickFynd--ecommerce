@@ -17,8 +17,8 @@ function ProductsContent() {
     const searchParams = useSearchParams()
     const categoryParam = searchParams.get('category')
 
-    const [showFilters, setShowFilters] = useState(false)
-    const [filters, setFilters] = useState({
+    const [showFilteRs, setShowFilteRs] = useState(false)
+    const [filteRs, setFilteRs] = useState({
         categories: categoryParam ? [categoryParam] : [],
         priceRange: [0, 100000],
         minRating: 0,
@@ -35,7 +35,7 @@ function ProductsContent() {
 
     // Toggle category filter
     const toggleCategory = (category) => {
-        setFilters(prev => ({
+        setFilteRs(prev => ({
             ...prev,
             categories: prev.categories.includes(category)
                 ? prev.categories.filter(c => c !== category)
@@ -43,9 +43,9 @@ function ProductsContent() {
         }))
     }
 
-    // Clear all filters
-    const clearFilters = () => {
-        setFilters({
+    // Clear all filteRs
+    const clearFilteRs = () => {
+        setFilteRs({
             categories: [],
             priceRange: [0, 100000],
             minRating: 0,
@@ -62,27 +62,27 @@ function ProductsContent() {
         filtered = filtered.filter(p => p.slug && typeof p.slug === 'string' && p.slug.length > 0)
 
         // Filter by category
-        if (filters.categories.length > 0) {
-            filtered = filtered.filter(p => filters.categories.includes(p.category))
+        if (filteRs.categories.length > 0) {
+            filtered = filtered.filter(p => filteRs.categories.includes(p.category))
         }
 
         // Filter by price range
         filtered = filtered.filter(p => 
-            p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
+            p.price >= filteRs.priceRange[0] && p.price <= filteRs.priceRange[1]
         )
 
         // Filter by rating
-        if (filters.minRating > 0) {
+        if (filteRs.minRating > 0) {
             filtered = filtered.filter(p => {
                 const avgRating = p.rating?.length 
                     ? p.rating.reduce((acc, r) => acc + r.rating, 0) / p.rating.length 
                     : 0
-                return avgRating >= filters.minRating
+                return avgRating >= filteRs.minRating
             })
         }
 
         // Filter by stock
-        if (filters.inStock) {
+        if (filteRs.inStock) {
             filtered = filtered.filter(p => p.inStock)
         }
 
@@ -108,13 +108,13 @@ function ProductsContent() {
         }
 
         return filtered
-    }, [products, filters, sortBy])
+    }, [products, filteRs, sortBy])
 
-    const activeFiltersCount = 
-        filters.categories.length + 
-        (filters.minRating > 0 ? 1 : 0) + 
-        (filters.inStock ? 1 : 0) +
-        (filters.priceRange[0] > 0 || filters.priceRange[1] < 100000 ? 1 : 0)
+    const activeFilteRsCount = 
+        filteRs.categories.length + 
+        (filteRs.minRating > 0 ? 1 : 0) + 
+        (filteRs.inStock ? 1 : 0) +
+        (filteRs.priceRange[0] > 0 || filteRs.priceRange[1] < 100000 ? 1 : 0)
 
     return (
         <div className="bg-gray-50">
@@ -128,41 +128,41 @@ function ProductsContent() {
 
                     {/* Mobile Filter Toggle */}
                     <button
-                        onClick={() => setShowFilters(!showFilters)}
+                        onClick={() => setShowFilteRs(!showFilteRs)}
                         className="lg:hidden flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50"
                     >
                         <FilterIcon size={18} />
-                        Filters
-                        {activeFiltersCount > 0 && (
+                        FilteRs
+                        {activeFilteRsCount > 0 && (
                             <span className="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">
-                                {activeFiltersCount}
+                                {activeFilteRsCount}
                             </span>
                         )}
                     </button>
                 </div>
 
                 <div className="flex gap-6">
-                    {/* Sidebar Filters - Sticky on Desktop */}
+                    {/* Sidebar FilteRs - Sticky on Desktop */}
                     <aside className={`
                         lg:block lg:w-64 bg-white border border-gray-200 rounded-lg p-4 h-fit lg:sticky lg:top-4
-                        ${showFilters ? 'fixed inset-0 z-50 w-full h-full overflow-y-auto' : 'hidden'}
+                        ${showFilteRs ? 'fixed inset-0 z-50 w-full h-full overflow-y-auto' : 'hidden'}
                     `}>
                         {/* Mobile Close Button */}
                         <div className="lg:hidden flex items-center justify-between mb-4 pb-4 border-b">
-                            <h2 className="text-lg font-semibold">Filters</h2>
-                            <button onClick={() => setShowFilters(false)} className="p-2">
+                            <h2 className="text-lg font-semibold">FilteRs</h2>
+                            <button onClick={() => setShowFilteRs(false)} className="p-2">
                                 <XIcon size={20} />
                             </button>
                         </div>
 
                         <div className="space-y-6">
-                            {/* Clear Filters */}
-                            {activeFiltersCount > 0 && (
+                            {/* Clear FilteRs */}
+                            {activeFilteRsCount > 0 && (
                                 <button
-                                    onClick={clearFilters}
+                                    onClick={clearFilteRs}
                                     className="w-full text-sm text-orange-500 hover:text-orange-600 font-medium"
                                 >
-                                    Clear all filters ({activeFiltersCount})
+                                    Clear all filteRs ({activeFilteRsCount})
                                 </button>
                             )}
 
@@ -174,7 +174,7 @@ function ProductsContent() {
                                     onChange={(e) => setSortBy(e.target.value)}
                                     className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 >
-                                    <option value="newest">Newest First</option>
+                                    <option value="newest">Newest FiRst</option>
                                     <option value="price-low">Price: Low to High</option>
                                     <option value="price-high">Price: High to Low</option>
                                     <option value="rating">Top Rated</option>
@@ -188,10 +188,10 @@ function ProductsContent() {
                                 <h3 className="font-semibold text-gray-900 mb-3">Categories</h3>
                                 <div className="space-y-2 max-h-60 overflow-y-auto">
                                     {categories.map(category => (
-                                        <label key={category} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                        <label key={category} className="flex items-center gap-2 cuRsor-pointer hover:bg-gray-50 p-2 rounded">
                                             <input
                                                 type="checkbox"
-                                                checked={filters.categories.includes(category)}
+                                                checked={filteRs.categories.includes(category)}
                                                 onChange={() => toggleCategory(category)}
                                                 className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
                                             />
@@ -211,8 +211,8 @@ function ProductsContent() {
                                         <input
                                             type="number"
                                             placeholder="Min"
-                                            value={filters.priceRange[0]}
-                                            onChange={(e) => setFilters(prev => ({
+                                            value={filteRs.priceRange[0]}
+                                            onChange={(e) => setFilteRs(prev => ({
                                                 ...prev,
                                                 priceRange: [Number(e.target.value), prev.priceRange[1]]
                                             }))}
@@ -222,8 +222,8 @@ function ProductsContent() {
                                         <input
                                             type="number"
                                             placeholder="Max"
-                                            value={filters.priceRange[1]}
-                                            onChange={(e) => setFilters(prev => ({
+                                            value={filteRs.priceRange[1]}
+                                            onChange={(e) => setFilteRs(prev => ({
                                                 ...prev,
                                                 priceRange: [prev.priceRange[0], Number(e.target.value)]
                                             }))}
@@ -235,15 +235,15 @@ function ProductsContent() {
                                         min="0"
                                         max="100000"
                                         step="1000"
-                                        value={filters.priceRange[1]}
-                                        onChange={(e) => setFilters(prev => ({
+                                        value={filteRs.priceRange[1]}
+                                        onChange={(e) => setFilteRs(prev => ({
                                             ...prev,
                                             priceRange: [prev.priceRange[0], Number(e.target.value)]
                                         }))}
                                         className="w-full"
                                     />
                                     <p className="text-xs text-gray-600">
-                                        Rs {filters.priceRange[0].toLocaleString()} - Rs {filters.priceRange[1].toLocaleString()}
+                                        Rs {filteRs.priceRange[0].toLocaleString()} - Rs {filteRs.priceRange[1].toLocaleString()}
                                     </p>
                                 </div>
                             </div>
@@ -255,12 +255,12 @@ function ProductsContent() {
                                 <h3 className="font-semibold text-gray-900 mb-3">Minimum Rating</h3>
                                 <div className="space-y-2">
                                     {[4, 3, 2, 1].map(rating => (
-                                        <label key={rating} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                        <label key={rating} className="flex items-center gap-2 cuRsor-pointer hover:bg-gray-50 p-2 rounded">
                                             <input
                                                 type="radio"
                                                 name="rating"
-                                                checked={filters.minRating === rating}
-                                                onChange={() => setFilters(prev => ({ ...prev, minRating: rating }))}
+                                                checked={filteRs.minRating === rating}
+                                                onChange={() => setFilteRs(prev => ({ ...prev, minRating: rating }))}
                                                 className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
                                             />
                                             <div className="flex items-center gap-1">
@@ -271,12 +271,12 @@ function ProductsContent() {
                                             </div>
                                         </label>
                                     ))}
-                                    <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <label className="flex items-center gap-2 cuRsor-pointer hover:bg-gray-50 p-2 rounded">
                                         <input
                                             type="radio"
                                             name="rating"
-                                            checked={filters.minRating === 0}
-                                            onChange={() => setFilters(prev => ({ ...prev, minRating: 0 }))}
+                                            checked={filteRs.minRating === 0}
+                                            onChange={() => setFilteRs(prev => ({ ...prev, minRating: 0 }))}
                                             className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
                                         />
                                         <span className="text-sm text-gray-700">All Ratings</span>
@@ -288,11 +288,11 @@ function ProductsContent() {
 
                             {/* Availability */}
                             <div>
-                                <label className="flex items-center gap-2 cursor-pointer">
+                                <label className="flex items-center gap-2 cuRsor-pointer">
                                     <input
                                         type="checkbox"
-                                        checked={filters.inStock}
-                                        onChange={(e) => setFilters(prev => ({ ...prev, inStock: e.target.checked }))}
+                                        checked={filteRs.inStock}
+                                        onChange={(e) => setFilteRs(prev => ({ ...prev, inStock: e.target.checked }))}
                                         className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
                                     />
                                     <span className="text-sm font-medium text-gray-900">In Stock Only</span>
@@ -302,7 +302,7 @@ function ProductsContent() {
 
                         {/* Mobile Apply Button */}
                         <button
-                            onClick={() => setShowFilters(false)}
+                            onClick={() => setShowFilteRs(false)}
                             className="lg:hidden w-full mt-6 bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
                         >
                             Show {filteredProducts.length} Products
@@ -320,12 +320,12 @@ function ProductsContent() {
                         ) : (
                             <div className="text-center py-20">
                                 <p className="text-2xl text-gray-400 mb-2">No products found</p>
-                                <p className="text-gray-500">Try adjusting your filters</p>
+                                <p className="text-gray-500">Try adjusting your filteRs</p>
                                 <button
-                                    onClick={clearFilters}
+                                    onClick={clearFilteRs}
                                     className="mt-4 text-orange-500 hover:text-orange-600 font-medium"
                                 >
-                                    Clear all filters
+                                    Clear all filteRs
                                 </button>
                             </div>
                         )}

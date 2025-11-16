@@ -19,7 +19,7 @@ export default function StoreManageProducts() {
     const { getToken } = useAuth()
     const { user } = useUser()
 
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '₹'
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || 'Rs'
 
     const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
@@ -29,7 +29,7 @@ export default function StoreManageProducts() {
     const fetchProducts = async () => {
         try {
              const token = await getToken()
-             const { data } = await axios.get('/api/store/product', {headers: { Authorization: `Bearer ${token}` } })
+             const { data } = await axios.get('/api/store/product', {headeRs: { Authorization: `Bearer ${token}` } })
              setProducts(data.products.sort((a, b)=> new Date(b.createdAt) - new Date(a.createdAt)))
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)
@@ -40,7 +40,7 @@ export default function StoreManageProducts() {
     const toggleStock = async (productId) => {
         try {
             const token = await getToken()
-            const { data } = await axios.post('/api/store/stock-toggle',{ productId }, {headers: { Authorization: `Bearer ${token}` } })
+            const { data } = await axios.post('/api/store/stock-toggle',{ productId }, {headeRs: { Authorization: `Bearer ${token}` } })
             setProducts(prevProducts => prevProducts.map(product =>  product.id === productId ? {...product, inStock: !product.inStock} : product))
 
             toast.success(data.message)
@@ -60,7 +60,7 @@ export default function StoreManageProducts() {
         try {
             const token = await getToken()
             await axios.delete(`/api/store/product?productId=${productId}`, {
-                headers: { Authorization: `Bearer ${token}` }
+                headeRs: { Authorization: `Bearer ${token}` }
             })
             setProducts(prevProducts => prevProducts.filter(p => p.id !== productId))
             toast.success('Product deleted successfully')
@@ -107,7 +107,7 @@ export default function StoreManageProducts() {
                         <tr key={product.id} className="border-t border-gray-200 hover:bg-gray-50">
                             <td className="px-4 py-3">
                                 <div className="flex gap-2 items-center">
-                                    <Image width={40} height={40} className='p-1 shadow rounded cursor-pointer' src={product.images[0]} alt="" />
+                                    <Image width={40} height={40} className='p-1 shadow rounded cuRsor-pointer' src={product.images[0]} alt="" />
                                     {product.name}
                                 </div>
                             </td>
@@ -118,9 +118,9 @@ export default function StoreManageProducts() {
                             <td className="px-4 py-3 hidden md:table-cell">{currency} {product.mrp.toLocaleString()}</td>
                             <td className="px-4 py-3">{currency} {product.price.toLocaleString()}</td>
                             <td className="px-4 py-3">
-                                <label className="relative inline-flex items-center cursor-pointer">
+                                <label className="relative inline-flex items-center cuRsor-pointer">
                                     <input type="checkbox" className="sr-only peer" onChange={() => toast.promise(toggleStock(product.id), { loading: "Updating..." })} checked={product.inStock} />
-                                    <div className="w-9 h-5 bg-slate-300 rounded-full peer peer-checked:bg-green-600 transition-colors duration-200"></div>
+                                    <div className="w-9 h-5 bg-slate-300 rounded-full peer peer-checked:bg-green-600 transition-coloRs duration-200"></div>
                                     <span className="dot absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-4"></span>
                                 </label>
                             </td>

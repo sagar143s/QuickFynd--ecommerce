@@ -4,7 +4,7 @@ import Loading from "../Loading"
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 import SellerNavbar from "./StoreNavbar"
-import SellerSidebar from "./StoreSidebar"
+import SelleRsidebar from "./StoreSidebar"
 import { dummyStoreData } from "@/assets/assets"
 import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
@@ -20,7 +20,7 @@ const StoreLayout = ({ children }) => {
     const fetchIsSeller = async () => {
         try {
             const token = await getToken()
-            const { data } = await axios.get('/api/store/is-seller', { headers: { Authorization: `Bearer ${token}` }})
+            const { data } = await axios.get('/api/store/is-seller', { headeRs: { Authorization: `Bearer ${token}` }})
             setIsSeller(data.isSeller)
             setStoreInfo(data.storeInfo)
         } catch (error) {
@@ -41,7 +41,7 @@ const StoreLayout = ({ children }) => {
         <div className="flex flex-col h-screen">
             <SellerNavbar />
             <div className="flex flex-1 items-start h-full overflow-y-scroll no-scrollbar">
-                <SellerSidebar storeInfo={storeInfo} />
+                <SelleRsidebar storeInfo={storeInfo} />
                 <div className="flex-1 h-full p-5 lg:pl-12 lg:pt-12 overflow-y-scroll">
                     {children}
                 </div>

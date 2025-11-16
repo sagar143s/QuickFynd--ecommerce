@@ -53,7 +53,7 @@ export default function CategoriesPage() {
                                 {/* Parent Category Header */}
                                 <Link
                                     href={`/products?category=${encodeURIComponent(parent.name)}`}
-                                    className="flex items-center justify-between p-6 bg-gradient-to-r from-orange-50 to-white hover:from-orange-100 transition-colors group"
+                                    className="flex items-center justify-between p-6 bg-gradient-to-r from-orange-50 to-white hover:from-orange-100 transition-coloRs group"
                                 >
                                     <div className="flex items-center gap-4">
                                         {parent.image ? (
@@ -68,7 +68,7 @@ export default function CategoriesPage() {
                                             </div>
                                         )}
                                         <div>
-                                            <h2 className="text-2xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
+                                            <h2 className="text-2xl font-bold text-gray-900 group-hover:text-orange-600 transition-coloRs">
                                                 {parent.name}
                                             </h2>
                                             {parent.description && (
@@ -81,7 +81,7 @@ export default function CategoriesPage() {
                                             )}
                                         </div>
                                     </div>
-                                    <ChevronRightIcon size={24} className="text-gray-400 group-hover:text-orange-500 transition-colors" />
+                                    <ChevronRightIcon size={24} className="text-gray-400 group-hover:text-orange-500 transition-coloRs" />
                                 </Link>
 
                                 {/* Subcategories Grid */}
@@ -104,7 +104,7 @@ export default function CategoriesPage() {
                                                         <FolderIcon size={32} className="text-gray-400" />
                                                     )}
                                                 </div>
-                                                <h3 className="font-semibold text-gray-900 text-sm text-center group-hover:text-orange-500 transition-colors line-clamp-2">
+                                                <h3 className="font-semibold text-gray-900 text-sm text-center group-hover:text-orange-500 transition-coloRs line-clamp-2">
                                                     {child.name}
                                                 </h3>
                                             </Link>

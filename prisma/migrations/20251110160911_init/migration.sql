@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('ORDER_PLACED', 'PROCESSING', 'SHIPPED', 'DELIVERED');
+CREATE TYPE "OrdeRstatus" AS ENUM ('ORDER_PLACED', 'PROCESSING', 'SHIPPED', 'DELIVERED');
 
 -- CreateEnum
 CREATE TYPE "PaymentMethod" AS ENUM ('COD', 'STRIPE');
@@ -65,7 +65,7 @@ CREATE TABLE "Product" (
 CREATE TABLE "Order" (
     "id" TEXT NOT NULL,
     "total" DOUBLE PRECISION NOT NULL,
-    "status" "OrderStatus" NOT NULL DEFAULT 'ORDER_PLACED',
+    "status" "OrdeRstatus" NOT NULL DEFAULT 'ORDER_PLACED',
     "userId" TEXT,
     "storeId" TEXT NOT NULL,
     "addressId" TEXT NOT NULL,
@@ -187,7 +187,7 @@ CREATE TABLE "Coupon" (
     "specificProducts" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "forNewUser" BOOLEAN NOT NULL DEFAULT false,
     "forMember" BOOLEAN NOT NULL DEFAULT false,
-    "firstOrderOnly" BOOLEAN NOT NULL DEFAULT false,
+    "fiRstOrderOnly" BOOLEAN NOT NULL DEFAULT false,
     "oneTimePerUser" BOOLEAN NOT NULL DEFAULT false,
     "usageLimit" INTEGER,
     "usedCount" INTEGER NOT NULL DEFAULT 0,
