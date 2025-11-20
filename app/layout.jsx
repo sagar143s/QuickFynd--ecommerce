@@ -27,9 +27,7 @@ export default function RootLayout({ children }) {
             <link rel="preconnect" href={ikOrigin} crossOrigin="anonymous" />
           </>
         )}
-        {/* Meta Pixel Code */}
-       
-        {/* End Meta Pixel Code */}
+   
       </head>
       <body className={`${outfit.className} antialiased`} suppressHydrationWarning>
         {isClerkConfigured ? (
